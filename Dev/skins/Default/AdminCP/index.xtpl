@@ -1,0 +1,140 @@
+<!-- BEGIN: Index -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+  <title>{page_title}</title>
+  <link rel="stylesheet" type="text/css" href="{style_link}" />
+ </head>
+ <body>
+  <div id="container">
+   <div id="header">
+    <div id="company">
+     <div class="logo"></div>
+     <div class="title"><h1>{site_name} Administration Control Panel</h1></div>
+    </div>
+   </div>
+
+<!-- BEGIN: Closed -->
+   <div id="closed">
+    <div class="article">
+     <div class="title"><span style="color:red">Site Offline:</span></div>
+     <span style="font:18px Arial, Sans-serif;">{closed_message}</span>
+    </div>
+   </div>
+<!-- END: Closed -->
+<!-- BEGIN: Spam -->
+   <div id="spam">
+    <div class="article">
+     <div class="title"><span style="color:red">Akismet Notice:</span></div>
+     <div style="float:left"><span style="font:18px Arial, Sans-serif;">{spam_message}</span></div>
+     <div style="float:right"><a href="/admin.php?a=spam">Spam Controls</a></div>
+     <p></p>
+    </div>
+   </div>
+<!-- END: Spam -->
+   <div id="blocks">
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/wrench.png" alt="" /> System Controls</div>
+     <ul>
+      <li><a href="admin.php?a=settings&amp;s=add">Add Site Setting</a></li>
+      <li><a href="admin.php?a=settings">Edit Site Settings</a></li>
+      <li><a href="admin.php?a=ban">Edit Bans</a></li>
+      <li><a href="admin.php?a=sys&amp;s=phpinfo">PHP Info</a></li>
+      <li><a href="admin.php?a=sys&amp;s=stats">Site Statistics</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/members.png" alt="" /> User Controls</div>
+     <ul>
+      <li><a href="admin.php?a=users">List Users</a></li>
+      <li><a href="admin.php?a=users&amp;s=create">Create User</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/database_gear.png" alt="" /> Database Controls</div>
+     <ul>
+      <li><a href="admin.php?a=sys&amp;s=backup">Backup the Database</a></li>
+      <li><a href="admin.php?a=sys&amp;s=restore">Restore a Database Backup</a></li>
+      <li><a href="admin.php?a=sys&amp;s=optimize">Optimize Database</a></li>
+      <li><a href="admin.php?a=sys&amp;s=repair">Repair Database</a></li>
+      <li><a href="admin.php?a=sys&amp;s=recount">Recount Comments</a></li>
+      <li><a href="admin.php?a=sys&amp;s=sql">Execute SQL Query</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/newspaper.png" alt="" /> Blog Controls</div>
+     <ul>
+      <li><a href="admin.php?a=posts">List Blog Entries</a></li>
+      <li><a href="admin.php?a=posts&amp;s=create">Post Blog Entry</a></li>
+      <li><a href="admin.php?a=cat">List Categories</a></li>
+      <li><a href="admin.php?a=blogroll">List Blogroll</a></li>
+      <li><a href="admin.php?a=quotes">Random Quotes</a></li>
+      <li><a href="admin.php?a=spam">Check Spam Comments</a></li>
+      <li><a href="admin.php?a=spam&amp;s=keytest">Test Akismet Key</a></li>
+      <li><a href="admin.php?a=posts&amp;s=ping_notifications">Pings and Notifications</a></li>
+      <li><a href="admin.php?a=emoticons">Emoticon Controls</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/photos.png" alt="" /> Gallery Controls</div>
+     <ul>
+      <li><a href="admin.php?a=gallery&amp;s=upload">Upload Image</a></li>
+      <li><a href="admin.php?a=gallery&amp;s=Edit">Edit Images</a></li>
+      <li><a href="admin.php?a=gallery&amp;s=Delete">Delete Images</a></li>
+      <li><a href="admin.php?a=gallery&amp;s=createfolder">Create Folder</a></li>
+      <li><a href="admin.php?a=gallery&amp;s=editfolder">Edit Folder</a></li>
+      <li><a href="admin.php?a=gallery&amp;s=deletefolder">Delete Folder</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/downloads.png" alt="" /> Download Controls</div>
+     <ul>
+      <li><a href="admin.php?a=downloads&amp;s=uploadfile">Upload File</a></li>
+      <li><a href="admin.php?a=downloads&amp;s=Edit">Edit File</a></li>
+      <li><a href="admin.php?a=downloads&amp;s=Delete">Delete File</a></li>
+      <li><a href="admin.php?a=downloads&amp;s=createfolder">Create Folder</a></li>
+      <li><a href="admin.php?a=downloads&amp;s=editfolder">Edit Folder</a></li>
+      <li><a href="admin.php?a=downloads&amp;s=deletefolder">Delete Folder</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/pages.png" alt="" /> Page Controls</div>
+     <ul>
+      <li><a href="admin.php?a=page">List Custom Pages</a></li>
+      <li><a href="admin.php?a=page&amp;s=create">Create Custom Page</a></li>
+     </ul>
+    </div>
+    <div class="block">
+     <div class="title"><img src="{imgsrc}/images/files.png" alt="" /> File Controls</div>
+     <ul>
+      <li><a href="admin.php?a=files">List Files</a></li>
+     </ul>
+    </div>
+   </div>
+
+   <div id="main">
+    <div class="article">
+     <div class="title"><a href="admin.php">{site_name} Administration Control Panel</a></div>
+    </div>
+
+    {module_output}
+
+<!-- BEGIN: Message -->
+    <div class="article">
+     <div class="title">{title}</div>
+     <div style="text-align:center">{message}</div><br />
+     {link_name}
+    </div>
+<!-- END: Message -->
+   </div>
+   <div id="bottom">&nbsp;</div>
+  </div>
+  <div id="footer">
+   {copyright_terms}<br />
+   Powered by Sandbox [v{version}] &copy; 2006-2010 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
+   <br />{page_generated}
+  </div>
+ </body>
+</html>
+<!-- END: Index -->

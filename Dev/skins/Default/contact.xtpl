@@ -1,0 +1,38 @@
+<!-- BEGIN: Contact -->
+<div id="main">
+<!-- BEGIN: Errors -->
+ <div class="article">
+  <div class="title">Submission Errors</div>
+  <span style="color:red">{errors}</span></span>
+ </div>
+<!-- END: Errors -->
+
+ <form method="post" action="index.php?a=contact">
+  <div class="article">
+   <div class="title">Contact {owner}</div>
+
+   <span class="field">Your name:</span>
+   <span class="form"><input type="text" name="name" id="name_input" value="{name}" /></span>
+
+   <p class="line"></p>
+
+   <span class="field">Your email:</span>
+   <span class="form"><input type="text" name="email" id="email_input" value="{email}" /></span>
+
+   <p class="line"></p>
+
+   <span class="field">Subject:</span>
+   <span class="form"><input type="text" name="subject" id="subject_input" value="{subject}" /></span>
+
+   <p class="line"></p>
+
+   <span class="field">Message:</span>
+   <span class="form"><textarea class="input" name="comments" rows="12" cols="60" id="message_input">{message}</textarea></span>
+
+   <p class="line"></p>
+
+   <div style="text-align:center"><input type="submit" name="submit" value="Send Email" /></div>
+  </div>
+ </form>
+</div>
+<!-- END: Contact -->

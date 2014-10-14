@@ -1,0 +1,20 @@
+<!-- BEGIN: Archive -->
+<div id="main">
+ <div class="article">
+  <div class="title">Archive: {month}</div>
+<!-- BEGIN: Post -->
+  <span class="category"><a href="{post_url}">{subject}</a></span>
+  <span class="author">By {author} in {cat_text}</span>
+  <span class="date">{date}</span>
+
+  <p class="line"></p>
+<!-- END: Post -->
+ </div>
+ <div class="article">
+  <div style="float:left">{prev_link}</div>
+  <div style="float:right">{next_link}</div>
+  <p></p>
+ </div>
+</div>
+{sidebar}
+<!-- END: Archive -->

@@ -1,0 +1,99 @@
+<!-- BEGIN: Index -->
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  {site_keywords}
+  {meta_desc}
+  <meta name="robots" content="noodp" />
+  <meta name="generator" content="Sandbox" />
+  <title>{page_title}</title>
+  <link rel="stylesheet" type="text/css" href="{style_link}" />
+  <script src="{site_link}javascript/utils.js" type="text/javascript"></script>
+<!-- BEGIN: RSS -->
+  {rss_feeds}
+<!-- END: RSS -->
+ </head>
+ <body>
+  <div id="container">
+   <div id="header">
+    <div id="company">
+     <div class="logo"></div>
+     <div class="title">
+      <h1>{site_name}</h1>
+<!-- BEGIN: RandomQuote -->
+      <p style="font-size:11px">{random_quote}</p>
+<!-- END: RandomQuote -->
+     </div>
+    </div>
+<!-- BEGIN: NavLinks -->
+    <ul id="navigation">
+     {nav_links}
+    </ul>
+<!-- END: NavLinks -->
+   </div>
+
+<!-- BEGIN: Closed -->
+   <div id="closed">
+    <div class="article">
+     <div class="title"><span style="color:red">Site Offline:</span></div>
+     <span style="font:18px Arial, Sans-serif;">{closed_message}</span>
+    </div>
+   </div>
+<!-- END: Closed -->
+<!-- BEGIN: Spam -->
+   <div id="spam">
+    <div class="article">
+     <div class="title"><span style="color:red">Akismet Notice:</span></div>
+     <div style="float:left"><span style="font:18px Arial, Sans-serif;">{spam_message}</span></div>
+     <div style="float:right"><a href="{spam_link}">Spam Controls</a></div>
+     <p></p>
+    </div>
+   </div>
+<!-- END: Spam -->
+<!-- BEGIN: GlobalAnnouncement -->
+   <div id="announce">
+    <div class="article">
+     <span class="postbit_top"></span>
+     <div class="rounded_top" style="background-position:22px 0px;">
+      <span class="one"></span>
+      <span class="two"></span>
+      <span class="three"></span>
+      <span class="four"></span>
+     </div>
+     <div class="postbit" style="font:18px Arial, Sans-serif;">{global_announcement}</div>
+     <div class="rounded_bottom">
+      <span class="one">&nbsp;</span>
+      <span class="two">&nbsp;</span>
+      <span class="three">&nbsp;</span>
+      <span class="four">&nbsp;</span>
+     </div>
+    </div>
+   </div>
+<!-- END: GlobalAnnouncement -->
+<!-- BEGIN: Message -->
+   <div id="main">
+    <div class="article">
+     <div class="title">{title}</div>
+     <div style="text-align:center">{message}</div><br />
+     {link_name}
+    </div>
+   </div>
+<!-- END: Message -->
+
+   {module_output}
+
+   <div id="bottom">&nbsp;</div>
+  </div>
+  <div id="footer">
+   {footer_text}<br /><br />
+   {copyright_terms}<br />
+   Powered by Sandbox &copy; 2006-2011 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
+<!-- BEGIN: PageStats -->
+   <br />{page_generated}
+<!-- END: PageStats -->
+  </div>
+  {google}
+ </body>
+</html>
+<!-- END: Index -->

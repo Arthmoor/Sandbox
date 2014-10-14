@@ -1,0 +1,44 @@
+<!-- BEGIN: Files -->
+<form enctype="multipart/form-data" method="post" action="admin.php?a=files&amp;s=upload">
+ <div class="article">
+  <div class="title">Upload File</div>
+
+  <span class="field"><label for="upload_file">File:</label></span>
+  <span class="form"><input type="file" name="upload_file" id="upload_file" /></span>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <div style="text-align:center"><input type="submit" name="submit" value="Upload" /></div>
+ </div>
+</form>
+
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="2">Miscellaneous Files in "files" Folder</td>
+ </tr>
+ <tr>
+  <td class="subheader" style="width:10%">&nbsp;</td>
+  <td class="subheader">Filename</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{delete_link}</td>
+  <td>{filename}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+<!-- END: Files -->
+
+<!-- BEGIN: FileDelete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete File</div>
+  Are you sure you want to delete {file_name}? This action is irreversible.
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="c" value="{cat_id}" />
+  <input type="submit" name="submit" value="Yes, delete this file." />
+ </div>
+</form>
+<!-- END: FileDelete -->

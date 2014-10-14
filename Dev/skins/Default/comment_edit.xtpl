@@ -1,0 +1,62 @@
+<!-- BEGIN: Comment -->
+<div id="main">
+<!-- BEGIN: Preview -->
+  <div class="article">
+   <div class="title"><span class="warning">COMMENT PREVIEW: DATA HAS NOT BEEN SAVED</span></div>
+  </div>
+
+  <div class="article">
+   <div class="title"><img src="{icon}" style="float:left" />{author} said:<br />
+    <div style="font-size:11px">{date}</div>
+   </div>
+
+   <span class="postbit_top"></span>
+
+   <div class="rounded_top" style="background-position:22px 0px;">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+    <span class="four"></span>
+   </div>
+
+   <div class="postbit">{message}<p></p></div>
+
+   <div class="rounded_bottom">
+    <span class="one">&nbsp;</span>
+    <span class="two">&nbsp;</span>
+    <span class="three">&nbsp;</span>
+    <span class="four">&nbsp;</span>
+   </div>
+  </div>
+<!-- END: Preview -->
+
+ <div class="article">
+  <h2 class="title"><span class="warning">EDITING COMMENT:</span></h2>
+  <form method="post" action="{action_link}" id="bbcode">
+   <div>
+    <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+
+    <span class="field">Author:</span>
+    <span class="form">{author}</span>
+    <div class="line"></div>
+
+    <span class="head">Text:</span>
+
+    <span class="field">
+     <span id="quicksmilies">
+      {emoticons}
+     </span>
+    </span>
+    <span class="form">
+     {bbcode_menu}
+     <textarea class="input" id="post_text" name="post_text" rows="15" cols="60">{text}</textarea>
+    </span>
+    <div class="line"></div>
+
+    <div style="text-align:center"><input type="submit" name="submit" value="Post Edited Comment" /><input type="submit" name="preview" value="Preview" /></div>
+    <script type="text/javascript">textarea = bbcodeInit("post_text");</script>
+   </div>
+  </form>
+ </div>
+</div>
+<!-- END: Comment -->

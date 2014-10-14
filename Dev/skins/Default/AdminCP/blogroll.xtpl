@@ -1,0 +1,61 @@
+<!-- BEGIN: Blogroll -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="5">Blogroll</td>
+ </tr>
+ <tr>
+  <td class="subheader" colspan="2" style="width:10%">&nbsp;</td>
+  <td class="subheader" style="width:15%">Link Name</td>
+  <td class="subheader" style="width:35%">Link URL</td>
+  <td class="subheader" style="width:40%">Link Title</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{edit_link}</td>
+  <td>{delete_link}</td>
+  <td>{entry_name}</td>
+  <td>{entry_url}</td>
+  <td>{entry_title}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+
+<!-- BEGIN: Form -->
+<form action="{action_link}" method="post">
+ <table style="width:100%">
+  <tr>
+   <td class="header" colspan="5">{heading}</td>
+  </tr>
+  <tr>
+   <td class="subheader" colspan="2" style="width:10%">&nbsp;</td>
+   <td class="subheader" style="width:15%">Link Name</td>
+   <td class="subheader" style="width:35%">Link URL</td>
+   <td class="subheader" style="width:40%">Link Title</td>
+  </tr>
+  <tr>
+   <td colspan="2">
+    <input type="hidden" name="token" value="{token}" />
+    <input type="submit" name="submit" value="Submit" />
+   </td>
+   <td><input type="text" name="link_name" value="{link_name}" size="30" maxlength="30" /></td>
+   <td><input type="text" name="link_url" value="{link_url}" size="45" maxlength="100" /></td>
+   <td><input type="text" name="link_title" value="{link_title}" size="45" maxlength="100" /></td>
+  </tr>
+ </table>
+</form>
+<!-- END: Form -->
+
+<!-- BEGIN: Delete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete From Blogroll</div>
+  Are you sure you want to remove {link_name} from your blogroll?
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="id" value="{link_id}" />
+  <input type="submit" name="submit" value="Yes, delete this entry." />
+ </div>
+</form>
+<!-- END: Delete -->
+<!-- END: Blogroll -->

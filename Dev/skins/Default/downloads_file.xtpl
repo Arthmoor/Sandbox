@@ -1,0 +1,54 @@
+<!-- BEGIN: DownloadFile -->
+<div id="fullscreen">
+ <div class="article">
+  <div class="title">{file_name}</div>
+
+  <span class="field">Filename:</span>
+  <span class="form">{file_name} [{file_url}]</span>
+
+  <p class="line"></p>
+
+  <span class="field">Version:</span>
+  <span class="form">{file_version}</span>
+
+  <p class="line"></p>
+
+  <span class="field">Type:</span>
+  <span class="form">{type}</span>
+
+  <p class="line"></p>
+
+  <span class="field">Size:</span>
+  <span class="form">{size} KB</span>
+
+  <p class="line"></p>
+
+  <span class="field">Downloaded:</span>
+  <span class="form">{downloads}</span>
+
+  <p class="line"></p>
+
+  <span class="field">Added on:</span>
+  <span class="form">{date} by {user_name}</span>
+
+  <p class="line"></p>
+
+  <span class="field">Last downloaded on:</span>
+  <span class="form">{down_time}</span>
+  <p></p>
+ </div>
+
+ <div class="article">
+  {desc}
+ </div>
+
+<!-- BEGIN: Comments -->
+ <div class="article">
+  <div class="title">Comments</div>
+ </div>
+ {comments}
+<!-- END: Comments -->
+
+ {comment_form}
+</div>
+<!-- END: DownloadFile -->

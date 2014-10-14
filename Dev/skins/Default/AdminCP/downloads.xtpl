@@ -1,0 +1,123 @@
+<!-- BEGIN: FileForm -->
+<form method="post" action="{action_link}" enctype="multipart/form-data" id="bbcode">
+<script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+<script type="text/javascript">mbcodeInit("bbcode", "file_description");</script>
+ <div class="article">
+  <div class="title">{heading}</div>
+
+  <span class="field">Folder:</span>
+  <span class="form">{folder_options}</span>
+  <p class="line"></p>
+
+  <span class="field">File:</span>
+  <span class="form"><input type="file" name="file_file" /></span>
+  <p class="line"></p>
+
+  <span class="field">Image:</span>
+  <span class="form"><input type="file" name="file_image" /></span>
+  <p class="line"></p>
+
+  <span class="field">Name:</span>
+  <span class="form"><input type="text" name="file_name" value="{filename}" /></span>
+  <p class="line"></p>
+
+  <span class="field">Version:</span>
+  <span class="form"><input type="text" name="file_version" value="{version}" /></span>
+  <p class="line"></p>
+
+  <span class="field">Summary:</span>
+  <span class="form">
+   <input type="text" name="file_summary" style="width:95%" maxlength="255" value="{summary}" /><br />
+   Used for meta description/rss feed.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">File Flags:</span>
+  <span class="form">
+   <input type="checkbox" name="file_flags[]" id="file_image" value="{img}"{imgbox} /> <label for="file_image">Has Image</label>
+   <input type="checkbox" name="file_flags[]" id="image_published" value="{pub}"{pubbox} /> <label for="file_published">Published</label>
+   <input type="checkbox" name="file_flags[]" id="file_closed" value="{cls}"{clsbox} /> <label for="file_closed">Comments Closed</label>
+   <input type="checkbox" name="file_flags[]" id="file_override" value="{ovr}"{ovrbox} /> <label for="file_override">Override Comment Autoclose</label>
+   <input type="checkbox" name="file_flags[]" id="file_membersonly" value="{mbo}"{mbobox} /> <label for="file_membersonly">Viewable by Members Only</label>
+  </span>
+  <p class="line"></p>
+
+  <span class="field"><label for="reset">Reset Download Counter? </label></span>
+  <span class="form"><input type="checkbox" name="reset_downloads" id="reset" /></span>
+  <p class="line"></p>
+
+  <span class="field">Description:</span>
+  <span class="form">
+   {bbcode_menu}
+   <textarea name="file_description" rows="12" cols="60">{desc}</textarea>
+  </span>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <div style="text-align:center"><input type="submit" name="submit" value="Submit" /></div>
+ </div>
+</form>
+{comment_list}
+<!-- END: FileForm -->
+
+<!-- BEGIN: FileDelete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete File</div>
+  Are you sure you want to delete {file_name} and all attached comments?
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="p" value="{file_id}" />
+  <input type="submit" name="submit" value="Yes, delete this file." />
+ </div>
+</form>
+<!-- END: FileDelete -->
+
+<!-- BEGIN: FolderForm -->
+<form method="post" action="{action_link}">
+ <div class="article">
+  <div class="title">{heading}</div>
+
+  <span class="field"><label for="folder_name">Name:</label></span>
+  <span class="form"><input type="text" name="folder_name" value="{folder_name}" size="50" maxlength="50" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="folder_summary">Content Summary:</label></span>
+  <span class="form"><input type="text" name="folder_summary" value="{folder_summary}" size="100" maxlength="255" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="folder_parent">Parent:</label></span>
+  <span class="form">{folder_options}</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="folder_hidden">Hidden:</label></span>
+  <span class="form"><input type="checkbox" name="folder_hidden" id="folder_hidden" value="0"{fchecked} /> Hidden folders are only visible to their creator or the site administrators.</span>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <div style="text-align:center"><input type="submit" name="submit" value="Submit" /></div>
+ </div>
+</form>
+<!-- END: FolderForm -->
+
+<!-- BEGIN: FolderDelete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete Downloads Folder</div>
+  Are you sure you want to delete the {folder_name} folder?<br /> {count} file(s) will be moved to the Root folder.
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="f" value="{folder_id}" />
+  <input type="submit" name="submit" value="Yes, delete this folder." />
+ </div>
+</form>
+<!-- END: FolderDelete -->
+
+<!-- BEGIN: FolderPick -->
+<div class="article">
+ <div class="title">{heading}</div>
+ <ul>{links}</ul>
+</div>
+<!-- END: FolderPick -->

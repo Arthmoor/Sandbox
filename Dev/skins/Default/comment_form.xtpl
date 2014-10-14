@@ -1,0 +1,78 @@
+<!-- BEGIN: CommentForm -->
+<!-- BEGIN: Closed -->
+  <div class="article">
+   <div class="title">Comments Closed</div>
+   <div style="text-align:center">Comments for this entry have been closed.</div>
+  </div>
+<!-- END: Closed -->
+  <div class="article">
+   <div class="title">
+    <script type="text/javascript">
+    <!--
+     function toggleCommentButton()
+     {
+      document.write('<a id="newcomment" class="comment" href="javascript:toggleCommentBox();">Post Comment:</a>');
+     } toggleCommentButton();
+     // -->
+    </script>
+   </div>
+  </div>
+
+  <div class="article">
+   <form method="post" action="{action_link}" id="bbcode">
+    <div>
+     <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+
+     <div class="title">{author}, you are commenting on: {subject}
+<!-- BEGIN: SpamControl -->
+       <br />
+       <span style="color:yellow">Your comment is subject to spam control.</span>
+<!-- END: SpamControl -->
+     </div>
+
+<!-- BEGIN: GuestName -->
+      <span class="field">Name:</span>
+      <span class="form"><input type="text" name="comment_author" value="{author}" size="30" maxlength="30" /></span>
+      <div class="line"></div>
+<!-- END: GuestName -->
+
+     <span class="field">
+      <span id="quicksmilies">
+       {emoticons}
+      </span>
+     </span>
+     <span class="form">
+      {bbcode_menu}
+      <textarea class="input" id="comment_message" name="comment_message" rows="12" cols="60">{message}</textarea>
+     </span>
+
+     <div class="line"></div>
+
+    <div style="text-align:center">
+     <input type="hidden" name="url" value="" />
+     <input type="submit" name="submit" value="Post Comment" /><input type="submit" name="preview" value="Preview" />
+     <script type="text/javascript">textarea = bbcodeInit("comment_message");</script>
+    </div>
+    </div>
+   </form>
+  </div>
+
+  <script type="text/javascript">
+   <!--
+    var toggleBoxStatus = 0;
+    var CommentBox = document.getElementById('bbcode');
+    CommentBox.style.display = 'none';
+
+    function toggleCommentBox()
+    {
+      if (toggleBoxStatus == 0) {
+        CommentBox.style.display = 'inline';
+        toggleBoxStatus = 1;
+      } else {
+        CommentBox.style.display = 'none';
+        toggleBoxStatus = 0;
+      }
+    }
+   // -->
+  </script>
+<!-- END: CommentForm -->

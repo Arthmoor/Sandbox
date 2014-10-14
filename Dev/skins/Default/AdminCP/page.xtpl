@@ -1,0 +1,73 @@
+<!-- BEGIN: Pages -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="5">Custom Pages</td>
+ </tr>
+ <tr>
+  <td class="subheader" style="width:10%" colspan="2">&nbsp;</td>
+  <td class="subheader" style="width:60%">Page Title</td>
+  <td class="subheader" style="width:15%">Created On</td>
+  <td class="subheader" style="width:15%">Last Edited On</td>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{edit_link}</td>
+  <td>{delete_link}</td>
+  <td>{page_title}</td>
+  <td>{created}</td>
+  <td>{edited}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+
+<!-- BEGIN: EditForm -->
+<form method="post" action="{action_link}" id="bbcode">
+<script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+<script type="text/javascript">mbcodeInit("bbcode", "page_content");</script>
+ <div class="article">
+  <div class="subtitle">{header}</div>
+
+  <span class="field"><label for="page_title">Title:</label></span>
+  <span class="form"><input class="input" type="text" name="page_title" id="page_title" value="{page_title}" size="50" maxlength="100" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="page_meta">Meta Description Tag:</label></span>
+  <span class="form"><input class="input" type="text" name="page_meta" id="page_meta" style="width:95%" maxlength="255" value="{page_meta}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="page_content">Content:</label></span>
+  <span class="form">
+   {bbcode_menu}
+   <textarea name="page_content" rows="30" cols="60">{page_content}</textarea>
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Formatting Options:</span>
+  <span class="form">
+   <input type="checkbox" name="page_flags[]" id="post_html" value="{html}"{htmlbox} /> <label for="post_html">HTML</label>
+   <input type="checkbox" name="page_flags[]" id="post_bbcode" value="{bb}"{bbbox} /> <label for="post_bbcode">BBCode</label>
+   <input type="checkbox" name="page_flags[]" id="post_sidebar" value="{sb}"{sbbox} /> <label for="post_sidebar">Display Sidebar</label>
+  </span>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <div style="text-align:center"><input type="submit" name="submit" value="Submit" /></div>
+ </div>
+</form>
+<!-- END: EditForm -->
+
+<!-- BEGIN: PageDelete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete Page</div>
+  {page_title}<br /><br />
+  {page_meta}<br /><br />
+  Are you absolutely sure you want to delete this page forever? This process is irreversable.
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="p" value="{page_id}" />
+  <input type="submit" name="submit" value="Yes, delete this page." />
+ </div>
+</form>
+<!-- END: PageDelete -->
+<!-- END: Pages -->

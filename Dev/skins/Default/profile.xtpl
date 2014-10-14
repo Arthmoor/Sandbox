@@ -1,0 +1,93 @@
+<!-- BEGIN: Profile -->
+<div id="main">
+<!-- BEGIN: Errors -->
+ <div class="article">
+  <div class="title">Submission Errors</div>
+  <span class="errors">{errors}</span>
+ </div>
+<!-- END: Errors -->
+ <div class="article">
+  <h2 class="title"><img src="{icon}" style="float:left" />Profile Information for {name}</h2>
+  <span class="postbit_top"></span>
+   <div class="rounded_top" style="background-position:20px 0px;">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+    <span class="four"></span>
+   </div>
+   <div class="postbit">
+    <span class="signature">.........................<br />{sigdisplay}</span>
+   </div>
+   <div class="rounded_bottom">
+    <span class="one">&nbsp;</span>
+    <span class="two">&nbsp;</span>
+    <span class="three">&nbsp;</span>
+    <span class="four">&nbsp;</span>
+   </div>
+  <p></p>
+
+<!-- BEGIN: Contributor -->
+  <span class="field">Blog Posts:</span>
+  <span class="form">{blogcount} - {blogpercent}% of Site Total</span>
+  <p class="line"></p>
+<!-- END: Contributor -->
+
+  <span class="field">Comments Posted:</span>
+  <span class="form">{count} - {percent}% of Site Total</span>
+  <p class="line"></p>
+
+  <span class="field">Joined on:</span>
+  <span class="form">{date}</span>
+  <p></p>
+ </div>
+
+ <form action="{action_link}" method="post" enctype="multipart/form-data">
+  <div class="article">
+   <div class="title">Update Profile Information</div>
+
+   <span class="field">Icon:</span>
+   <span class="form"><input type="file" name="user_icon" /> Icon will be reduced to {width}px wide X {height}px high</span>
+   <p class="line"></p>
+
+   <span class="field">Gravatar:</span>
+   <span class="form"><input type="text" name="user_gravatar" size="30" maxlength="100" value="{gravatar}" /> Email address used for <a href="http://www.gravatar.com/">Gravatar</a> if you have one. Will be used in place of an uploaded icon.</span>
+   <p class="line"></p>
+
+   <span class="field">Signature:</span>
+   <span class="form"><textarea name="user_sig" rows="5">{sig}</textarea></span>
+   <p class="line"></p>
+
+   <span class="field">Email:</span>
+   <span class="form"><input type="text" name="user_email" size="50" maxlength="100" value="{email}" /></span>
+   <p class="line"></p>
+
+   <span class="field">Homepage:</span>
+   <span class="form"><input type="text" name="user_url" size="50" maxlength="100" value="{url}" /></span>
+   <p class="line"></p>
+
+   <span class="field">Skin:</span>
+   <span class="form">{skin}</span>
+   <p class="line"></p>
+
+<!-- BEGIN: Stylesheet -->
+    <span class="field">Stylesheet:</span>
+    <span class="form"><input type="text" name="user_stylesheet" size="50" maxlength="100" value="{stylesheet}" /></span>
+    <span style="color:yellow">Leave blank to use the site's default stylesheets.</span>
+    <p class="line"></p>
+<!-- END: Stylesheet -->
+
+   <span class="field">Change Password:</span>
+   <span class="form"><input name="user_password" type="password" value="" /></span>
+   <p class="line"></p>
+
+   <span class="field">Confirm Password:</span>
+   <span class="form"><input name="user_pass_confirm" type="password" value="" /></span>
+   <span style="color:yellow">Note: Changing your password will require you to log back in to the site.</span>
+   <p class="line"></p>
+
+   <input type="hidden" name="token" value="{token}" />
+   <div style="text-align:center"><input type="submit" name="submit" value="Update Profile" /></div>
+  </div>
+ </form>
+</div>
+{sidebar}

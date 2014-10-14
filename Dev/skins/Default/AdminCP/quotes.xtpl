@@ -1,0 +1,60 @@
+<!-- BEGIN: RandomQuotes -->
+<form action="{action_link}" method="post" id="bbcode">
+ <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+ <script type="text/javascript">mbcodeInit("bbcode", "text");</script>
+ <table style="width:100%">
+  <tr>
+   <td class="header" colspan="2">{heading}</td>
+  </tr>
+  <tr>
+   <td colspan="2">
+    {bbcode_menu}
+   </td>
+  </tr>
+  <tr>
+   <td class="subheader" style="width:5%">&nbsp;</td>
+   <td class="subheader" style="width:95%">Quote Text</td>
+  </tr>
+  <tr>
+   <td>
+    <input type="hidden" name="token" value="{token}" />
+    <input type="submit" name="submit" value="Submit" />
+   </td>
+   <td><textarea name="text" rows="15">{text}</textarea></td>
+  </tr>
+ </table>
+</form>
+
+<!-- BEGIN: List -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="3">Random Quotes List - Newest First</td>
+ </tr>
+ <tr>
+  <td class="subheader" colspan="2" style="width:10%">&nbsp;</td>
+  <td class="subheader" style="width:90%">Quote</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{edit_link}</td>
+  <td>{delete_link}</td>
+  <td>{entry_text}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+<!-- END: List -->
+
+<!-- BEGIN: Delete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete Random Quote</div>
+  {quote_text}<br /><br />
+  Are you sure you want to remove the quote from your list?
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="submit" name="submit" value="Yes, delete this quote." />
+ </div>
+</form>
+<!-- END: Delete -->
+<!-- END: RandomQuotes -->

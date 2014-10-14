@@ -1,0 +1,500 @@
+Changes for Sandbox 2.2
+-----------------------
+
+Changes:
+
+* Added Google +1 button support to blog posts.
+* Added Twitter button support to blog posts.
+* Added Reddit button support for blog posts.
+* Changed the Facebook button setup.
+* Removed the Technorati button as they're now a vile web spam service provider.
+* Added global and per-post toggles for restriction of anonymous posting.
+* Emoticons are now handled independently of skins and can be added on the fly as desired.
+* Added the ability to disable all comments for all users, registered or otherwise.
+* Updated the Akismet PHP class to version 0.5.
+* Changed all usage of serialize and unserialize to json_encode and json_decode to address potential PHP related vulnerabilities.
+* Moved the [c] and [tm] codes into the bbcode parser instead of sitting out on their own.
+* Added the ability to reset the download counter on an uploaded file.
+* Blog ping functions now require the php5-xmlrpc extension.
+* BBCode parsing updated to eliminate PHP5 deprecation warnings for the /e parameter in preg_replace.
+
+Bugs:
+
+* Active users display in the ACP was not showing user names as intended.
+* Gallery folder creation was using GET instead of POST.
+* Gallery and download folders had naming collisions due to not including the folder ID number in URLs.
+* Could not use multiple spoiler tags in a post.
+* Post navigation and search functions should not return unpublished material to non-authors.
+* Content type header for the default skin was still set to XHTML.
+* Sidebar calendar was not validating for a blank line at the top.
+* Corrected the post box's inability to focus on the cursor position when using bbcode buttons.
+* Fixed a division by zero error in the make_links function.
+* Corrected inconsistent file path handling for skin folders. (Issue #4)
+* Social sharing icons were not being referred to by the full URL, causing 404 errors to fill up the webserver logs.
+* URL bbcode was not adding http:// in front of a URL that was missing this, which resulted in bad links when using friendly URL support.
+* User registration was not handling cases where bots tried to circumvent the form.
+* Emoticons were not being loaded properly for ACP pages.
+* Fixed HTML5 validation errors in the social media button links.
+
+Changes for Sandbox 2.1
+-----------------------
+
+Changes:
+
+* Raised blog post, comment message, and spam text columns to MEDIUMTEXT rather than just TEXT so they can hold larger content.
+* Reduced page text column to MEDIUMTEXT instead of LONGTEXT since there's no sane reason to expect anyone will ever have a 4GB page content.
+ (The above changes each have fields capable of holding 16MB apiece. That should be more than enough.)
+* Overhauled the entire query system to make it possible for alternative database drivers to be used.
+* Audited all queries within the software to conform to the new forced escaping system.
+* Standard MySQL will no longer be supported since Sandbox requires PHP 5.3.0 and above anyway and MySQLi is the preferred driver for this version.
+* Added the ability to restrict large downloads to registered users only.
+* Version field added to the file downloads data.
+* Add hidden URL input to make catching spammers less dodgy.
+* Added a Facebook "like" button to blog posts.
+* HTML is now rendered as HTML5. Very small amount of work to validate it.
+* IPv6 addresses are now supported for all functions that use them.
+* Lost password recovery link has been added so that site admins won't need to process them in the ACP anymore.
+* Added support for Gravatars. See: http://www.gravatar.com/
+
+Bugs:
+
+* Still had some formatting issues with the size bbcode tag.
+* Validation fixes for 508 and WCAG accessibility.
+
+Changes for Sandbox 2.0.7
+-------------------------
+
+New Stuff:
+
+* Added BBCode support for fonts and font sizes.
+* Added a "more" tag to the front page display for page jumps.
+* Display the IP address for comments when logged in as an admin or contributing author.
+* Added function to detect if a supplied IP is a Tor exit node. Useful for judging possible abuse.
+* Updated Google Analytics code.
+* MySQLi is now forced if available and has a supporting SQL server.
+
+Bugs:
+
+* Validation faliure due to a lack of alt tags in post icons.
+* Editing a user was inserting a broken stylesheet link if one was not specified.
+* Editing an unpublished blog entry would erroneously report the post as non-existent after submitting the changes.
+* Default style had the post icon too far to the right.
+
+Changes for Sandbox 2.0.6
+-------------------------
+
+Bugs:
+
+* SECURITY: Fixed a low grade vulnerability in password cookie handling.
+
+Changes for Sandbox 2.0.5
+-------------------------
+
+Bugs:
+
+* A PHP syntax error prevents the profile management screen from coming up.
+
+Changes for Sandbox 2.0.4
+-------------------------
+
+Bugs:
+
+* SECURITY: Multiple remote vulnerabilities still existing in 2.0.3 have been corrected.
+
+New Stuff:
+
+* Implemented a simple math based captcha to help screen out bots.
+
+Changes for Sandbox 2.0.3
+-------------------------
+
+Bugs:
+
+* SECURITY: Potential remote file inclusion vulnerability has been addressed.
+* Color BBCode tag should not have been greedy.
+* Unable to create or edit Gallery folders due to tokens not being generated.
+* Spam control page had a bogus link.
+
+Changes for Sandbox 2.0.2
+-------------------------
+
+Bugs:
+
+* SECURITY: Fixed a number of cross-site request forgery vulnerabilities.
+* Typed in email address was not parsed correctly.
+* There was no method for users to select an alternate skin.
+
+Changes for Sandbox 2.0.1
+-------------------------
+
+Bugs:
+
+* HTML slipped by in comments. Oops.
+* Emoticons were not loading properly for gallery or downloads when friendly URLs were turned on.
+
+Changes for Sandbox 2.0
+-----------------------
+
+Bugs:
+
+* URL BBCode processing does not protect against unset $_SERVER['HTTP_HOST']
+* Error reporting module was not using the proper variable in the email.
+* Fixed all date range handling in the Sidebar.
+* Query errors should now properly trigger the error handler instead of being dumb and spitting the SQL query to the user screen.
+* Error module properly reports database query errors now.
+* Emoticon box on comment form was not validating.
+* Finally fixed the skin to be properly fluid on the left column.
+
+New Stuff:
+
+* Dropped support for versions of PHP older than 5.2.0. It's time to upgrade folks.
+* Added MySQLi database library as an option. Provided by Detruire WAY back in 2008!
+* Added proper user account levels, replacing the old is_owner flag.
+* Files module now has a short summary field for the main listing pages.
+* Files module supports adding a thumbnail entry to the file listings.
+* Better error reporting on file uploads.
+* Post flag added to mark blog entries as visible to registered members only.
+* Added the ability to replace an image when editing an image entry.
+* Added bbcode menu to image description editing.
+* Images now have the same publication flags as blog posts.
+* Comment support has been added to the gallery module.
+* Akismet has been integrated into the codebase for spam protection on comments, emails, and user registrations.
+* Captcha protection removed from the email form as it was not effective.
+* Google Analytics code updated.
+* Template parsing updated to handle nesting IF/ELSE blocks.
+* AdminCP controls for editing blog entries now lists attached comments below the entry, with the comment editing controls moved there.
+* Complete overhaul of the entire skin for the package, based on the Ashlander 3 skin from QSF Portal.
+* Added recent images box to the sidebar.
+* Error pages generated and shown to users will also send proper HTTP codes so bots will stop indexing bogus pages.
+* Added UI controls to the main pages to edit/delete blog entries.
+* Added UI controls to the main pages to edit/delete/report comments.
+* Adapted the QSFP BBCode parser. All BBCode should now be processed properly.
+* Changed the Youtube tag to parse the URL to the video and then embed the proper code. Now XHTML 1.1 compliant. Also raised the view window size to 640x400 to match their widescreen format.
+* Blog entry quotes now have a nifty set of yellow quotation marks for style purposes.
+* RSS feed now properly handles post and image publication flags.
+* Recent comments and images boxes in the sidebar properly handle post and image publication flags.
+* Fixed comments to report accurate usernames for registered members rather than the old manually input names from before the software had accounts.
+* Fixed comments so that if a user has no icon specified the default Anonymous icon will always be displayed.
+* Added support for a list of random quotes which can be entered through the AdminCP.
+* Fatal error output has been masked with a user presentable page that does not reveal potentially sensitive information.
+* HTML markup corrections to bring the code back to valid XHTML 1.1 standards.
+* Comment posting and editing forms have been made immune to double posting errors.
+* Added some more TLD's to the email validation function.
+* Skin cookie will no longer set multiple copies of itself.
+* Comment functions have been moved to their own library file.
+* A whole lot of template shuffling and style nitpicking.
+* New settings can be manually entered into the settings table from the AdminCP.
+* Number of recent comments and recent images is now configurable from the AdminCP.
+* Preview added for blog posts and comments (when editing them too).
+* Full emoticon support, with skins able to have completely independent sets.
+* Blog posting form now has prompts to include an image for the top left of the posts. Either upload a new one or pick an existing image that's already been uploaded.
+* Archives section merged into the calendar box. It was getting too large and unwieldy.
+* Added title check to friendly URL links. Protects against typos and/or malicious backlinks from poisoning search indexes.
+* AdminCP option for optimizing the database will output its results.
+* Added database repair option to the AdminCP.
+* Put navigation links on the archive pages to make reaching adjascent months a bit easier.
+* Custom page IDs have been converted into proper database ID values instead of strings.
+* Users above regular member status can provide a link to a custom stylesheet for the skin if they want it.
+* Copyright terms for content on the site can be specified through the AdminCP to display in the page footer.
+* Optional setting to allow for miscellaneous footer text to be displayed above the copyright information.
+* Magic Quotes is deprecated as of PHP 5.3.0. All functions relating to it have been removed.
+* Removed several unused variables, some unused functions, and unused modules.
+* Separate CSS for print media removed as it was never used.
+* Spam notification will now display on the front page in addition to the AdminCP.
+* Added XTemplate engine for skin control. Converted all templates stored in the database to the new system.
+* Added rss_image_url setting.
+* Added timing to database queries.
+* Separated archive page processing from the main view processing.
+* Added gzip output buffering.
+* Skin performance optimizations recommended by Google PageSpeed.
+* Updated the xmlrpc module to latest version.
+* User passwords are now hashed with sha256 instead of md5.
+* Added support for large codeboxes, most useful for posting lengthy Oblivion mod lists.
+
+Changes for Sandbox 1.7
+-----------------------
+
+Bugfixes
+--------
+
+* Corrected inconsistent use of the word "photo" in the image gallery modules.
+* Author and URL cookie settings were not being handled correctly with cookie prefixes.
+* trim() was being called twice on every link in the nav bar unnecessarily.
+* Protected gallery and download folders did not function properly.
+* Profile edit option was missing from users.php function list.
+* Contact form was unusable due to a bad variable name.
+
+Other Changes
+-------------
+
+* Added a blogroll, by popular demand from those who have sent email comments.
+* Reworked the Sidebar boxes to allow them to be individually toggled on or off.
+* Reworked the friendly URL support to produce cleaner looking URLs.
+* Removed the Technorati tag support as it isn't really necessry.
+* Set all category names in blog posts with rel="tag"
+* Improved the layout of the post viewing templates. The bookmarking links were awkward.
+
+Changes for Sandbox 1.6
+-----------------------
+
+Bugfixes
+--------
+
+* Using a broken file link with the "i" parameter specified results in a crash. Fixed to send a 404 error instead.
+* Contact email should specify the name of the person who sent the email, not the name of the site.
+* RSS comments query bugged out due to not querying the post flags.
+* Blog signature span tags were not valid due to an extraneous closing slash.
+* The admin.css file was missing the CSS directives for file folders.
+* Cookie path settings in the AdminCP could end up with bad / usages.
+
+Other Changes
+-------------
+
+* Added friendly URL support. Requires the ability to modify .htaccess in order to work. Optional toggle.
+* Added a field to show when a file in the downloads center was last downloaded.
+* Added support for blog update pings using an XMLRPC interface.
+* Added a search feature to search blog entries.
+* Added the ability to nest bbcode quotes.
+* RSS blog entry query will now show the description tag instead of the first 200 characters of the post.
+* Blog entries can now be backdated upon being posted, or being edited.
+
+Changes for Sandbox 1.5
+-----------------------
+
+Bugfixes
+--------
+
+* RSS feed does not validate.
+* Editing a folder does not return a nicely formatted message.
+* Creating a file folder crashes due to improperly set protected flag.
+* Creating a file folder crashes due to checking a wrong variable name.
+
+Other Changes
+-------------
+
+* Added number of items to display on rss feed.
+* Added refresh time in minutes for rss feed.
+* Added meta description field for blog entries. Also used as rss feed subheadline.
+* Added meta description field for custom pages.
+* Users can now change their own passwords.
+* Entering a blog subject is now required.
+* Added support for submitting blog entries to del.icio.us, technorati, and stumbleupon.
+
+Changes for Sandbox 1.4.1
+-------------------------
+
+Bugfixes
+--------
+
+* SECURITY: Error reporting module reveals DB information when a DB connection error is displayed.
+* SECURITY: Comment submissions to closed posts are not blocked. Usually only possible from bots.
+* Youtube bbcode tag produces numerous XHTML validation errors. New substitution cuts it down to 1.
+
+Other Changes
+-------------
+
+* Option for HTML comment email added.
+
+Changes for Sandbox 1.4
+-----------------------
+
+Bugfixes
+--------
+
+* RSS feed provides improper links back to posts and comments, resulting in bogus 404 errors.
+* Syntax error in the ACP downloads module prevents it from being used.
+* Bad use of download directory setting in file deletion from the downloads ACP module.
+* Updating a file with a new copy does not unlink the old md5 name.
+* Plugged up several instances of undefined index checking.
+* Captcha image system was defeated. So it needed to be replaced. Added jpgraph files to support it.
+* Banned IPs being unset litters the logs with errors.
+* Editing a post with a title in quotes cuts off everything past the first quote mark.
+* Blog signatures in single post view were not being displayed.
+* CSS fixes to better handle the post icons when displayed.
+
+Other Changes
+-------------
+
+* Added error reporting, with email to the site owner when one comes up.
+
+Changes for Sandbox 1.3
+-----------------------
+
+Bugfixes
+--------
+
+* Blog category display on the AdminCP leaves empty whitespace where blue should be.
+* Height of the box that asks to choose a template for editing/deleting is too short.
+* Months with no posts in them will not be shown on the archives box.
+* Admin login prompt should never reveal any menu items.
+* Max length field in posting form was too large.
+* Broken <td> tag in page creation form.
+
+Other Changes
+-------------
+
+* Added previous and next blog post links to the post view.
+* Modified calls to $this->error to send a 404 response if a link is broken.
+* Send 403 Forbidden header for banned IPs trying to access the site.
+* When editing templates, the box being edited changes the background to alert you it hasn't been saved.
+* Added verification step to deleting blog posts and the comments with them.
+* Added verification step to deleting blog comments.
+* Added the ability to log on to the admin panel with a persistent cookie.
+* Added a proper users table for admins.
+* Added bbcode tag spoiler.
+* Added second img bbcode that doesn't require an alt tag.
+* Added blog posting icons.
+* Added bbcode control menus to blog comments, blog posting.
+* Added new Global template set for the bbcode options menu.
+* Links added to the post view to navigate between older and newer posts.
+* SQL errors encountered through the raw SQL form in the ACP will return a friendlier error screen.
+* Introduced limited access users who can:
+  + Post/Edit/Delete their own blog entries
+  + Delete comments from their own blog entries
+  + Upload/Edit/Delete their own files, and folders
+  + Upload/Edit/Delete their own gallery images, and folders
+  + Create/Edit/Delete their own custom pages
+  + Edit their own post icon and signature
+  + As a result of the above, users marked as owners are all powerful and can do as they please, including deleting limited users.
+  *** This system is built around the initial owner being able to trust new users - it's not the job of the code to police this if you mark them improperly!
+
+Changes for Sandbox 1.2
+-----------------------
+
+Bugfixes
+--------
+
+* tar.gz extension was not properly handled when uploading a file.
+* File submission date was never added in INSERT query for file uploads or updates.
+* Download counters should reset if a file is replaced when updating.
+* Deleting a file does not unlink the stored copy due to the wrong directory being used.
+* Removed Akismet code block from posts.php. Ooops.
+* Site address usage is inconsistent in the code. Fixed that and added enforcement of the trailing slash.
+* Added the missing skin template deletion function. Again, ooops.
+* Unable to add templates of the same name in a different set.
+* Fixed invalid <div> alignment for "center" and "right" justification bbocde.
+* Post flags for oveerriding the autoclose were not working.
+* Post listings in categories were not honoring the POST_PUBLISHED flag if it wasn't set.
+* RSS feed entries were not honoring the POST_PUBLISHED flag if it wasn't set.
+* tar.gz extension did not show as an archive type on a download display.
+* Disable PHP zlib.output_compression when downloading a file. Otherwise results in corrupted downloads.
+* Fixed CSS link hover. The change in font weight causes a few problems.
+
+Other changes
+-------------
+
+* Moved documentation to the docs directory.
+* Updated all copyright headers.
+* Cleaned up all of the capitalization on the AdminCP controls.
+* Cleaned up all of the output messges in both the AdminCP and main site to route through the message functions.
+* Message functions will automatically redirect after 4 seconds, unless code specifically says not to.
+* Cleaned up byte output for items with file sizes.
+* Can now edit the information for images in the gallery.
+* Image deletion overhauled for better visual confirmation of what you're deleting.
+* Logging out will redirect you back to the site homepage.
+* Added function to optimize the database tables.
+* Main page sidebar display moved to its own library file to be callable in other modules.
+* Custom pages now have an option to display the sidebar.
+* Added function to export templates from the site default skin.
+* Removed the annoying javascript that made template editing expand the textarea size.
+* Added version variable to global class. Displays only in AdminCP so you know what version you're running.
+* Added detailed description for gallery images.
+* Added bbcode control for youtube.
+* Overhauled the Sandbox installer. Ripped portions from QSF Portal. Installation is much more robust now. Skin is installed via XML file.
+* Added migration script to installer, supporting upgrades from 0.3 up to current.
+* Category listings will now include the sidebar.
+* File submission date added to the download display.
+* Added Google's new X-Robots-Tag to stop indexing file archives.
+* Added image submission date to gallery image display.
+* Modified how individual blog posts are displayed.
+* Modified the display of the archive link page to only show post titles. Aids in reducing duplicate search indexing.
+* Date links on the calendar will now bring up the post for that day using the proper post link.
+* Comment notification email will now link directly to the new comment.
+
+Changes for Sandbox 1.1
+-----------------------
+
+Bugfixes
+--------
+
+* Blog: Links were not being auto-parsed in comment text.
+* AdminCP: Typo in AdminCP templates - Blog "Bategory" should be "Category"
+* AdminCP: Updating a file did not change the filename in the database.
+* Photo gallery: Root folder was being referenced by the wrong folder ID.
+* Downloads: Root folder was being referenced by the wrong folder ID.
+
+Other changes
+-------------
+
+* AdminCP: Only posts with comments will show up when editing comments.
+* AdminCP: Added setting to identify the site owner.
+* Blog: When viewing a blog category, the HTML title reflects the category name.
+* Contact Form: Email contact page uses the site owner name setting.
+* Blog: The HTML title will show "Archive:" when listing an archive link.
+* Blog: The HTML title will use the title of the post being viewed when viewing a blog entry.
+* Blog: Blog comments will be sorted by date, oldest first. This aids add-ons like Akismet that insert false positives at a later date.
+
+Changes for Sandbox 1.0b
+------------------------
+
+Bugfixes
+--------
+
+* Check for illegal admin names was reversed.
+* Deleting a download tries to unlink from a hardcoded directory setting.
+
+Other changes
+-------------
+
+* Numerous database fields renamed - Upgraders beware!!!
+* More CSS changes to the default skin.
+* Skinning engine as found in QSF Portal added for making changes to the layout without hardcoding them.
+* XHTML data for the main pages of the site transferred to database templates.
+* AdminCP functions will output a menu of their options when clicked.
+* List option added to files menu.
+* Added page ID field to custom pages.
+* Added the ability to edit blog posts and blog comments.
+* Moves RSS functions to their own file, RSS is now built "on the fly".
+* Added blog categories.
+* AdminCP setting to set blog posts to close after a certain period of time.
+* Date format for the blog settable in the AdminCP.
+* Added a toggle for sending emails to the site owner for blog comments.
+* New IP banning module added, with CIDR range support.
+* New systems module for: site settings, bans, and raw SQL queries.
+* New module added for dealing with skin templates. Can add, edit, and delete them.
+* New categories module.
+* Added bbcode: quote, email, font size, color.
+* Added date, url, and IP to blog comments.
+* Added date to downloads and gallery images.
+
+Changes before Sandbox 1.0 - These were all done by Kiasyn
+----------------------------------------------------------
+
+Changes for Sandbox 0.5
+-----------------------
+
+* Enabled PHP error level E_ALL
+* Location of download directories can be specified in the AdminCP now.
+* Wrapped some file data in htmlspecialchars.
+* Added support for gif images to the gallery.
+* Removed Kiasyn's name from the login box on the AdminCP :)
+* Better field validation when saving site settings.
+* Added a blog avatar image to the front page.
+* Added posts per page setting.
+* Added root folders for downloads and images.
+* Added blog calendar with links to posts made on particular days.
+* Several changes in the CSS for the default skin.
+
+Changes for Sandbox 0.4
+-----------------------
+
+* Added the ability to create multiple site administrators.
+* Added logout link to AdminCP.
+* Switched to using $this->get instead of $_GET directly. Same for other request variables.
+* Updated database library to use mysql_real_escape_string instead of stripslashes calls everywhere.
+* Pastebin admin module removed from release package. Oops.
+* Added support for Google Analytics ID.
+* Install script provided - guess 0.3 didn't have this.
+* Changed the way dates are handled on postings and by the DB.
+
+Sandbox 0.3 - Initial release

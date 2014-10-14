@@ -1,0 +1,302 @@
+<!-- BEGIN: Settings -->
+<form method="post" action="admin.php?a=settings">
+ <div class="article">
+  <div class="title">Edit Site Settings</div>
+  <div class="subtitle">General Settings</div>
+
+  <input type="hidden" name="token" value="{token}" />
+
+  <span class="field"><label for="site_name">Site Name:</label></span>
+  <span class="form"><input style="width:25%" class="input" type="text" name="site_name" id="site_name" value="{site_name}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_owner">Site Owner:</label></span>
+  <span class="form"><input class="input" type="text" name="site_owner" id="site_owner" value="{site_owner}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="email_adm">Admin Email [Real]:</label></span>
+  <span class="form"><input style="width:25%" class="input" type="text" name="email_adm" id="email_adm" value="{email_adm}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="email_sys">System Email [Fake]:</label></span>
+  <span class="form"><input style="width:25%" class="input" type="text" name="email_sys" id="email_sys" value="{email_sys}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_address">Site Address:</label></span>
+  <span class="form"><input style="width:35%" class="input" type="text" name="site_address" id="site_address" value="{site_address}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_meta">Default META Description:</label></span>
+  <span class="form"><input style="width:85%" class="input" type="text" name="site_meta" id="site_meta" value="{site_meta}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_keywords">Site Search Keywords:</label><br />(Separated by commas)</span>
+  <span class="form"><input style="width:65%" class="input" type="text" name="site_keywords" id="site_keywords" value="{site_keywords}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_dateformat">Date Format <a href="http://us2.php.net/manual/en/function.date.php" target="_blank">(PHP style)</a>:</label></span>
+  <span class="form"><input class="input" type="text" name="blog_dateformat" id="blog_dateformat" value="{blog_dateformat}" /></span>
+  <p class="line"></p>
+
+  <span class="field">Default Skin:</span>
+  <span class="form">{site_defaultskin}</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_analytics">Google Analytics ID:</label></span>
+  <span class="form"><input class="input" type="text" name="site_analytics" id="site_analytics" value="{site_analytics}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="wordpress_api_key">Wordpress API Key:</label></span>
+  <span class="form">
+   <input class="input" type="text" name="wordpress_api_key" id="wordpress_api_key" value="{wordpress_api_key}" />
+   <a href="http://akismet.com/signup/" target="_blank">Obtain API Key</a> - Required to activate Akismet.
+  </span>
+  <p class="line"></p>
+
+  <span class="field"><label for="twitter_user">Twitter ID:</label></span>
+  <span class="form">
+   <input class="input" type="text" name="twitter_user" id="twitter_user" value="{twitter_user}" />
+   <a href="http://twitter.com/" target="_blank">Sign up with Twitter</a> - Not required. Used when users click the Twitter share icon.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Global Comments:</span>
+  <span class="form">
+   <input type="radio" name="global_comments" id="glob1" value="1"{glob1} /> <label for="glob1">Allowed</label>
+   <input type="radio" name="global_comments" id="glob0" value="0"{glob0} /> <label for="glob0">Disallowed</label><br />
+   Site wide flag for allowing or disallowing *ALL* comments, including registered users.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Anonymous Comments:</span>
+  <span class="form">
+   <input type="radio" name="anonymous_comments" id="anon1" value="1"{anon1} /> <label for="anon1">Allowed</label>
+   <input type="radio" name="anonymous_comments" id="anon0" value="0"{anon0} /> <label for="anon0">Disallowed</label><br />
+   Site wide flag for allowing or disallowing anonymous comments.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Friendly URL Support:</span>
+  <span class="form">
+   <input type="radio" name="friendly_urls" id="url1" value="1"{url1} /> <label for="url1">Enabled</label>
+   <input type="radio" name="friendly_urls" id="url0" value="0"{url0} /> <label for="url0">Disabled</label><br />
+   This requires that you are able to make use of the .htaccess file for your site.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Site Status:</span>
+  <span class="form">
+   <input type="radio" name="site_open" id="site1" value="1"{site1} /> <label for="site1">Open</label>
+   <input type="radio" name="site_open" id="site0" value="0"{site0} /> <label for="site0">Closed</label>
+  </span>
+  <p class="line"></p>
+
+  <span class="field"><label for="site_closedmessage">Closed Message:</label></span>
+  <span class="form"><input style="width:65%" class="input" type="text" name="site_closedmessage" id="site_closedmessage" value="{site_closedmessage}" /></span>
+  <p class="line"></p>
+
+  <span class="field">Footer Text:</span>
+  <span class="form">
+   <textarea name="footer_text" rows="8">{footer_text}</textarea>
+   Text to insert into the page footer. Displays above the copyright. Supports HTML.
+  </span>
+  <p class="line"></p>
+
+  <span class="field">Copyright Terms:</span>
+  <span class="form">
+   <textarea name="copyright_terms" rows="8">{copyright_terms}</textarea>
+   Terms for the copyright of content posted to your site. Displays above the software copyright statement. Supports HTML.
+  </span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Cookies</div>
+
+  <span class="field"><label for="cookie_prefix">Cookie Prefix:</label></span>
+  <span class="form"><input class="input" type="text" name="cookie_prefix" id="cookie_prefix" value="{cookie_prefix}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="cookie_path">Cookie Path:</label></span>
+  <span class="form"><input class="input" type="text" name="cookie_path" id="cookie_path" value="{cookie_path}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="cookie_domain">Cookie Domain:</label></span>
+  <span class="form"><input class="input" type="text" name="cookie_domain" id="cookie_domain" value="{cookie_domain}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="cookie_logintime">Time to stay logged in (seconds):</label></span>
+  <span class="form"><input class="input" type="text" name="cookie_logintime" id="cookie_logintime" value="{cookie_logintime}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="cookie_secure">Is this site SSL secured?</label></span>
+  <span class="form">
+   <input type="checkbox" name="cookie_secure" id="cookie_secure"{cookie_secure} />
+   Leave this box UNCHECKED if your URL does not begin with https:// or you will not be able to log on!
+  </span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Blog</div>
+
+  <span class="field"><label for="blog_avatar">Avatar:</label></span>
+  <span class="form"><input style="width:25%" class="input" type="text" name="blog_avatar" id="blog_avatar" value="{blog_avatar}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_postsperpage">Posts Per Page:</label></span>
+  <span class="form"><input class="input" type="text" name="blog_postsperpage" id="blog_postsperpage" value="{blog_postsperpage}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_autoclose">Autoclose Period (in days):</label></span>
+  <span class="form"><input class="input" type="text" name="blog_autoclose" id="blog_autoclose" value="{blog_autoclose}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_icon_width">Icon Width(px):</label></span>
+  <span class="form"><input class="input" type="text" name="blog_icon_width" id="blog_icon_width" value="{blog_icon_width}" /> Should match the width in your css.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_icon_height">Icon Height(px):</label></span>
+  <span class="form"><input class="input" type="text" name="blog_icon_height" id="blog_icon_height" value="{blog_icon_height}" /> Should match the height in your css.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="sidebar_comments_count">Recent Comments:</label></span>
+  <span class="form"><input class="input" type="text" name="sidebar_comments_count" id="sidebar_comments_count" value="{sidebar_comments_count}" /> Number of recent comments to list in the sidebar box if it is enabled.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_commentsperpage">Comments Per Page:</label></span>
+  <span class="form"><input class="input" type="text" name="blog_commentsperpage" id="blog_commentsperpage" value="{blog_commentsperpage}" /> Number of comments to display per page of comments.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_notifycomments">Email on new comments?</label></span>
+  <span class="form"><input type="checkbox" name="blog_notifycomments" id="blog_notifycomments"{blog_notifycomments} /></span>
+  <p class="line"></p>
+
+  <span class="field">Email Type:</span>
+  <span class="form">
+   <input type="radio" name="html_email" id="email0" value="0"{email0} /> <label for="email0">Standard</label>
+   <input type="radio" name="html_email" id="email1" value="1"{email1} /> <label for="email1">HTML</label>
+  </span>
+  <p class="line"></p>
+
+  <span class="field"><label for="blog_signature_on">Enable Signatures?</label></span>
+  <span class="form"><input type="checkbox" name="blog_signature_on" id="blog_signature_on"{blog_signature_on} /></span>
+  <p class="line"></p>
+
+  <span class="head">Sidebar functions. Check the boxes for the ones you want to enable.</span>
+
+  <span class="field">&nbsp;</span>
+  <span class="form">
+   <input type="checkbox" id="sidebar_avatar" name="sidebar_avatar"{sidebar_avatar} /> <label for="sidebar_avatar">Avatar</label>
+   <input type="checkbox" id="sidebar_search" name="sidebar_search"{sidebar_search} /> <label for="sidebar_search">Search</label>
+   <input type="checkbox" id="sidebar_calendar" name="sidebar_calendar"{sidebar_calendar} /> <label for="sidebar_calendar">Calendar</label>
+   <input type="checkbox" id="sidebar_comments" name="sidebar_comments"{sidebar_comments} /> <label for="sidebar_comments">Recent Comments</label>
+   <input type="checkbox" id="sidebar_images" name="sidebar_images"{sidebar_images} /> <label for="sidebar_images">Recent Images</label>
+   <input type="checkbox" id="sidebar_blogroll" name="sidebar_blogroll"{sidebar_blogroll} /> <label for="sidebar_blogroll">Blogroll</label>
+   <input type="checkbox" id="sidebar_categories" name="sidebar_categories"{sidebar_categories} /> <label for="sidebar_categories">Categories</label>
+  </span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Image Gallery</div>
+
+  <span class="field"><label for="gallery_thumb_w">Gallery Thumbnail Width(px):</label></span>
+  <span class="form"><input class="input" type="text" name="gallery_thumb_w" id="gallery_thumb_w" value="{gallery_thumb_w}" /> Should match the width in your css.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="gallery_thumb_h">Gallery Thumbnail Height(px):</label></span>
+  <span class="form"><input class="input" type="text" name="gallery_thumb_h" id="gallery_thumb_h" value="{gallery_thumb_h}" /> Should match the height in your css.</span>
+  <p class="line"></p>
+
+  <span class="field"><label for="sidebar_images_count">Recent Images:</label></span>
+  <span class="form"><input class="input" type="text" name="sidebar_images_count" id="sidebar_images_count" value="{sidebar_images_count}" /> Number of recent images to list in the sidebar box if it is enabled.</span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Downloads Area</div>
+
+  <span class="field"><label for="large_download">Large Downloads (MB):</label></span>
+  <span class="form"><input class="input" type="text" name="download_size" id="large_download" value="{lg_download}" /> File size at which registration is required to download. 0 to disable the limit.</span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">RSS Feeds</div>
+
+  <span class="field"><label for="rss_enabled">RSS Enabled:</label></span>
+  <span class="form"><input type="checkbox" name="rss_enabled" id="rss_enabled"{rss_enabled} /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="rss_items">Items per Feed:</label></span>
+  <span class="form"><input class="input" type="text" name="rss_items" id="rss_items" value="{rss_items}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="rss_refresh">Refresh Time (minutes):</label></span>
+  <span class="form"><input class="input" type="text" name="rss_refresh" id="rss_refresh" value="{rss_refresh}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="rss_name">RSS Name:</label></span>
+  <span class="form"><input style="width:25%" class="input" type="text" name="rss_name" id="rss_name" value="{rss_name}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="rss_image_url">RSS Image URL:</label></span>
+  <span class="form"><input style="width:45%" class="input" type="text" name="rss_image_url" id="rss_image_url" value="{rss_image_url}" /></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="rss_description">RSS Description:</label></span>
+  <span class="form"><input style="width:85%" class="input" type="text" name="rss_description" id="rss_description" value="{rss_description}" /></span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Homepage Navigation Links</div>
+
+  <span class="field"><label for="page_names">Page Names:</label></span>
+  <span class="form"><textarea name="page_names" id="page_names" rows="8">{page_names}</textarea></span>
+  <p class="line"></p>
+
+  <span class="field"><label for="page_links">Links</label></span>
+  <span class="form"><textarea name="page_links" id="page_links" rows="8">{page_links}</textarea></span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+ <div class="article">
+  <div class="subtitle">Global Announcement Message</div>
+
+  <span class="field"><label for="global_announce">Message Text:</label></span>
+  <span class="form"><textarea name="global_announce" id="global_announce" rows="8">{global_announce}</textarea></span>
+  <p class="line"></p>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+</form>
+
+<!-- BEGIN: AddForm -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Add Site Setting</div>
+
+  <span class="field">New setting name:</span>
+  <span class="form"><input class="input" name="new_setting" type="text" value="" /></span>
+  <p class="line"></p>
+
+  <span class="field">New setting value:</span>
+  <span class="form"><input class="input" name="new_value" type="text" value="" /></span>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="submit" name="submit" value="Submit" />
+  <p></p>
+ </div>
+</form>
+<!-- END: AddForm -->
+<!-- END: Settings -->

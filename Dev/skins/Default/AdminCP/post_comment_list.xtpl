@@ -1,0 +1,23 @@
+<!-- BEGIN: Comments -->
+<table style="width:100%">
+ <tr>
+  <th class="header" colspan="6">Comments</th>
+ </tr>
+ <tr>
+  <td colspan="3" class="subheader" style="width:25%; text-align:center">Comment Controls</td>
+  <td class="subheader" style="width:10%">Author</td>
+  <td class="subheader" style="width:10%">IP Address</td>
+  <td class="subheader">Message</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{edit_link}</td>
+  <td>{delete_link}</td>
+  <td>{spam_link}</td>
+  <td>{user_name}</td>
+  <td>{user_ip}</td>
+  <td>{comment_text}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+<!-- END: Comments -->

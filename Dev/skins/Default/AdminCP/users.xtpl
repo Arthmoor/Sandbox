@@ -1,0 +1,27 @@
+<!-- BEGIN: Users -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="7">{header}</td>
+ </tr>
+ <tr>
+  <td class="subheader">&nbsp;</td>
+  <td class="subheader">&nbsp;</td>
+  <td class="subheader">Name</td>
+  <td class="subheader">Email</td>
+  <td class="subheader">Homepage</td>
+  <td class="subheader">Joined On</td>
+  <td class="subheader"># Comments</td>
+ </tr>
+<!-- BEGIN: Member -->
+ <tr>
+  <td><a href="admin.php?a=users&amp;s=edit&amp;user={user_id}">Edit</a></td>
+  <td><a href="admin.php?a=users&amp;s=delete&amp;user={user_id}">Delete</a></td>
+  <td><img src="{user_icon}" alt="" /> {user_name}</td>
+  <td>{user_email}</td>
+  <td>{user_url}</td>
+  <td>{join_date}</td>
+  <td>{post_count} [{percent}%]</td>
+ </tr>
+<!-- END: Member -->
+</table>
+<!-- END: Users -->

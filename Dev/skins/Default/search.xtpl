@@ -1,0 +1,20 @@
+<!-- BEGIN: Search -->
+<div id="main">
+ <div class="article">
+  <div class="title">Search Results: {count} {posts} containing '{search_word}'</div>
+<!-- Begin: Result -->
+  <span class="category">
+   <a href="{item_link}">{subject}</a>
+   <p></p>
+   {summary}
+  </span>
+  <span class="author">By {user_name}</span>
+  <span class="date">{date}</span>
+
+  <p class="line"></p>
+<!-- END: Result -->
+ {content}
+ </div>
+</div>
+{sidebar}
+<!-- END: Search -->

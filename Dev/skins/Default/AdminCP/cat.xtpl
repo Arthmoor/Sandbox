@@ -1,0 +1,63 @@
+<!-- BEGIN: Categories -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="4">Blog Categories</td>
+ </tr>
+ <tr>
+  <td class="subheader" style="width:10%" colspan="2">&nbsp</td>
+  <td class="subheader">Name</td>
+  <td class="subheader">Description</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td style="width:5%">{edit_link}</td>
+  <td style="width:5%">{delete_link}</td>
+  <td>{name}</td>
+  <td>{desc}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+
+<!-- BEGIN: EditForm -->
+<form action="{action_link}" method="post" id="bbcode">
+<script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+<script type="text/javascript">mbcodeInit("bbcode", "cat_desc");</script>
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="2">{heading}</td>
+ </tr>
+ <tr>
+  <td style="width:25%">Category Name:</td>
+  <td><input class="input" name="category" id="category" type="text" value="{cat_name}" size="50" maxlength="50" /></td>
+ </tr>
+ <tr>
+  <td style="width:25%">Category Description:</td>
+  <td>
+   {bbcode_menu}
+   <textarea class="input" name="cat_desc" id="cat_desc" rows="5">{cat_desc}</textarea>
+  </td>
+ </tr>
+ <tr>
+  <td colspan="3">
+   <input type="hidden" name="token" value="{token}" />
+   <input type="submit" name="submit" value="Submit" />
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END: EditForm -->
+
+<!-- BEGIN: Delete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title">Delete Blog Category</div>
+  Are you sure you want to delete the {cat_name} category?<br />All posts within will be flagged as uncategorized.
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="hidden" name="c" value="{cat_id}" />
+  <input type="submit" name="submit" value="Yes, delete this category." />
+ </div>
+</form>
+<!-- END: Delete -->
+<!-- END: Categories -->

@@ -1,0 +1,28 @@
+Sandbox Personal Website Software
+---------------------------------
+
+Software Requirements
+---------------------
+
+PHP 5.3.0 or greater.
+MySQL 5.0 or greater.
+php5-xmlrpc library required for blog ping support. If this is not available, ping functions will be disabled.
+
+Quick Installation Instructions
+-------------------------------
+
+If you just want to dive right in and play around, follow these steps:
+
+* Make sure you have a database available with appropriate permissions.
+* Upload the files to your web host.
+* Set the following directories to 0777 permissions:
+   files
+   files/blogpostimages
+   files/downloads
+   files/emoticons
+   files/gallery
+   files/gallery/thumbnails
+   files/posticons
+* Point your browser to http://yoururl/wheresandboxis/install
+
+Follow the instructions in the installer.

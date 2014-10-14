@@ -1,0 +1,11 @@
+<!-- BEGIN: Page -->
+<!-- BEGIN: HasSidebar -->
+ <div id="main">
+<!-- END: HasSidebar -->
+<!-- BEGIN: NoSidebar -->
+ <div id="fullscreen">
+<!-- END: NoSidebar -->
+  {content}
+ </div>
+{sidebar}
+<!-- END: Page -->

@@ -1,0 +1,115 @@
+<!-- BEGIN: Sidebar -->
+<div id="blocks">
+
+<!-- BEGIN: Avatar -->
+ <div class="block">
+  <img src="{avatar}" alt="" height="185" width="185" />
+ </div>
+<!-- END: Avatar -->
+
+<!-- BEGIN: UserboxMember -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/user_online.png" alt="" /> {user_name}</div>
+  <a href="{profile_url}">Manage Your Profile</a><br /><br />
+  {post_create_link}
+  {admin_cp_link}
+  <a href="{logout_url}">Logout</a>
+ </div>
+<!-- END: UserboxMember -->
+
+<!-- BEGIN: UserboxGuest -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/user_online.png" alt="" /> Anonymous</div>
+  <a href="{register_url}">Register</a>
+  <p class="line"></p>
+
+  <a href="{password_url}">Forgot Password?</a>
+  <p class="line"></p>
+
+  <form method="post" action="{login_url}">
+   <div>
+    <span class="field"><label for="u_name">Name:</label></span>
+    <span class="form"><input type="text" name="username" id="u_name" value="" /></span>
+    <p class="line"></p>
+
+    <span class="field"><label for="u_password">Password:</label></span>
+    <span class="form"><input type="password" name="password" id="u_password" value="" /></span>
+    <input type="submit" name="submit" value="Login" />
+   </div>
+  </form>
+ </div>
+<!-- END: UserboxGuest -->
+
+<!-- BEGIN: Calendar -->
+ <div class="block">
+  <div class="title">
+   <form action="/">
+    <div>
+     <label for="archiveselect"></label>
+     <select name="months" class="archives" id="archiveselect">{month_options}</select>
+     <input class="archives" type="button" value="View" onclick="self.location.href = form.months.value" />
+    </div>
+   </form>
+  </div>
+  {calendar_table}
+ </div>
+<!-- END: Calendar -->
+
+<!-- BEGIN: Search -->
+ <div class="block">
+  <form action="{search_url}" method="post">
+   <div class="title"><img src="{imgsrc}/images/search.png" alt="" />  <label for="searchbox">Search</label></div>
+   <div>
+    <input type="text" name="search_word" id="searchbox" value="" /><br />
+    <input type="submit" name="submit" value="Search" />
+   </div>
+  </form>
+ </div>
+<!-- END: Search -->
+
+<!-- BEGIN: Comments -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/comments.png" alt="" /> Recent Comments</div>
+  <ul>
+<!-- BEGIN: Link -->
+   <li><a href="{comment_post_url}" title="Posted by {comment_user_name} on {comment_date}">{comment_subject}</a></li>
+<!-- END: Link -->
+  </ul>
+ </div>
+<!-- END: Comments -->
+
+<!-- BEGIN: Images -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/photos.png" alt="" /> <a href="{recent_link}">Recent Images</a></div>
+  <ul>
+<!-- BEGIN: Link -->
+   <li><a href="{image_post_url}" title="Posted on {image_date}">{image_subject}</a></li>
+<!-- END: Link -->
+  </ul>
+ </div>
+<!-- END: Images -->
+
+<!-- BEGIN: Blogroll -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/world_link.png" alt="" /> Blogroll</div>
+  <ul>
+<!-- BEGIN: Link -->
+   <li><a href="{blogroll_url}" title="{blogroll_title}">{blogroll_name}</a></li>
+<!-- END: Link -->
+  </ul>
+ </div>
+<!-- END: Blogroll -->
+
+<!-- BEGIN: Categories -->
+ <div class="block">
+  <div class="title"><img src="{imgsrc}/images/categories.png" alt="" /> Blog Categories</div>
+  <ul>
+<!-- BEGIN: Link -->
+   <li><a href="{cat_link}">{cat_name}</a></li>
+<!-- END: Link -->
+  </ul>
+ </div>
+<!-- END: Categories -->
+
+</div>
+<!-- END: Sidebar -->

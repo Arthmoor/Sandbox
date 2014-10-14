@@ -1,0 +1,43 @@
+<!-- BEGIN: DownloadFolder -->
+<div id="fullscreen">
+ <div class="article">
+  <div class="navtree"><img src="{imgsrc}/images/downloads.png" alt="" /> {tree}</div>
+  <div class="title">{folder_summary}</div>
+<!-- BEGIN: Link -->
+  <span class="file_folder">
+   <img src="{imgsrc}/images/folder.png" height="14" width="14" alt="" />
+   <a href="{parent}">{name}</a>
+  </span>
+<!-- END: Link -->
+  <div style="clear:both;"></div>
+ </div>
+<!-- BEGIN: File -->
+ <div class="article">
+  <h2 class="title"><img src="{item_icon}" style="float:left" /><a href="{item_link}" title="{item_name}">{item_name}</a></h2>
+
+  <span class="postbit_top"></span>
+  <div class="rounded_top" style="background-position:22px 0px;">
+   <span class="one"></span>
+   <span class="two"></span>
+   <span class="three"></span>
+   <span class="four"></span>
+  </div>
+
+  <div class="postbit">
+   {item_image}
+   {item_summary}
+   <p class="line"></p>
+   [{item_size} KB] Uploaded on {item_date} by {item_user}<br />
+   {item_downloads}
+  </div>
+
+  <div class="rounded_bottom">
+   <span class="one">&nbsp;</span>
+   <span class="two">&nbsp;</span>
+   <span class="three">&nbsp;</span>
+   <span class="four">&nbsp;</span>
+  </div>
+ </div>
+<!-- END: File -->
+</div>
+<!-- END: DownloadFolder -->

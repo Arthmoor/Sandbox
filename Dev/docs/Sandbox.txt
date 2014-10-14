@@ -1,0 +1,71 @@
+Sandbox Personal Website Software
+---------------------------------
+
+Sandbox is a personal website package that provides you with a blog, image gallery, file downloads area, and the ability to create miscellaneous custom webpages. It was originally designed by Sam O'Connor as a simple package to handle some random postings and other small things. When I took over the project around version 1.0, I decided I needed more. Other blog/website packages like Wordpress only did one thing. Many of them still only do one thing. Most blog packages do not also provide a good image gallery and I have not seen one yet that provides a good downloads module. You can get these things in separate packages, but integrating them into one site is a nightmare of code bridges and incompatible skinning systems.
+
+Sandbox evolved after 1.0 from my desire to have all of these things integrated into one package, with an easy to use interface. Though it may seem simplistic at first glance, the software holds a great deal of potential in the right hands and could function as the front end for a small business, school group, family site, or project headquarters. It's my hope that it will one day take its place among the giants. Well, I can dream anyway, right? :)
+
+Sandbox supports the following:
+
+General Features
+----------------
+
+* Custom pages created on the fly, provided you know HTML.
+* Skinning built around the XTemplate PHP class. Change the entire look of your site without ever touching the PHP!
+* HTML 5/CSS standards compliant in the default skin.
+* Graduated user levels, from totally anonymous, up to full fledged administrators.
+* Google Analytics support - Just input your Analytics ID.
+* RSS feeds for blog, gallery, downloads, and comments.
+* IP banning with CIDR range support.
+* Errors for missing or bad links send the proper HTTP status codes to the user agent.
+* Error reporting emailed to the site owner. No details of the error are exposed to visitors.
+* Support for friendly URLs controlled through .htaccess.
+* Full BBCode support throughout most modules.
+* Emoticons supported in blog posts and comments.
+* Modular sidebar boxes can be enabled or disabled as desired, except for the user login/logout box.
+* Contact page to allow visitors to email you without exposing your address.
+* Akismet spam filtering built in, all you need is your API key.
+* Top level navigation bar you can add to from the AdminCP without having to touch the code or the templates.
+* Provides settings to allow for custom copyright footer and/or miscellaneous information.
+* Privileged users and above have the option to specify a substitute stylesheet if they choose.
+
+Blog
+----
+
+* Contributing authors have limited access to post blog entries, but cannot access the AdminCP.
+  + They may edit their own posts, and control comments attached to them, including spam.
+* Supports HTML formatting only in blog posts. Comment HTML is still considered too risky.
+* Full support for all common BBCode entities, and emoticons in blog posts and comments.
+* Archives of past entries, accessible via the sidebar calendar.
+* Categorized posts, with links to view what is posted in each. Category links also double as tags for aggregators like Technorati.
+* Ability to auto-close posts after a specified time frame. Registered members have no limit.
+* Email notification on new comments. Optionally in HTML format.
+* Blog signatures and avatars for each user.
+* Blog signatures and avatars for each user. Includes support for Gravatars (http://www.gravatar.com/).
+* Links for submitting blog entries to del.icio.us, Technorati, Stumbleupon, and Facebook.
+* Support for pinging blog update services with new posts. (Requires php5-xmlrpc extension)
+* Search function for blog posts.
+* Blogroll to add your friends' sites to.
+* Full preview support for posting blog entries. Make sure it looks good before posting.
+* Ability to insert an image in the top-left of the post for that added bit of flare.
+
+Image Gallery
+-------------
+
+* Thumbnail preview of images.
+* Captions below the images.
+* Detailed descriptions of images.
+* Folders to help keep things more organized.
+* Folders can be marked hidden and are only available to that user and the site administrators.
+* Full comment support, including spam filtering.
+
+File Downloads
+--------------
+
+* Folders to help keep things more organized.
+* Folder listings support thumbnail sized images to help show off the files.
+* Folders can be marked hidden and are only available to that user and the site administrators.
+* Allows brief description of the contents.
+* Downloads counter to keep track of how many downloads you get, and when the last one was made.
+* Full comment support, including spam filtering.
+* Large downloads can be restricted to registered members only.

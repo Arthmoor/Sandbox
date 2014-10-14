@@ -1,0 +1,77 @@
+<!-- BEGIN: Comment -->
+<!-- BEGIN: Preview -->
+ <div class="article">
+  <div class="title"><span class="warning">COMMENT PREVIEW: DATA HAS NOT BEEN SAVED</span></div>
+ </div>
+
+ <div class="article">
+  <div class="title"><img src="{icon}" style="float:left" />{author} said:<br />
+   <div style="font-size:11px">{date}</div>
+  </div>
+
+  <span class="postbit_top"></span>
+
+  <div class="rounded_top" style="background-position:22px 0px;">
+   <span class="one"></span>
+   <span class="two"></span>
+   <span class="three"></span>
+   <span class="four"></span>
+  </div>
+
+  <div class="postbit">{message}<p></p></div>
+
+  <div class="rounded_bottom">
+   <span class="one">&nbsp;</span>
+   <span class="two">&nbsp;</span>
+   <span class="three">&nbsp;</span>
+   <span class="four">&nbsp;</span>
+  </div>
+ </div>
+<!-- END: Preview -->
+
+ <div class="article">
+  <h2 class="title"><span class="warning">EDITING COMMENT:</span></h2>
+  <form method="post" action="{action_link}" id="bbcode">
+   <div>
+    <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+    <script type="text/javascript">mbcodeInit("bbcode", "post_text");</script>
+
+    <span class="field">Author:</span>
+    <span class="form">{author}</span>
+    <div class="line"></div>
+
+    <span class="head">Text:</span>
+
+    <span class="field">
+     <span id="quicksmilies">
+      {emoticons}
+     </span>
+    </span>
+    <span class="form">
+     {bbcode_menu}
+     <textarea class="input" id="post_text" name="post_text" rows="15" cols="60">{text}</textarea>
+    </span>
+    <div class="line"></div>
+
+    <div style="text-align:center">
+     <input type="hidden" name="token" value="{token}" />
+     <input type="submit" name="submit" value="Post Edited Comment" /><input type="submit" name="preview" value="Preview" />
+    </div>
+   </div>
+  </form>
+ </div>
+<!-- BEGIN: Delete -->
+<form action="{action_link}" method="post">
+ <div class="article">
+  <div class="title"><span class="warning">Delete Comment</span></div>
+  <div class="title">Comment by {author} Posted on: {date}</div>
+  <div class="article">{text}</div>
+  <div class="title" style="text-align:center">Are you sure you want to delete this comment?{sp}</div>
+  <p class="line"></p>
+
+  <input type="hidden" name="token" value="{token}" />
+  <input type="submit" name="submit" value="Yes, delete this comment." />
+ </div>
+</form>
+<!-- END: Delete -->
+<!-- END: Comment -->

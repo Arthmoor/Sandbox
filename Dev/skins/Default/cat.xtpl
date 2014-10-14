@@ -1,0 +1,20 @@
+<!-- BEGIN: Category -->
+<div id="main">
+ <div class="article">
+  <div class="title">{cat_name}</div>
+  {cat_desc}
+ </div>
+
+ <div class="article">
+  <div class="title">Entries in {cat_name}</div>
+<!-- BEGIN: Post -->
+  <span class="category"><a href="{post_url}">{subject}</a></span>
+  <span class="author">{author}</span>
+  <span class="date">{date}</span>
+
+  <p class="line"></p>
+<!-- END: Post -->
+ </div>
+</div>
+{sidebar}
+<!-- END: Category -->

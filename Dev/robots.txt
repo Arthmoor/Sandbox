@@ -1,0 +1,7 @@
+User-agent: WebReaper
+Disallow: /
+
+User-agent: *
+Disallow: /index.php?a=register
+Disallow: /register
+Disallow: /files

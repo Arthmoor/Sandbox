@@ -1,0 +1,24 @@
+<!-- BEGIN: PostList -->
+<table style="width:100%">
+ <tr>
+  <td class="header" colspan="6">Blog Posts</td>
+ </tr>
+ <tr>
+  <td class="subheader" colspan="2">&nbsp;</td>
+  <td class="subheader" style="width:20%">Date</td>
+  <td class="subheader">Subject</td>
+  <td class="subheader">Poster</td>
+  <td class="subheader">Status</td>
+ </tr>
+<!-- BEGIN: Entry -->
+ <tr class="line">
+  <td>{edit_link}</td>
+  <td>{delete_link}</td>
+  <td>{date}</td>
+  <td>{subject}</td>
+  <td>{user_name}</td>
+  <td>{status}</td>
+ </tr>
+<!-- END: Entry -->
+</table>
+<!-- END: PostList -->

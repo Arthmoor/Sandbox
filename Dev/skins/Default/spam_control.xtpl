@@ -1,0 +1,49 @@
+<!-- BEGIN: SpamControl -->
+<div id="fullscreen">
+ <table>
+  <tr>
+   <td class="header" colspan="8" style="text-align:center">
+    Comments flagged as spam. Click on <span style="color:yellow">Not Spam</span> to allow posting and notify Akismet of a false positive.<br />
+    Click on <span style="color:yellow">Delete</span> to remove it now. Spam left here will be deleted after 30 days automatically.
+<!-- BEGIN: ClearAll -->
+    <form action="{clear_all_link}" method="post">
+     <input type="hidden" name="token" value="{token}" />
+     <input class="input" type="submit" name="spam_clear" value="Clear entire table." />
+    </form>
+<!-- END: ClearAll -->
+   </td>
+  </tr>
+  <tr>
+   <td class="subheader" style="width:10%">Action</td>
+   <td class="subheader" style="width:8%">Author</td>
+   <td class="subheader" style="width:8%">Type</td>
+   <td class="subheader" style="width:8%">IP</td>
+   <td class="subheader" style="width:10%">Post</td>
+   <td class="subheader">URL</td>
+   <td class="subheader" style="width:10%">Date</td>
+   <td class="subheader">Text</td>
+  </tr>
+<!-- BEGIN: Entry -->
+  <tr class="line">
+   <td class="line">
+    <form action="{ham_link}" method="post">
+     <input type="hidden" name="token" value="{token}" />
+     <input class="input" type="submit" name="ham_comment" value="Not Spam" />
+    </form>
+    <form action="{delete_link}" method="post">
+     <input type="hidden" name="token" value="{token}" />
+     <input class="input" type="submit" name="delete_comment" value="Delete" />
+    </form>
+   </td>
+   <td class="line">{spam_author}</td>
+   <td class="line">{spam_type}</td>
+   <td class="line">{spam_ip}</td>
+   <td class="line">{spam_subject}</td>
+   <td class="line">{spam_url}</td>
+   <td class="line">{spam_date}</td>
+   <td class="line">{spam_text}</td>
+  </tr>
+<!-- END: Entry -->
+ </table>
+</div>
+<!-- END: SpamControl -->

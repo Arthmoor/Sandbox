@@ -1,0 +1,27 @@
+<!-- BEGIN: GalleryFolder -->
+<div id="fullscreen">
+ <div class="article">
+  <div class="navtree"><img src="{imgsrc}/images/photos.png" alt="" /> {tree}</div>
+  <div class="title">{folder_summary}</div>
+<!-- BEGIN: Link -->
+  <span class="file_folder">
+   <img src="{imgsrc}/images/folder.png" height="14" width="14" alt="" />
+   <a href="{parent}">{name}</a>
+  </span>
+<!-- END: Link -->
+  <div style="clear:both;"></div>
+ </div>
+ <div class="article">
+<!-- BEGIN: Thumbnail -->
+  <div class="t">
+   <div class="thumb">
+    <img src="{item_src}" alt="{item_name}" {imgWH} title="{item_dimensions} {item_size} KB {item_type}" />&nbsp;
+   </div>
+   <br />
+   <a href="{item_link}" title="{item_name}">{item_name}</a>{item_num}
+  </div>
+<!-- END: Thumbnail -->
+  <p></p>
+ </div>
+</div>
+<!-- END: GalleryFolder -->

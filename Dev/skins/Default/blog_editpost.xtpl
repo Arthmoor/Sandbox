@@ -1,0 +1,127 @@
+<!-- BEGIN: BlogEditPost -->
+<div id="fullscreen">
+<!-- BEGIN: Errors -->
+  <div class="article">
+   <div class="title">Submission Errors</div>
+   <span class="errors">{errors}</span>
+  </div>
+<!-- END: Errors -->
+
+<!-- BEGIN: Preview -->
+  <div class="article">
+   <h2 class="title"><img src="{icon}" style="float:left" /><span class="warning">POST EDIT PREVIEW: {preview_subject}</span></h2>
+
+ <span class="postbit_top"></span>
+ <div class="rounded_top" style="background-position:22px 0px;">
+  <span class="one"></span>
+  <span class="two"></span>
+  <span class="three"></span>
+  <span class="four"></span>
+ </div>
+
+ <div class="postbit">
+<!-- BEGIN: Image -->
+  <img class="float" src="{image}" alt="" />
+<!-- END: Image -->
+  {preview_text}
+  <p></p>
+ </div>
+
+ <div class="rounded_bottom">
+  <span class="one">&nbsp;</span>
+  <span class="two">&nbsp;</span>
+  <span class="three">&nbsp;</span>
+  <span class="four">&nbsp;</span>
+ </div>
+</div>
+<!-- END: Preview -->
+
+ <div class="article">
+  <h2 class="title"><img src="{icon}" style="float:left" /><span class="warning">EDITING: {subject}</span></h2>
+  <form method="post" action="{action_link}" enctype="multipart/form-data" id="bbcode">
+   <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
+
+   <span class="field">Author:</span>
+   <span class="form">{author}</span>
+
+   <div class="line"></div>
+
+   <span class="field"><label for="post_subject">Subject:</label></span>
+   <span class="form"><input type="text" name="post_subject" value="{subject}" size="50" maxlength="50" /></span>
+
+   <div class="line"></div>
+
+   <span class="field"><label for="post_summary">Summary:</label></span>
+   <span class="form"><input type="text" name="post_summary" value="{summary}" style="width:90%" maxlength="255" /></span>
+
+   <div class="line"></div>
+
+   <span class="field"><label for="post_backdate">Backdate:</label></span>
+   <span class="form"><input type="text" name="post_backdate" value="{date}" style="width:20%" /></span>
+   <div class="line"></div>
+
+   <span class="field">Insert New Image:</span>
+   <span class="form"><input type="file" name="image_file" /></span>
+   <div class="line"></div>
+
+   <span class="field">Use Existing Image:</span>
+   <span class="form">
+    <select name="existing_image">
+     {existing_images}
+    </select>
+   </span>
+   <div class="line"></div>
+
+   <span class="head">Text:</span>
+
+   <span class="field">
+    <span id="quicksmilies">
+     {emoticons}
+    </span>
+   </span>
+   <span class="form">
+    {bbcode_menu}
+    <textarea class="input" id="post_text" name="post_text" rows="15" cols="60">{text}</textarea>
+   </span>
+   <div class="line"></div>
+
+   <span class="field">Post Flags</span>
+   <span class="form">
+    <input type="checkbox" name="post_flags[]" id="post_html" value="{html}"{htmlbox} /><label for="post_html">HTML</label>
+    <input type="checkbox" name="post_flags[]" id="post_breaks" value="{br}"{brbox} /><label for="post_breaks">Format Newlines</label>
+    <input type="checkbox" name="post_flags[]" id="post_bbcode" value="{bb}"{bbbox} /><label for="post_bbcode">Format BBCode</label>
+    <input type="checkbox" name="post_flags[]" id="post_emoticons" value="{em}"{embox} /><label for="post_emoticons">Format Emoticons</label>
+    <input type="checkbox" name="post_flags[]" id="post_published" value="{pub}"{pubbox} /><label for="post_published">Published</label>
+    <input type="checkbox" name="post_flags[]" id="post_closed" value="{cls}"{clsbox} /><label for="post_closed">Closed Post</label>
+    <input type="checkbox" name="post_flags[]" id="post_override" value="{ovr}"{ovrbox} /><label for="post_override">Overrides Autoclose</label>
+    <input type="checkbox" name="post_flags[]" id="post_memonly" value="{mbo}"{mbobox} /><label for="post_memonly">Visible to Members Only</label>
+    <input type="checkbox" name="post_flags[]" id="post_comrestrict" value="{cmr}"{cmrbox} /> <label for="post_comrestrict">Comments Restricted - Members Only</label>
+   </span>
+
+   <div class="line"></div>
+
+   <span class="half">
+    <span class="field">Post Categories:</span>
+    <span class="form">
+     <select name="post_categories[]" multiple="multiple" style="width:40%">
+      {cats}
+     </select>
+    </span>
+   </span>
+
+   <span class="half">
+    <span class="field"><label for="post_newcat">New Category:</label></span>
+    <span class="form"><input type="text" name="post_newcat" id="post_newcat" size="50" maxlength="50" /></span>
+   </span>
+
+   <div class="line"></div>
+
+   <input type="hidden" name="original_date" value="{date}" />
+   <input type="hidden" name="token" value="{token}" />
+   <div style="text-align:center"><input type="submit" name="submit" value="Post Edited Entry" /><input type="submit" name="preview" value="Preview" /></div>
+   <script type="text/javascript">textarea = bbcodeInit("post_text");</script>
+  </form>
+ </div>
+</div>
+{comment_list}
+<!-- END: BlogEditPost -->

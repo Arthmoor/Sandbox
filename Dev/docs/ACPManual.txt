@@ -1,0 +1,60 @@
+AdminCP User's Manual
+---------------------
+
+This document is a brief run-down of some features found in the Administration Control Panel, or ACP. Most of what's there should be self-explanatory.
+
+If something isn't covered here and you think it should be, let me know. What's obvious to me may not be obvious to others. Either post a comment to one of the Sandbox topics or use the email form at http://www.iguanadons.net.
+
+System Controls
+---------------
+
+Add Site Setting: This option allows you to add a new setting to the system. By itself this isn't very useful but in combination with a code change somewhere it becomes more obvious. There should be no need to use this outside of development situations.
+
+Edit Settings:
+
+This menu is where most of the mundane configuration is done. Most of this should be fairly straightforward. Some things to note though.
+
+In order for spam filtering to work, you must obtain a Wordpress API Key. There is a link next to the setting that has more details on these. There are some restrictions on use, so check with the sire before activating it.
+
+Similarly with the Google Analytics ID, you need to get one of those before Analytics data can be collected from your site. Once you've added the ID, the code is already embedded and will kick in immediately.
+
+Friendly URL Support determines whether you display http://www.yoursite.com/Neato-Post-Title-1.html vs http://www.yoursite.com/index.php?a=blog&p=1. Modifying URLs like this is a subject of some debate among SEO experts. Whether or not it makes any difference in your rankings, you can choose whichever method you prefer and the site will adjust things accordingly. Do be aware that if you switch after having been online for some time, your old links will not be redirected automatically. This decision is best made when you launch. There are also some administrative URLs on the public side that will not be adjusted because bots will never see them. Links in the ACP are not affected. You need to be able to make use of the .htaccess file under Apache in order for this to work.
+
+The Footer Text section allows you to insert a block of miscellaneous text that will appear at the bottom of your pages above the copyright. This box supports the use of regular HTML. It also supports the use of two special markers: {date} and {spam}. These markers allow you to see the current date/time and the number of spam comments caught by Akismet. The brackets must be included since these are codes interpreted by the template engine. In order to maintain valid XHTML code you will need to be sure and escape things like ampersands with &amp;.
+
+The copyright terms box allows you to insert whatever conditions for copyright your site's content will have. It supports the use of one special tag: {year}. This tag will display the current year, and is most useful for date ranges. IE: © 2007-{year}. You may need to properly escape the copyright symbol with &copy; and the trademark symbol with &reg;.
+
+Cookies:
+
+Care should be taken when setting up the cookie information, because doing the wrong thing here can cause you to get locked out of your own website.
+
+Cookie Prefix: Can be any text you want. Usually in the form of sometext_. This allows the browser to distinguish things more clearly.
+
+Cookie Path: Be careful with this one. If you are on a site where you don't need a path ( http://www.example.com/ ) then you should leave this set as /. If you are on a site where you have a URL that has to start off with something like http://www.example.com/folder/ then you should put that folder's name here.
+
+Cookie Domain: This will almost always be the example.com portion of your URL. You should include a period in front, like so: .example.com If you have something like site.example.com then you should use .site.example.com for the domain.
+
+The time to stay logged in is measured in seconds. The default value of 31536000 is one year from the current date. Setting this too low can cause you to get locked out of your site.
+
+The checkbox for SSL security is equally important. DO NOT USE IT unless your URL starts with https:// or you will lock yourself out permanently.
+
+Global Announcement:
+
+This special message area allows you to have a notice on your site that is seen no matter where you are navigating. This can be useful for getting important information out to your visitors. Leaving it blank turns it off.
+
+Page Controls
+-------------
+
+When generating custom page content, it is important to note that even though you can craft whatever HTML you desire here you are still somewhat bound by the over all layout of the skin you are using. If you take a look through the skin files, pay attention to the structure of the index.xtpl file. There are a number of blocks assigned to other functions, but the spot you need to concern yourself with most is {module_output}. Any content you put into a custom page will go into this marker's position in the template. So you will still see the site headers and the site footers. The page generation menus will allow you to turn off the sidebar for that page though if you don't want it in the way.
+
+You should also be aware that because you can insert whatever HTML or javascript you feel like into these pages that any security risks that may impose will be just as much of a risk within Sandbox. The code is not there to protect you from your own mistakes.
+
+Database Controls
+-----------------
+
+As with the page controls, you can shoot yourself pretty badly in the foot here as well. Any SQL queries entered into the query form will be performed with the full privileges of the account your website is operating under. There should normally be no real need to use this, but it's there in case you need it. Just be aware of the dangers, especially if you're running Sandbox on a user account with elevated database rights.
+
+File Controls
+-------------
+
+This menu may seem somewhat silly, but it is there to allow for the general purpose maintenance of the topmost files folder. This folder is not used anywhere by the code, but exists so that you may upload something locally, like perhaps an image for a comment or a second supporting image for a blog post, or maybe you just need somewhere to store a file long enough for someone else to come get it from you without bothering with a downloads entry. It can also be useful for storing files for custom pages, such as flash animations which are not supported by the gallery.

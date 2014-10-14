@@ -1,0 +1,40 @@
+<!-- BEGIN: BlogPostDelete -->
+<div id="fullscreen">
+ <div class="article">
+  <h2 class="title"><img src="{icon}" style="float:left" /><span class="warning">DELETING: {subject}</span></h2>
+  <span class="postbit_top"></span>
+  <div class="rounded_top" style="background-position:22px 0px;">
+   <span class="one"></span>
+   <span class="two"></span>
+   <span class="three"></span>
+   <span class="four"></span>
+  </div>
+
+  <div class="postbit">
+<!-- BEGIN: Image -->
+   <img class="float" src="{image}" alt="" />
+<!-- END: Image -->
+   {text}
+   <p></p>
+  </div>
+
+  <div class="rounded_bottom">
+   <span class="one">&nbsp;</span>
+   <span class="two">&nbsp;</span>
+   <span class="three">&nbsp;</span>
+   <span class="four">&nbsp;</span>
+  </div>
+ </div>
+
+ <div class="article">Posted on {date} by {author} | {count} comment(s)</div>
+ <form method="post" action="{action_link}">
+  <div class="article">
+   <div class="title"><span class="warning">{confirm_message}</span></div>
+   <div style="text-align:center">
+    <input type="hidden" name="token" value="{token}" />
+    <input class="input" name="confirm" type="submit" value="Yes, delete this post." />
+    <input class="input" name="image" type="checkbox" value="0" /> Also delete the associated image file.
+   </div>
+  </div>
+</div>
+<!-- END: BlogPostDelete -->

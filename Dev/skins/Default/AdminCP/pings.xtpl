@@ -1,0 +1,14 @@
+<!-- BEGIN: Pings -->
+<form action="admin.php?a=posts&amp;s=ping_notifications" method="post">
+ <div class="article">
+  <div class="subtitle">Pings and Notifications</div>
+  When you post a new blog entry, Sandbox can notify sites of the update. These notifications happen automatically.<br />
+  Specify one URL per line. URLs need to be complete, eg: http://www.example.com/rpc/ping instead of www.example.com/rpc/ping<br />
+  To manually ping the listed services now, <a href="admin.php?a=posts&amp;s=ping">click here</a>.<br /><br />
+
+  <span class="head"><textarea name="ping_sites" rows="12" cols="70">{links}</textarea></span>
+
+  <input type="submit" name="submit" value="Submit" />
+ </div>
+</form>
+<!-- END: Pings -->
