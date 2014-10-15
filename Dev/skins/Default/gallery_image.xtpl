@@ -9,11 +9,11 @@
 
  <div class="article">
   {delicious}
-  {technorati}
   {stumbleupon}
+  {reddit}
+  {gplus}
   {facebook}
   {twitter}
-  <div class="g-plusone" data-size="small" data-href="{image_url}" data-annotation="none"></div>
   [{width} x {height}] Submitted{date} by {name}
  </div>
 

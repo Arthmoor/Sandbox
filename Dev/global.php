@@ -66,7 +66,7 @@ define( 'SANDBOX_QUERY_ERROR', 6 ); // For SQL errors to be reported properly by
 
 class module
 {
-	var $version		= 2.2;
+	var $version		= 2.3;
 	var $title		= null;
 	var $meta_description	= null;
 	var $skin		= 'Default';

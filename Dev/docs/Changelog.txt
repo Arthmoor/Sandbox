@@ -1,3 +1,10 @@
+Changes for Sandbox 2.3
+-----------------------
+
+Bugs:
+
+* Social media button links for gallery images needed to be updated.
+
 Changes for Sandbox 2.2
 -----------------------
 
