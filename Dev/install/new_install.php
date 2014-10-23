@@ -3,7 +3,7 @@
  * Copyright (c) 2006-2007 Sam O'Connor (Kiasyn)
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2012
+ * Copyright (c) 2007-2015
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * Sandbox installer module. Based on QSF Portal installer module.

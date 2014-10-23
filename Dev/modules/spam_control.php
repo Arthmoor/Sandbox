@@ -4,7 +4,7 @@
  * Sam O'Connor (Kiasyn) http://www.kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2012
+ * Copyright (c) 2007-2015
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * This software is provided 'as-is', without any express or implied warranty.
@@ -124,7 +124,7 @@ class spam_control extends module
 
 		// Setup and deliver the information to flag this comment as legit with Akismet.
 		require_once( 'lib/akismet.php' );
-		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key']);
+		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
 		$akismet->setCommentAuthor($spam['spam_author']);
 		$akismet->setCommentAuthorURL($spam['spam_url']);
 		$akismet->setCommentContent($spam['spam_message']);

@@ -40,9 +40,8 @@ Blog
 * Categorized posts, with links to view what is posted in each. Category links also double as tags for aggregators like Technorati.
 * Ability to auto-close posts after a specified time frame. Registered members have no limit.
 * Email notification on new comments. Optionally in HTML format.
-* Blog signatures and avatars for each user.
 * Blog signatures and avatars for each user. Includes support for Gravatars (http://www.gravatar.com/).
-* Links for submitting blog entries to del.icio.us, Technorati, Stumbleupon, and Facebook.
+* Links for submitting blog entries to social media such as Twitter and Facebook.
 * Support for pinging blog update services with new posts. (Requires php5-xmlrpc extension)
 * Search function for blog posts.
 * Blogroll to add your friends' sites to.

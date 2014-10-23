@@ -95,11 +95,11 @@ class Akismet
 	 *	@param	string	$blogURL		The URL of your blog.
 	 *	@param	string	$wordPressAPIKey	WordPress API key.
 	 */
-	public function __construct($blogURL, $wordPressAPIKey)
+	public function __construct($blogURL, $wordPressAPIKey, $blogVersion)
 	{
 		$this->blogURL = $blogURL;
 		$this->wordPressAPIKey = $wordPressAPIKey;
-		$this->version = '2.2'; // The Sandbox version number.
+		$this->version = $blogVersion; // The Sandbox version number.
 
 		// Set some default values
 		$this->apiPort = 80;

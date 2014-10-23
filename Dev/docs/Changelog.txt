@@ -1,6 +1,11 @@
 Changes for Sandbox 2.3
 -----------------------
 
+Changes:
+
+* Added site_tagline setting to go with a site's name in the header.
+* Made the iTouch icons used on Empire of the Iguanadons into a standard feature.
+
 Bugs:
 
 * Social media button links for gallery images needed to be updated.

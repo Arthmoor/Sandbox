@@ -4,7 +4,7 @@
  * Sam O'Connor (Kiasyn) http://www.kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2012
+ * Copyright (c) 2007-2015
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * This software is provided 'as-is', without any express or implied warranty.
@@ -253,7 +253,7 @@ class comments
 
 		if( $this->user['user_level'] < USER_PRIVILEGED ) {
 			try {
-				$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key']);
+				$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->module->version);
 
 				$akismet->setCommentAuthor($author);
 				// $akismet->setCommentAuthorEmail($email);
@@ -587,7 +587,7 @@ $error
 		if( isset($this->module->get['t']) && $this->module->get['t'] == 'spam' ) {
 			// Time to report the spammer before we delete the comment. Hopefully this is enough info to strike back with.
 			require_once( 'lib/akismet.php' );
-			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key']);
+			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->module->version);
 			$akismet->setCommentAuthor($comment['user_name']);
 			$akismet->setCommentAuthorURL($comment['user_url']);
 			$akismet->setCommentContent($comment['comment_message']);

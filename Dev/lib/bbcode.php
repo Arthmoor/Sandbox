@@ -5,7 +5,7 @@
  * Sam O'Connor (Kiasyn) http://www.kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2011
+ * Copyright (c) 2007-2015
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * This software is provided 'as-is', without any express or implied warranty.
