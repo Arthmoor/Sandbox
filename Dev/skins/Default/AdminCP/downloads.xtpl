@@ -1,7 +1,8 @@
 <!-- BEGIN: FileForm -->
 <form method="post" action="{action_link}" enctype="multipart/form-data" id="bbcode">
+<script type="text/javascript" src="{site_root}javascript/fileuploads.js"></script>
 <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
-<script type="text/javascript">mbcodeInit("bbcode", "file_description");</script>
+<script type="text/javascript">bbcodeInit("bbcode", "file_description");</script>
  <div class="article">
   <div class="title">{heading}</div>
 
@@ -10,11 +11,16 @@
   <p class="line"></p>
 
   <span class="field">File:</span>
-  <span class="form"><input type="file" name="file_file" /></span>
+  <span class="form">
+   <input type="file" name="file_file" id="file_file" />
+   <progress id="progressBar" value="0" max="100" style="width:250px;"></progress>
+   <h3 id="status"></h3>
+   <p id="loaded_n_total"></p>
+  </span>
   <p class="line"></p>
 
   <span class="field">Image:</span>
-  <span class="form"><input type="file" name="file_image" /></span>
+  <span class="form"><input type="file" name="file_image" id="file_image" /></span>
   <p class="line"></p>
 
   <span class="field">Name:</span>

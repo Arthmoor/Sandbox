@@ -10,6 +10,10 @@
   <span class="form"><input style="width:25%" class="input" type="text" name="site_name" id="site_name" value="{site_name}" /></span>
   <p class="line"></p>
 
+  <span class="field"><label for="site_tagline">Site Tagline:</label></span>
+  <span class="form"><input style="width:45%" class="input" type="text" name="site_tagline" id="site_tagline" value="{site_tagline}" /></span>
+  <p class="line"></p>
+
   <span class="field"><label for="site_owner">Site Owner:</label></span>
   <span class="form"><input class="input" type="text" name="site_owner" id="site_owner" value="{site_owner}" /></span>
   <p class="line"></p>
@@ -23,7 +27,7 @@
   <p class="line"></p>
 
   <span class="field"><label for="site_address">Site Address:</label></span>
-  <span class="form"><input style="width:35%" class="input" type="text" name="site_address" id="site_address" value="{site_address}" /></span>
+  <span class="form"><input style="width:45%" class="input" type="text" name="site_address" id="site_address" value="{site_address}" /></span>
   <p class="line"></p>
 
   <span class="field"><label for="site_meta">Default META Description:</label></span>

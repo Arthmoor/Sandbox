@@ -4,7 +4,7 @@
  * Sam O'Connor (Kiasyn) http://www.kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2011
+ * Copyright (c) 2007-2014
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * This software is provided 'as-is', without any express or implied warranty.
@@ -162,6 +162,7 @@ class settings extends module
 
 		$xtpl->assign( 'token', $this->generate_token() );
 		$xtpl->assign( 'site_name', htmlspecialchars($sets['site_name']) );
+		$xtpl->assign( 'site_tagline', htmlspecialchars($sets['site_tagline']) );
 		$xtpl->assign( 'site_owner', htmlspecialchars($sets['site_owner']) );
 		$xtpl->assign( 'email_adm', htmlspecialchars($sets['email_adm']) );
 		$xtpl->assign( 'email_sys', htmlspecialchars($sets['email_sys']) );

@@ -138,6 +138,10 @@ class new_install extends module
   <span class='form'><input class='input' type='text' name='site_name' value='Sandbox' size='75' /></span>
   <p class='line'></p>
 
+  <span class='field'>Site Tagline:</span>
+  <span class='form'><input class='input' type='text' name='site_tagline' value='Personal websites made easy.' size='75' /></span>
+  <p class='line'></p>
+
   <span class='field'>Site URL:</span>
   <span class='form'><input class='input' type='text' name='site_url' value='{$url}' size='75' /></span>
   <p></p>
@@ -222,6 +226,7 @@ break;
 			}
 
 			$this->settings['site_name'] = $this->post['site_name'];
+			$this->settings['site_tagline'] = $this->post['site_tagline'];
 
 			if( !empty($this->post['site_url']) && $this->post['site_url'][strlen($this->post['site_url'])-1] != '/' )
 				$this->post['site_url'] = $this->post['site_url'] . '/';

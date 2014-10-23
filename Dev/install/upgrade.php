@@ -120,7 +120,7 @@ class upgrade extends module
 						$this->settings['blog_commentsperpage'] = 50;
 						$this->settings['download_size'] = 0;
 
-					case '2.1': // 2.1 to 2.1.1
+					case '2.1': // 2.1 to 2.2
 						$this->settings['anonymous_comments'] = true; // They were always on before, this continues behavior for existing sites
 						$this->settings['global_comments'] = true;
 
@@ -175,6 +175,10 @@ class upgrade extends module
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':P', 'tongue.gif', 0 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (';)', 'wink.gif', 0 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':)', 'smile.gif', 0 )";
+
+					case '2.2': // 2.2 to 2.3
+						$this->settings['site_tagline'] = '';
+
 					default:
 						break;
 				}
