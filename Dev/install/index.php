@@ -175,8 +175,8 @@ if ($mode) {
 		$pgsql_client = '';
 	}
 
-	echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">
+	echo "<!DOCTYPE html>
+<html lang=\"en-US\">
 <head>
  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
  <title>Sandbox Installer</title>
@@ -224,7 +224,7 @@ if ($mode) {
 	echo "   <div id='bottom'>&nbsp;</div>
   </div>
   <div id='footer'>
-   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2011 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='http://www.iguanadons.net'>Samson</a>]
+   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2015 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='http://www.iguanadons.net'>Samson</a>]
   </div>
  </body>
 </html>";

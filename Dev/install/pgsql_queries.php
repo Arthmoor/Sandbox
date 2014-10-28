@@ -206,6 +206,7 @@ $queries[] = "CREATE TABLE %prandom_quotes (
 $queries[] = "DROP TABLE IF EXISTS %psettings";
 $queries[] = "CREATE TABLE %psettings (
   settings_id tinyint(2) NOT NULL AUTO_INCREMENT,
+  settings_version smallint(2) NOT NULL default 2,
   settings_value text NOT NULL,
   PRIMARY KEY (settings_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";

@@ -313,7 +313,7 @@ break;
 
 			$newsets = array();
 			$this->db->dbquery( "INSERT INTO %psettings (settings_value) VALUES( '%s' )", json_encode($newsets) );
-			$this->db->dbquery( "INSERT INTO %pblogposts (post_user, post_subject, post_summary, post_text, post_date, post_flags) VALUES(1, 'Welcome to your Sandbox Website', 'Sandbox: Personal websites made easy.', 'We hope you enjoy it. Google Code repository can be found at: http://code.google.com/p/sandbox/ Please post bug reports, feature requests and ideas there.', " . time() . ", 6 )" );
+			$this->db->dbquery( "INSERT INTO %pblogposts (post_user, post_subject, post_summary, post_text, post_date, post_flags) VALUES(1, 'Welcome to your Sandbox Website', 'Sandbox: Personal websites made easy.', 'We hope you enjoy it. GitHub repository can be found at: https://github.com/Arthmoor/Sandbox Please post bug reports, feature requests and ideas there.', " . time() . ", 6 )" );
 			$this->db->dbquery( "INSERT INTO %pphotofolders (folder_name) VALUES( 'Root' )" );
 			$this->db->dbquery( 'UPDATE %pphotofolders SET folder_id=0' );
 			$this->db->dbquery( "INSERT INTO %pfilefolders (folder_name) VALUES( 'Root' )" );
