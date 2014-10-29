@@ -257,6 +257,7 @@ break;
 			$this->settings['blog_icon_width'] = 40;
 			$this->settings['blog_icon_height'] = 40;
 			$this->settings['site_owner'] = $this->post['admin_name'];
+			$this->settings['twitter_user'] = '';
 			$this->settings['blog_signature_on'] = true;
 			$this->settings['anonymous_comments'] = false;
 			$this->settings['global_comments'] = true;
@@ -320,15 +321,15 @@ break;
 			$this->db->dbquery( 'UPDATE %pfilefolders SET folder_id=0' );
 			$this->db->dbquery( "INSERT INTO %pblogcats (cat_name, cat_description) VALUES ( 'Uncategorized', 'Default category.' )" );
 
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':alien:', 'alien.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':alien:', 'alien.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':biggrin:', 'biggrin.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blues:', 'blues.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blues:', 'blues.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cool:', 'cool.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cry:', 'cry.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cyclops:', 'cyclops.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':devil:', 'devil.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cyclops:', 'cyclops.png', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':devil:', 'devil.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':evil:', 'evil.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':ghostface:', 'ghostface.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':ghostface:', 'ghostface.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':grinning:', 'grinning.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':lol:', 'lol.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':mad:', 'mad.gif', 1 )" );
@@ -337,11 +338,11 @@ break;
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':rolleyes:', 'rolleyes.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':sad:', 'sad.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':smile:', 'smile.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':stare:', 'stare.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':stare:', 'stare.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':surprised:', 'surprised.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':thinking:', 'thinking.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':tongue:', 'tongue.png', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':unclesam:', 'unclesam.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':unclesam:', 'unclesam.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':wink:', 'wink.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':huh:', 'huh.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blink:', 'blink.gif', 1 )" );
@@ -358,7 +359,7 @@ break;
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':nuke:', 'nuke.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':wub:', 'wub.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':imp:', 'imp.png', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':banana:', 'dancingbanana.gif"', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':banana:', 'dancingbanana.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cricket:', 'cricket.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':(', 'sad.png', 0 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':P', 'tongue.png', 0 )" );
@@ -368,13 +369,20 @@ break;
 			$this->settings['app_version'] = $this->version;
 			$this->save_settings();
 
+			// Generate the Anonymous user.
+			$this->db->dbquery( "INSERT INTO %pusers (user_name, user_level, user_perms, user_icon)
+				VALUES( 'Anonymous', 1, 0, 'Anonymous.png' )" );
+
+			// Add the administrator next.
 			$pass = hash( 'sha256', $this->post['admin_pass'] );
+			$current_time = time();
+
 			$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_level, user_perms, user_joined, user_icon)
-				VALUES( '%s', '%s', '%s', 5, 7, %d, 'Anonymous.png' )",  $this->post['admin_name'], $pass, $this->post['contact_email'], time() );
+				VALUES( '%s', '%s', '%s', 5, 7, %d, 'Anonymous.png' )",  $this->post['admin_name'], $pass, $this->post['contact_email'], $current_time );
 			$id = $this->db->insert_id();
 
-			setcookie($this->settings['cookie_prefix'] . 'user', $id, $time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
-			setcookie($this->settings['cookie_prefix'] . 'pass', $pass, $time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
+			setcookie($this->settings['cookie_prefix'] . 'user', $id, $current_time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
+			setcookie($this->settings['cookie_prefix'] . 'pass', $pass, $current_time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
 
 			echo "
 			<div class='article'>

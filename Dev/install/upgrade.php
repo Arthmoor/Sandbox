@@ -75,7 +75,7 @@ class upgrade extends module
 
 			echo "<br /><br /><strong>{$v_message}</strong>";
 
-			if( $this->settings['app_version'] == $this->version ) {
+			if( isset($this->settings['app_version']) && $this->settings['app_version'] == $this->version ) {
 				echo "<br /><br /><strong>The detected version of Sandbox is the same as the version you are trying to upgrade to. The upgrade cannot be processed.</strong>";
 			} else {
 				echo "	<div class='title' style='text-align:center'>Upgrade from what version?</div>
@@ -126,6 +126,13 @@ class upgrade extends module
 					case '1.8': // 1.8 to 2.0
 						$this->settings['sidebar_images'] = true;
 
+						// Need to grab the owner user before embarking.
+						$owner = $this->db->quick_query( "SELECT user_id, user_name, user_isowner FROM %pusers WHERE user_isowner=1 LIMIT 1" );
+						if( !isset($owner['user_id']) ) {
+							echo '<br />No user is assigned as the site owner! Cannot continue with upgrade.';
+							break;
+						}
+
 						$queries[] = "CREATE TABLE %pactive (
 						 	active_action varchar(50) NOT NULL,
 						 	active_time int(10) unsigned NOT NULL,
@@ -161,6 +168,7 @@ class upgrade extends module
 						$queries[] = "ALTER TABLE %pblogposts ADD post_image varchar(50) NOT NULL DEFAULT '' AFTER post_comment_count";
 						$queries[] = "ALTER TABLE %pblogposts CHANGE post_description post_summary varchar(255) DEFAULT NULL";
 						$queries[] = 'ALTER TABLE %pblogcomments CHANGE comment_post comment_post int(12) unsigned NOT NULL';
+						$queries[] = "ALTER TABLE %pblogcomments ADD comment_editedby varchar(30) DEFAULT '' AFTER comment_author";
 						$queries[] = "ALTER TABLE %pblogcomments ADD comment_editdate int(10) unsigned NOT NULL DEFAULT '0' AFTER comment_date";
 						$queries[] = "ALTER TABLE %pblogcomments ADD comment_user int(10) unsigned NOT NULL DEFAULT '1' AFTER comment_post";
 						$queries[] = "ALTER TABLE %pblogcomments ADD comment_type tinyint(2) unsigned NOT NULL DEFAULT '0' AFTER comment_editdate";
@@ -171,9 +179,10 @@ class upgrade extends module
 						$queries[] = "ALTER TABLE %pfilefolders CHANGE folder_protected folder_hidden tinyint(1) NOT NULL DEFAULT '0'";
 						$queries[] = "ALTER TABLE %pfilefolders CHANGE folder_password folder_password varchar(33) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pfilefolders ADD folder_summary varchar(255) DEFAULT '' AFTER folder_name";
+						$queries[] = "ALTER TABLE %pfilefolders ADD folder_tree varchar(255) NOT NULL DEFAULT '' AFTER folder_summary";
 						$queries[] = 'ALTER TABLE %pfilelist CHANGE file_filename file_filename varchar(100) NOT NULL';
-						$queries[] = 'ALTER TABLE %pfilelist ADD file_shortdesc text AFTER file_description';
-						$queries[] = "ALTER TABLE %pfilelist ADD file_img_ext varchar(5) DEFAULT '' AFTER file_shortdesc";
+						$queries[] = 'ALTER TABLE %pfilelist ADD file_summary text AFTER file_filename';
+						$queries[] = "ALTER TABLE %pfilelist ADD file_img_ext varchar(5) DEFAULT '' AFTER file_summary";
 						$queries[] = "ALTER TABLE %pfilelist CHANGE file_md5name file_md5name varchar(33) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pfilelist CHANGE file_type file_type varchar(4) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pfilelist ADD file_comment_count int(10) unsigned NOT NULL DEFAULT '0' AFTER file_downloaded";
@@ -184,6 +193,7 @@ class upgrade extends module
 						$queries[] = "ALTER TABLE %pphotofolders CHANGE folder_protected folder_hidden tinyint(1) NOT NULL DEFAULT '0'";
 						$queries[] = "ALTER TABLE %pphotofolders CHANGE folder_password folder_password varchar(33) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pphotofolders ADD folder_summary varchar(255) DEFAULT '' AFTER folder_name";
+						$queries[] = "ALTER TABLE %pphotofolders ADD folder_tree varchar(255) NOT NULL DEFAULT '' AFTER folder_summary";
 						$queries[] = "ALTER TABLE %pphotogallery CHANGE photo_caption photo_caption varchar(50) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pphotogallery CHANGE photo_md5name photo_md5name varchar(33) NOT NULL DEFAULT ''";
 						$queries[] = "ALTER TABLE %pphotogallery ADD photo_flags int(10) unsigned NOT NULL DEFAULT '0' AFTER photo_adddate";
@@ -191,19 +201,32 @@ class upgrade extends module
 						$queries[] = "ALTER TABLE %pphotogallery ADD photo_summary varchar(255) DEFAULT '' AFTER photo_caption";
 						$queries[] = "ALTER TABLE %pphotogallery CHANGE photo_adddate photo_date int(10) unsigned NOT NULL DEFAULT '0'";
 						$queries[] = "ALTER TABLE %pusers CHANGE user_password user_password varchar(64) NOT NULL DEFAULT ''";
+						$queries[] = "ALTER TABLE %pusers CHANGE user_icon user_icon varchar(30) DEFAULT 'Anonymous.png'";
 						$queries[] = "ALTER TABLE %pusers ADD user_email varchar(100) NOT NULL DEFAULT '' AFTER user_password";
 						$queries[] = "ALTER TABLE %pusers ADD user_url varchar(100) DEFAULT '' AFTER user_email";
 						$queries[] = "ALTER TABLE %pusers ADD user_stylesheet varchar(100) DEFAULT '' AFTER user_url";
-						$queries[] = "ALTER TABLE %pusers ADD user_level smallint(2) unsigned NOT NULL DEFAULT '1' AFTER user_stylesheet";
-						$queries[] = "ALTER TABLE %pusers ADD user_perms smallint(4) unsigned NOT NULL DEFAULT '0' AFTER user_level";
+						$queries[] = "ALTER TABLE %pusers ADD user_level smallint(2) unsigned NOT NULL DEFAULT '2' AFTER user_stylesheet";
+						$queries[] = "ALTER TABLE %pusers ADD user_perms smallint(4) unsigned NOT NULL DEFAULT '7' AFTER user_level";
 						$queries[] = "ALTER TABLE %pusers ADD user_joined int(10) unsigned DEFAULT '0' AFTER user_perms";
 						$queries[] = "ALTER TABLE %pusers ADD user_ip varchar(15) NOT NULL DEFAULT '127.0.0.1' AFTER user_joined";
 						$queries[] = 'ALTER TABLE %pusers DROP COLUMN user_isowner';
+
+						// Update any blank icons lurking about.
+						$queries[] = "UPDATE %pusers SET user_icon='Anonymous.png' WHERE user_icon=''";
+
+						// Promote the site owner to admin level and also assign them the site admin email address.
+						$email = $this->settings['email_adm'];
+						$id = $owner['user_id'];
+						$queries[] = "UPDATE %pusers SET user_level=5, user_perms=7, user_email='{$email}' WHERE user_id={$id}";
 
 						$this->settings['footer_text'] = '';
 						$this->settings['copyright_terms'] = '';
 						$this->settings['sidebar_comments_count'] = 5;
 						$this->settings['sidebar_images_count'] = 5;
+						$this->settings['wordpress_api_key'] = '';
+						$this->settings['twitter_user'] = '';
+						$this->settings['rss_image_url'] = '';
+						$this->settings['global_announce'] = '';
 
 					case '2.0.7': // 2.0-2.0.7 to 2.1
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_ip active_ip varchar(40) NOT NULL';
@@ -231,29 +254,29 @@ class upgrade extends module
 						  PRIMARY KEY  (emote_id)
 						) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':alien:', 'alien.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':alien:', 'alien.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':biggrin:', 'biggrin.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blues:', 'blues.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blues:', 'blues.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cool:', 'cool.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cry:', 'cry.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cyclops:', 'cyclops.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':devil:', 'devil.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cyclops:', 'cyclops.png', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':devil:', 'devil.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':evil:', 'evil.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':ghostface:', 'ghostface.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':grinning:', 'grinning.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':ghostface:', 'ghostface.png', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':grinning:', 'grinning.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':lol:', 'lol.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':mad:', 'mad.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':redface:', 'redface.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':robot:', 'robot.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':rolleyes:', 'rolleyes.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':sad:', 'sad.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':sad:', 'sad.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':smile:', 'smile.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':stare:', 'stare.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':stare:', 'stare.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':surprised:', 'surprised.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':thinking:', 'thinking.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':tongue:', 'tongue.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':unclesam:', 'unclesam.gif', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':wink:', 'wink.gif', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':tongue:', 'tongue.png', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':unclesam:', 'unclesam.png', 1 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':wink:', 'wink.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':huh:', 'huh.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':blink:', 'blink.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':facepalm:', 'facepalm.gif', 1 )";
@@ -271,9 +294,9 @@ class upgrade extends module
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':imp:', 'imp.png', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':banana:', 'dancingbanana.gif', 1 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':cricket:', 'cricket.png', 1 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':(', 'sad.gif', 0 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':P', 'tongue.gif', 0 )";
-						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (';)', 'wink.gif', 0 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':(', 'sad.png', 0 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':P', 'tongue.png', 0 )";
+						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (';)', 'wink.png', 0 )";
 						$queries[] = "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':)', 'smile.gif', 0 )";
 
 					case '2.2': // 2.2 to 2.3
@@ -284,6 +307,31 @@ class upgrade extends module
 				}
 
 				execute_queries($queries, $this->db);
+
+				// Ugly hack of a special case because the Anonymous user never existed before now. How does that even happen?
+				if( $this->settings['app_version'] < 2.3 ) {
+					$uid = $this->db->quick_query( 'SELECT user_id FROM %pusers WHERE user_id=1' );
+					if( !isset($uid['user_id']) ) {
+						$this->db->dbquery( "INSERT INTO %pusers (user_id, user_name, user_level, user_perms, user_icon)
+							VALUES( 1, 'Anonymous', 1, 0, 'Anonymous.png' )" );
+					} else {
+						$top_user = $this->db->quick_query( 'SELECT user_id, user_name FROM %pusers ORDER BY user_id DESC LIMIT 1' );
+						$new_id = $top_user['user_id'] + 1;
+						$name = $top_user['user_name'];
+
+						$this->db->dbquery( "UPDATE %pblogcomments SET comment_user=%d WHERE comment_user=1 AND comment_author='%s'", $new_id, $name );
+						$this->db->dbquery( "UPDATE %pblogposts SET post_user=%d WHERE post_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %pfilefolders SET folder_user=%d WHERE folder_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %pfilelist SET file_user=%d WHERE file_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %ppages SET page_user=%d WHERE page_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %pphotofolders SET folder_user=%d WHERE folder_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %pphotogallery SET photo_user=%d WHERE photo_user=1", $new_id );
+						$this->db->dbquery( "UPDATE %pusers SET user_id=%d WHERE user_id=1 AND user_name='%s'", $new_id, $name );
+
+						$this->db->dbquery( "INSERT INTO %pusers (user_id, user_name, user_level, user_perms, user_icon)
+							VALUES( 1, 'Anonymous', 1, 0, 'Anonymous.png' )" );
+					}
+				}
 
 				$this->settings['app_version'] = $this->version;
 				$this->save_settings();

@@ -132,7 +132,7 @@
   </div>
   <div id="footer">
    {copyright_terms}<br />
-   Powered by Sandbox [v{version}] &copy; 2006-2010 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
+   Powered by Sandbox [v{version}] &copy; 2006-2015 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
    <br />{page_generated}
   </div>
  </body>

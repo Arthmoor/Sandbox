@@ -71,13 +71,22 @@ class rss extends module
 		else
 			$where = "((i.photo_flags & " . POST_PUBLISHED . ") AND !(i.photo_flags & " . POST_MEMBERSONLY . "))";
 
-  		$result = $this->db->dbquery( 'SELECT i.*, u.user_name
+  		$result = $this->db->dbquery( 'SELECT i.*, u.user_name, f.folder_hidden, f.folder_user
 		   FROM %pphotogallery i
 		   LEFT JOIN %pusers u ON u.user_id=i.photo_user
+		   LEFT JOIN %pphotofolders f ON f.folder_id=i.photo_folder
 		   WHERE '. $where . ' ORDER BY photo_date DESC LIMIT %d', $this->settings['rss_items'] );
 
 		while ( $entry = $this->db->assoc($result) )
 		{
+			if( $entry['folder_hidden'] ) {
+				if( $this->user['user_level'] == USER_GUEST )
+					continue;
+
+				if( $this->user['user_id'] != $entry['folder_user'] && $this->user['user_level'] < USER_ADMIN )
+					continue;
+			}
+
 			$xtpl->assign( 'item_title', htmlspecialchars($entry['photo_caption']) );
 
 			if( $this->settings['friendly_urls'] )
@@ -125,14 +134,23 @@ class rss extends module
 		else
 			$where = "((f.file_flags & " . POST_PUBLISHED . ") AND !(f.file_flags & " . POST_MEMBERSONLY . "))";
 
-  		$result = $this->db->dbquery( 'SELECT f.*, u.user_name
+  		$result = $this->db->dbquery( 'SELECT f.*, u.user_name, d.folder_hidden, d.folder_user
 		   FROM %pfilelist f
 		   LEFT JOIN %pusers u ON u.user_id=f.file_user
+		   LEFT JOIN %pfilefolders d ON d.folder_id=f.file_folder
 		   WHERE ' . $where . ' ORDER BY file_date DESC LIMIT %d', $this->settings['rss_items'] );
 
 		$items = '';
 		while ( $entry = $this->db->assoc($result) )
 		{
+			if( $entry['folder_hidden'] ) {
+				if( $this->user['user_level'] == USER_GUEST )
+					continue;
+
+				if( $this->user['user_id'] != $entry['folder_user'] && $this->user['user_level'] < USER_ADMIN )
+					continue;
+			}
+
 			$xtpl->assign( 'item_title', htmlspecialchars($entry['file_name']) );
 
 			if( $this->settings['friendly_urls'] )

@@ -182,7 +182,7 @@ class gallery extends module
 
 		$xtpl->assign( 'folder_name', 'Recent Images' );
 		$xtpl->assign( 'folder_summary', 'Recent Images' );
-		$xtpl->assign( 'imgsrc', $this->settings['site_address'] . $this->skin );
+		$xtpl->assign( 'imgsrc', $this->settings['site_address'] . 'skins/' . $this->skin );
 		$xtpl->assign( 'tree', $this->build_folder_list(0) );
 
 		$folders = $this->folder_array;
@@ -197,8 +197,13 @@ class gallery extends module
 			if( $id == 0 )
 				continue;
 
-			if( $folder['folder_hidden'] && $this->user['user_id'] != $folder['folder_user'] && $this->user['user_level'] < USER_ADMIN )
-				continue;
+			if( $folder['folder_hidden'] ) {
+				if( $this->user['user_level'] == USER_GUEST )
+					continue;
+
+				if( $this->user['user_id'] != $folder['folder_user'] && $this->user['user_level'] < USER_ADMIN )
+					continue;
+			}
 
 			$xtpl->assign( 'name', htmlspecialchars($folder['folder_name']) );
 
@@ -472,7 +477,9 @@ class gallery extends module
 	{
 		$list[] = array();
 
-		$sql = 'SELECT photo_id, photo_caption, photo_md5name, photo_type, photo_size, photo_width, photo_height, photo_comment_count FROM %pphotogallery';
+		$sql = 'SELECT p.photo_id, p.photo_caption, p.photo_md5name, p.photo_type, p.photo_size, p.photo_width, p.photo_height, p.photo_comment_count, p.photo_folder,
+			f.folder_hidden, f.folder_user
+			FROM %pphotogallery p LEFT JOIN %pphotofolders f ON f.folder_id=p.photo_folder';
 		if( $recent )
 			$sql .= ' ORDER BY photo_date DESC LIMIT 50';
 		else {
@@ -488,6 +495,14 @@ class gallery extends module
 
 		while( $photo = $this->db->assoc( $result ) )
 		{
+			if( $photo['folder_hidden'] ) {
+				if( $this->user['user_level'] == USER_GUEST )
+					continue;
+
+				if( $this->user['user_id'] != $photo['folder_user'] && $this->user['user_level'] < USER_ADMIN )
+					continue;
+			}
+
 			if( $this->settings['friendly_urls'] )
 				$caption = $this->settings['site_address'] . 'gallery/' . $this->clean_url( $photo['photo_caption'] ) . "-{$photo['photo_id']}.html";
 			else

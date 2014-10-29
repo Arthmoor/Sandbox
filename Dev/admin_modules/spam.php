@@ -121,7 +121,7 @@ class spam extends module
 	function test_akismet_key()
 	{
 		require_once( 'lib/akismet.php' );
-		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key']);
+		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
 
 		$response = $akismet->isKeyValid() ? 'Key is Valid!' : 'Key is Invalid!';
 		return $this->message( 'Test Akismet Key', $response, 'Continue', 'admin.php', 0 );

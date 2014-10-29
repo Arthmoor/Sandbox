@@ -140,7 +140,7 @@ class settings extends module
 				$this->post['site_address'] = $this->post['site_address'] . '/';
 
 			$valid_fields = array(
-				'email_adm', 'email_sys', 'site_name', 'site_owner', 'site_address', 'site_analytics', 'site_closedmessage',
+				'email_adm', 'email_sys', 'site_name', 'site_tagline', 'site_owner', 'site_address', 'site_analytics', 'site_closedmessage',
 				'site_meta', 'site_keywords', 'rss_name', 'rss_description', 'rss_image_url', 'blog_avatar', 'blog_dateformat',
 				'wordpress_api_key', 'twitter_user', 'cookie_prefix', 'cookie_path', 'cookie_domain', 'global_announce', 'copyright_terms', 'footer_text' );
 			foreach( $valid_fields as $key )

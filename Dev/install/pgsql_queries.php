@@ -235,7 +235,7 @@ $queries[] = "CREATE TABLE %pusers (
   user_perms smallint(4) unsigned NOT NULL DEFAULT '0',
   user_ip varchar(40) NOT NULL DEFAULT '127.0.0.1',
   user_name varchar(30) NOT NULL DEFAULT '',
-  user_icon varchar(30) DEFAULT '',
+  user_icon varchar(30) DEFAULT 'Anonymous.png',
   user_password varchar(64) NOT NULL DEFAULT '',
   user_email varchar(100) NOT NULL DEFAULT '',
   user_url varchar(100) DEFAULT '',
