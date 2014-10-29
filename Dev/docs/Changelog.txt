@@ -5,10 +5,13 @@ Changes:
 
 * Added site_tagline setting to go with a site's name in the header.
 * Made the iTouch icons used on Empire of the Iguanadons into a standard feature.
+* Analytics tracker code updated.
 
 Bugs:
 
 * Social media button links for gallery images needed to be updated.
+* Clean up the upgrade installer to handle upgrades for sites running Sandbox 1.8.
+* Numerous bug fixes for new installs, upgrades, and minor security issues with hidden image and download folders.
 
 Changes for Sandbox 2.2
 -----------------------
