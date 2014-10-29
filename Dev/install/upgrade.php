@@ -80,6 +80,10 @@ class upgrade extends module
 			} else {
 				echo "	<div class='title' style='text-align:center'>Upgrade from what version?</div>
 
+					<span class='field'><input type='radio' name='from' value='2.3' id='230' /></span>
+					<span class='form'><label for='230'>Sandbox 2.3</label></span>
+					<p class='line'></p>
+
 					<span class='field'><input type='radio' name='from' value='2.2' id='220' /></span>
 					<span class='form'><label for='220'>Sandbox 2.2</label></span>
 					<p class='line'></p>
@@ -301,6 +305,8 @@ class upgrade extends module
 
 					case '2.2': // 2.2 to 2.3
 						$this->settings['site_tagline'] = '';
+
+					case '2.3': // 2.3 to 2.31
 
 					default:
 						break;
