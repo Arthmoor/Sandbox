@@ -38,6 +38,13 @@
   <span class="form"><input style="width:65%" class="input" type="text" name="site_keywords" id="site_keywords" value="{site_keywords}" /></span>
   <p class="line"></p>
 
+  <span class="field">Mobile Icon Meta Tags:</span>
+  <span class="form">
+   <textarea name="mobile_icons" rows="8">{mobile_icons}</textarea>
+   Link tags for optional mobile icons (ie: Apple Touch, Android, etc). <a href="https://mathiasbynens.be/notes/touch-icons#sizes">See here for details.</a>
+  </span>
+  <p class="line"></p>
+
   <span class="field"><label for="blog_dateformat">Date Format <a href="http://us2.php.net/manual/en/function.date.php" target="_blank">(PHP style)</a>:</label></span>
   <span class="form"><input class="input" type="text" name="blog_dateformat" id="blog_dateformat" value="{blog_dateformat}" /></span>
   <p class="line"></p>

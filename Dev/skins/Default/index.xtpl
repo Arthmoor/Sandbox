@@ -9,10 +9,7 @@
   <meta name="generator" content="Sandbox" />
   <title>{page_title}</title>
   <link rel="stylesheet" type="text/css" href="{style_link}" />
-  <link rel="apple-touch-icon" href="{site_link}images/touch-icon-iphone.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="{site_link}images/touch-icon-ipad.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="{site_link}images/touch-icon-iphone-retina.png" />
-  <link rel="apple-touch-icon" sizes="144x144" href="{site_link}images/touch-icon-ipad-retina.png" />
+  {mobile_icons}
   <script src="{site_link}javascript/utils.js" type="text/javascript"></script>
 <!-- BEGIN: RSS -->
   {rss_feeds}

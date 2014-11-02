@@ -234,6 +234,7 @@ break;
 
 			$this->settings['site_meta'] = 'Personal websites made easy.';
 			$this->settings['site_keywords'] = 'blog,gallery,downloads,personal website';
+			$this->settings['mobile_icons'] = '';
 			$this->settings['email_adm'] = $this->post['contact_email'];
 			$this->settings['email_sys'] = $this->post['admin_email'];
 			$this->settings['site_open'] = true;

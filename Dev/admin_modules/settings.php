@@ -141,7 +141,7 @@ class settings extends module
 
 			$valid_fields = array(
 				'email_adm', 'email_sys', 'site_name', 'site_tagline', 'site_owner', 'site_address', 'site_analytics', 'site_closedmessage',
-				'site_meta', 'site_keywords', 'rss_name', 'rss_description', 'rss_image_url', 'blog_avatar', 'blog_dateformat',
+				'site_meta', 'site_keywords', 'mobile_icons', 'rss_name', 'rss_description', 'rss_image_url', 'blog_avatar', 'blog_dateformat',
 				'wordpress_api_key', 'twitter_user', 'cookie_prefix', 'cookie_path', 'cookie_domain', 'global_announce', 'copyright_terms', 'footer_text' );
 			foreach( $valid_fields as $key )
 				$this->settings[$key] = $this->post[$key];
@@ -169,6 +169,7 @@ class settings extends module
 		$xtpl->assign( 'site_address', htmlspecialchars($sets['site_address']) );
 		$xtpl->assign( 'site_meta', htmlspecialchars($sets['site_meta']) );
 		$xtpl->assign( 'site_keywords', htmlspecialchars($sets['site_keywords']) );
+		$xtpl->assign( 'mobile_icons', htmlspecialchars($sets['mobile_icons']) );
 		$xtpl->assign( 'blog_dateformat', htmlspecialchars($sets['blog_dateformat']) );
 		$xtpl->assign( 'site_defaultskin', $this->select_input( 'site_defaultskin', $sets['site_defaultskin'], $this->get_skins() ) );
 		$xtpl->assign( 'site_analytics', htmlspecialchars($sets['site_analytics']) );

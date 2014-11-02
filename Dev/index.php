@@ -121,6 +121,7 @@ $mod->xtpl = $xtpl;
 $xtpl->assign( 'site_link', $mod->settings['site_address'] );
 $xtpl->assign( 'site_name', htmlspecialchars($mod->settings['site_name']) );
 $xtpl->assign( 'site_tagline', htmlspecialchars($mod->settings['site_tagline']) );
+$xtpl->assign( 'mobile_icons', $mod->settings['mobile_icons'] );
 
 $mod->title = 'Site Title Not Set';
 if( isset($mod->settings['site_name']) && !empty($mod->settings['site_name']) )

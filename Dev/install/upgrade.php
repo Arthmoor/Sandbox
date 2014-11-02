@@ -306,7 +306,8 @@ class upgrade extends module
 					case '2.2': // 2.2 to 2.3
 						$this->settings['site_tagline'] = '';
 
-					case '2.3': // 2.3 to 2.31
+					case '2.3': // 2.3 to 2.3.1
+						$this->settings['mobile_icons'] = '';
 
 					default:
 						break;
