@@ -7,7 +7,8 @@
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * Sandbox installer module. Based on QSF Portal installer module.
- * QSF Portal Copyright (c)2006-2007 The QSF Portal Team
+ * QSF Portal Copyright (c)2006-2015 The QSF Portal Team
+ * https://github.com/Arthmoor/QSF-Portal
  *
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the authors be held liable for any damages arising from the
