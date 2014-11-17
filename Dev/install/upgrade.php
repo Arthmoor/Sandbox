@@ -7,7 +7,8 @@
  * Roger Libiez [Samson] http://www.iguanadons.net
  *
  * Sandbox installer module. Based on QSF Portal installer module.
- * QSF Portal Copyright (c)2006-2007 The QSF Portal Team
+ * QSF Portal Copyright (c)2006-2015 The QSF Portal Team
+ * https://github.com/Arthmoor/QSF-Portal
  *
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the authors be held liable for any damages arising from the
@@ -231,6 +232,12 @@ class upgrade extends module
 						$this->settings['twitter_user'] = '';
 						$this->settings['rss_image_url'] = '';
 						$this->settings['global_announce'] = '';
+
+						unset( $this->settings['dir_uploads'] );
+						unset( $this->settings['dir_downloads'] );
+						unset( $this->settings['dir_gallery'] );
+						unset( $this->settings['dir_thumbnails'] );
+						unset( $this->settings['dir_posticons'] );
 
 					case '2.0.7': // 2.0-2.0.7 to 2.1
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_ip active_ip varchar(40) NOT NULL';
