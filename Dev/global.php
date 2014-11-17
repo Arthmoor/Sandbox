@@ -782,8 +782,8 @@ function error($type, $message, $file, $line = 0)
 
 	header('HTTP/1.0 500 Internal Server Error');
 	exit( "
-<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">
+<!DOCTYPE html>
+<html lang=\"en-US\">
  <head>
   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
   <meta name=\"robots\" content=\"noodp\" />
@@ -816,7 +816,7 @@ function error($type, $message, $file, $line = 0)
 
   <div id=\"bottom\">&nbsp;</div>
  </div>
- <div id=\"footer\">Powered by Sandbox &copy; 2006-2010 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"http://www.iguanadons.net\">Samson</a>]</div>
+ <div id=\"footer\">Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"http://www.iguanadons.net\">Samson</a>]</div>
 </body>
 </html>" );
 }
