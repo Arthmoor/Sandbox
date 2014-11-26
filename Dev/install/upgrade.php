@@ -316,6 +316,8 @@ class upgrade extends module
 					case '2.3': // 2.3 to 2.3.1
 						$this->settings['mobile_icons'] = '';
 
+						$queries[] = 'ALTER TABLE %pactive CHANGE active_user_agent active_user_agent varchar(255) NOT NULL';
+
 					default:
 						break;
 				}

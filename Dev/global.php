@@ -107,10 +107,10 @@ class module
 		$this->ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 
 		$this->agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '-';
-		$this->agent = substr($this->agent, 0, 99); // Cut off after 100 characters.
+		$this->agent = substr($this->agent, 0, 254); // Cut off after 255 characters.
 
 		$this->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '-';
-		$this->referrer = substr($this->agent, 0, 99); // Cut off after 100 characters.
+		$this->referrer = substr($this->agent, 0, 254); // Cut off after 255 characters.
 
 		$this->postimages_dir = 'files/blogpostimages/';
 		$this->file_dir = 'files/downloads/';
@@ -566,7 +566,7 @@ class module
 				}
 
 				if ( ( strstr($ip, '/') && $this->cidrmatch($ip) ) || !strcasecmp( $ip, $this->ip ) )
-						return true;
+					return true;
 			}
 		}
 		return false;

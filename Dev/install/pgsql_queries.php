@@ -42,7 +42,7 @@ $queries[] = "CREATE TABLE %pactive (
   active_action varchar(50) NOT NULL,
   active_time int(10) unsigned NOT NULL,
   active_ip varchar(40) NOT NULL,
-  active_user_agent varchar(100) NOT NULL,
+  active_user_agent varchar(255) NOT NULL,
   PRIMARY KEY (active_ip)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 

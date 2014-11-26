@@ -4,6 +4,11 @@ Changes for Sandbox 2.3.1
 Changes:
 
 * Updated how mobile icons are handled.
+* User agent string has been raised to 255 since more browser agents are using long strings these days.
+
+Bugs:
+
+* Active user agent list didn't have sufficient space for an IPv6 address to display clearly.
 
 Changes for Sandbox 2.3
 -----------------------
