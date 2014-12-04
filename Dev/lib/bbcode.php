@@ -192,7 +192,7 @@ class bbcode
 			'matches' => array('~(^|\s)([a-z0-9-_.]+@[a-z0-9-.]+\.[a-z0-9-_.]+)~i',
 				'~(^|\s)(http|https|ftp)://(\w+[^\s\[\]]+)~is'),
 			'replacements' => array('\\1[email=\\2]\\2[/email]',
-				'\'\\1[url=\\2://\\3]\\2://\\3[/url]\'')
+				'\\1[url=\\2://\\3]\\2://\\3[/url]')
 		);
 
 		return preg_replace($parse['matches'], $parse['replacements'], $in);
