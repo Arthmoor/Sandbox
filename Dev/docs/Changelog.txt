@@ -9,6 +9,7 @@ Changes:
 Bugs:
 
 * Active user agent list didn't have sufficient space for an IPv6 address to display clearly.
+* Bare URLs entered into posts were getting stray single quotes placed around them.
 
 Changes for Sandbox 2.3
 -----------------------

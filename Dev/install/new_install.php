@@ -334,7 +334,7 @@ break;
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':ghostface:', 'ghostface.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':grinning:', 'grinning.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':lol:', 'lol.gif', 1 )" );
-			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':mad:', 'mad.gif', 1 )" );
+			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':mad:', 'angry.png', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':redface:', 'redface.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':robot:', 'robot.gif', 1 )" );
 			$this->db->dbquery( "INSERT INTO %pemoticons (emote_string, emote_image, emote_clickable) VALUES (':rolleyes:', 'rolleyes.gif', 1 )" );
