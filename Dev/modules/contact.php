@@ -118,7 +118,11 @@ class contact extends module
 
 		if( $spam_checked && $akismet != null && $akismet->isCommentSpam() )
 		{
-			$this->settings['email_spam_count']++;
+			if( isset($this->settings['email_spam_count']) )
+				$this->settings['email_spam_count']++;
+			else
+				$this->settings['email_spam_count'] = 1;
+
 			$this->save_settings();
 			return $this->message( 'Akismet Warning', 'Your email has been rejected as spam. If you believe this to be an error, you\'ll need to find some other way to let me know.' );
 		}
