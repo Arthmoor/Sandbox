@@ -1,10 +1,11 @@
-Changes for Sandbox 2.3.1
--------------------------
+Changes for Sandbox 2.4
+-----------------------
 
 Changes:
 
 * Updated how mobile icons are handled.
 * User agent string has been raised to 255 since more browser agents are using long strings these days.
+* Password security has been updated to stronger hashing standards. As a result, PHP 5.5.0 or higher is now required.
 
 Bugs:
 

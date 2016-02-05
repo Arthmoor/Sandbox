@@ -66,7 +66,7 @@ define( 'SANDBOX_QUERY_ERROR', 6 ); // For SQL errors to be reported properly by
 
 class module
 {
-	var $version		= 2.31;
+	var $version		= 2.40;
 	var $title		= null;
 	var $meta_description	= null;
 	var $skin		= 'Default';
@@ -262,13 +262,16 @@ class module
 	{
 		if( isset($this->post['username']) && isset($this->post['password']) ) {
 			$username = $this->post['username'];
-			$password = hash( 'sha256', $this->post['password'] );
+			$password = $this->post['password'];
 
-			$user = $this->db->quick_query( "SELECT * FROM %pusers WHERE user_name='%s' AND user_password='%s' LIMIT 1", $username, $password );
+			$user = $this->db->quick_query( "SELECT * FROM %pusers WHERE user_name='%s' LIMIT 1", $username );
 			if( !$user )
 				return false;
 
 			if( !isset($user['user_id']) )
+				return false;
+
+			if( !password_verify( $password, $user['user_password'] ) )
 				return false;
 
 			setcookie($this->settings['cookie_prefix'] . 'user', $user['user_id'], $this->time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
@@ -509,6 +512,21 @@ class module
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Hash a given string into a password suitable for database use
+	 *
+	 * @param string $pass The supplied password to hash
+	 * @author Samson
+	 * @since 2.3.1
+	 */
+	function sandbox_password_hash($pass)
+	{
+		$options = [ 'cost' => 12, ];
+		$newpass = password_hash( $pass, PASSWORD_DEFAULT, $options );
+
+		return $newpass;
 	}
 
 	/**

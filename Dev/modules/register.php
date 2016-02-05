@@ -103,8 +103,6 @@ class register extends module
 		$name = $this->post['user_name'];
 		$email = $this->post['user_email'];
 		$url = $this->post['user_url'];
-		$pass = $this->generate_pass(8);
-		$dbpass = hash( 'sha256', $pass );
 		$math = $this->post['user_math'];
 
 		if( $math != $_SESSION['answer'] )
@@ -140,6 +138,9 @@ class register extends module
 			$this->save_settings();
 			return $this->message( 'Registration Failure', 'Information provided during registration has been flagged by Akismet as a spam source. You will need to find another means of contacting the administration if you wish to register.' );
 		}
+
+		$pass = $this->generate_pass(8);
+		$dbpass = $this->sandbox_password_hash( $pass );
 
 		$this->settings['user_count']++;
 		$this->save_settings();
@@ -223,6 +224,7 @@ class register extends module
 		}
 
 		$newpass = $this->generate_pass(8);
+		$dbpass = $this->sandbox_password_hash( $newpass );
 
 		$headers = "From: {$this->settings['site_name']} <{$this->settings['email_sys']}>\r\n" . "X-Mailer: PHP/" . phpversion();
 		$subject = 'Lost Password Recovery - New Password';
@@ -235,7 +237,7 @@ class register extends module
 
 		mail( $target['user_email'], '[' . $this->settings['site_name'] . '] ' . str_replace( '\n', '\\n', $subject ), $message, $headers );
 
-		$this->db->dbquery( "UPDATE %pusers SET user_password='%s' WHERE user_id=%d", hash( 'sha256', $newpass ), $target['user_id'] );
+		$this->db->dbquery( "UPDATE %pusers SET user_password='%s' WHERE user_id=%d", $dbpass, $target['user_id'] );
 
 		return $this->message( 'Lost Password Recovery' , 'Password recovery complete. A new password has been sent to your email address.' );
 	}

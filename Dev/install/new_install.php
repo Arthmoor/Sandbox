@@ -376,7 +376,7 @@ break;
 				VALUES( 'Anonymous', 1, 0, 'Anonymous.png' )" );
 
 			// Add the administrator next.
-			$pass = hash( 'sha256', $this->post['admin_pass'] );
+			$pass = $this->sandbox_password_hash( $this->post['admin_pass'] );
 			$current_time = time();
 
 			$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_level, user_perms, user_joined, user_icon)

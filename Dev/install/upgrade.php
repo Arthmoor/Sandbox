@@ -313,10 +313,11 @@ class upgrade extends module
 					case '2.2': // 2.2 to 2.3
 						$this->settings['site_tagline'] = '';
 
-					case '2.3': // 2.3 to 2.3.1
+					case '2.3': // 2.3 to 2.4.0
 						$this->settings['mobile_icons'] = '';
 
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_user_agent active_user_agent varchar(255) NOT NULL';
+						$queries[] = 'ALTER TABLE %pusers CHANGE user_password user_password varchar(255) NOT NULL';
 
 					default:
 						break;

@@ -231,12 +231,10 @@ class users extends module
 				foreach( $this->post['user_perms'] as $flag )
 					$perms |= intval($flag);
 
-				$setpass = null;
 				$passgen = null;
 				if( isset($this->post['user_pass']) ) {
 					$pass = $this->generate_pass(8);
-					$dbpass = $this->db->escape( hash( 'sha256', $pass ) );
-					$setpass = "user_password='$dbpass',";
+					$dbpass = $this->sandbox_password_hash( $pass );
 					$passgen = '<br />New password generated and emailed.';
 
 					$headers = "From: {$this->settings['site_name']} <{$this->settings['email_adm']}>\r\n" . "X-Mailer: PHP/" . phpversion();
@@ -248,9 +246,14 @@ class users extends module
 					$message .= "Site URL: {$this->settings['site_address']}";
 
 					mail( $this->post['user_email'], '[' . $this->settings['site_name'] . '] ' . str_replace( '\n', '\\n', $subject ), $message, $headers );
+
+					$this->db->dbquery( "UPDATE %pusers SET user_password='%s', $icon user_name='%s', user_email='%s', user_signature='%s', user_url='%s', user_stylesheet='%s', user_level=%d, user_perms=%d WHERE user_id=%d",
+						$dbpass, $name, $email, $sig, $url, $stylesheet, $level, $perms, $id );
 				}
-				$this->db->dbquery( "UPDATE %pusers SET $setpass $icon user_name='%s', user_email='%s', user_signature='%s', user_url='%s', user_stylesheet='%s', user_level=%d, user_perms=%d WHERE user_id=%d",
-					$name, $email, $sig, $url, $stylesheet, $level, $perms, $id );
+				else {
+					$this->db->dbquery( "UPDATE %pusers SET $icon user_name='%s', user_email='%s', user_signature='%s', user_url='%s', user_stylesheet='%s', user_level=%d, user_perms=%d WHERE user_id=%d",
+						$name, $email, $sig, $url, $stylesheet, $level, $perms, $id );
+				}
 
 				return $this->message( 'Edit User', "User edited.$passgen", 'Continue', 'admin.php?a=users' );
 			}

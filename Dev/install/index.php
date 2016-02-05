@@ -128,8 +128,8 @@ if ($mode) {
 	$register_globals = get_cfg_var('register_globals') ? 'on' : 'off';
 	$server = isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : 'unknown';
 
-	if( version_compare( PHP_VERSION, "5.3.0", "<" ) ) {
-		echo 'Your PHP version is ' . PHP_VERSION . '.<br />Currently only PHP 5.3.0 and higher are supported.';
+	if( version_compare( PHP_VERSION, "5.5.0", "<" ) ) {
+		echo 'Your PHP version is ' . PHP_VERSION . '.<br />Currently only PHP 5.5.0 and higher are supported.';
 		$failed = true;
 	}
 
@@ -225,7 +225,7 @@ if ($mode) {
 	echo "   <div id='bottom'>&nbsp;</div>
   </div>
   <div id='footer'>
-   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2015 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='http://www.iguanadons.net'>Samson</a>]
+   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2016 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='http://www.iguanadons.net'>Samson</a>]
   </div>
  </body>
 </html>";

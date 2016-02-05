@@ -207,15 +207,18 @@ class profile extends module
 		if( isset($this->post['user_stylesheet']) && $this->user['user_level'] > USER_MEMBER )
 			$stylesheet = $this->post['user_stylesheet'];
 
-		$pass = null;
 		if( !empty( $this->post['user_password'] ) && !empty( $this->post['user_pass_confirm'] ) ) {
-			$newpass = $this->db->escape( hash( 'sha256', $this->post['user_password'] ) );
-			$pass = ", user_password='$newpass'";
+			$newpass = $this->sandbox_password_hash( $this->post['user_password'] );
+
+			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s', user_password='%s' WHERE user_id=%d",
+				$email, $url, $stylesheet, $icon, $sig, $newpass, $this->user['user_id'] );
+
 			$action_link = '/';
 		}
-
-		$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s'$pass WHERE user_id=%d",
-			$email, $url, $stylesheet, $icon, $sig, $this->user['user_id'] );
+		else {
+			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s' WHERE user_id=%d",
+				$email, $url, $stylesheet, $icon, $sig, $this->user['user_id'] );
+		}
 		return $this->message( 'Edit Your Profile', 'Your profile has been updated.', 'Continue', $action_link );
 	}
 }
