@@ -60,14 +60,14 @@
   <span class="field"><label for="wordpress_api_key">Wordpress API Key:</label></span>
   <span class="form">
    <input class="input" type="text" name="wordpress_api_key" id="wordpress_api_key" value="{wordpress_api_key}" />
-   <a href="http://akismet.com/signup/" target="_blank">Obtain API Key</a> - Required to activate Akismet.
+   <a href="https://akismet.com/signup/" target="_blank">Obtain API Key</a> - Required to activate Akismet.
   </span>
   <p class="line"></p>
 
   <span class="field"><label for="twitter_user">Twitter ID:</label></span>
   <span class="form">
    <input class="input" type="text" name="twitter_user" id="twitter_user" value="{twitter_user}" />
-   <a href="http://twitter.com/" target="_blank">Sign up with Twitter</a> - Not required. Used when users click the Twitter share icon.
+   <a href="https://twitter.com/" target="_blank">Sign up with Twitter</a> - Not required. Used when users click the Twitter share icon.
   </span>
   <p class="line"></p>
 
