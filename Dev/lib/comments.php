@@ -38,7 +38,7 @@ if ( !defined('SANDBOX') ) {
 
 class comments
 {
-	function comments(&$module)
+	public function __construct(&$module)
 	{
 		$this->module = &$module;
 		$this->user = &$module->user;
@@ -46,7 +46,7 @@ class comments
 		$this->settings = &$module->settings;
 	}
 
-	function generate_comment_form( $author, $subject, $action_link, $closed, $message = null )
+	public function generate_comment_form( $author, $subject, $action_link, $closed, $message = null )
 	{
 		$xtpl = new XTemplate( './skins/' . $this->module->skin . '/comment_form.xtpl' );
 
@@ -73,7 +73,7 @@ class comments
 		return $xtpl->text( 'CommentForm' );
 	}
 
-	function list_comments( $ctype, $p, $subject, $u, $count, $min, $num, $link )
+	public function list_comments( $ctype, $p, $subject, $u, $count, $min, $num, $link )
 	{
 		$result = $this->db->dbquery( '
 			SELECT c.comment_id, c.comment_date, c.comment_editdate, c.comment_editedby, c.comment_author, c.comment_user, c.comment_message, c.comment_ip,
@@ -157,7 +157,7 @@ class comments
 		return $xtpl->text( 'CList' );
 	}
 
-	function post_comment( $ctype, $subject, $id )
+	public function post_comment( $ctype, $subject, $id )
 	{
 		$uid = $this->user['user_id'];
 		$com_time = $this->module->time;
@@ -382,7 +382,7 @@ $error
 		return $cid; // Returns the comment ID so the originating page can header to it immediately.
 	}
 
-	function edit_comment()
+	public function edit_comment()
 	{
 		// Lock this shit down!!!
 		if( $this->user['user_level'] < USER_MEMBER )
@@ -496,7 +496,7 @@ $error
 		header( 'Location: ' . $link );
 	}
 
-	function delete_comment()
+	public function delete_comment()
 	{
 		// Lock this shit down!!!
 		if( $this->user['user_level'] < USER_PRIVILEGED )
@@ -618,7 +618,7 @@ $error
 		return $this->module->message( 'Delete Comment', $out, 'Continue', "index.php?a=$page&p={$comment['comment_post']}" );
 	}
 
-	function make_links( $ctype, $p, $subject, $count, $min, $num )
+	private function make_links( $ctype, $p, $subject, $count, $min, $num )
 	{
 		if( $num < 1 ) $num = 1; // No more division by zero please.
 
@@ -723,7 +723,7 @@ $error
 	}
 
 	// Automatically drop spam posts in the spam DB that are older than 30 days.
-	function purge_old_spam()
+	private function purge_old_spam()
 	{
 		$diff = 2592000; // 30 days * 86400 secs
 		$cut_off = $this->module->time - $diff;
