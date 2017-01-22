@@ -90,7 +90,7 @@
   <div id="footer">
    {footer_text}<br /><br />
    {copyright_terms}<br />
-   Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
+   Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.iguanadons.net">Samson</a>]
 <!-- BEGIN: PageStats -->
    <br />{page_generated}
 <!-- END: PageStats -->

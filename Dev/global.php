@@ -834,7 +834,7 @@ function error($type, $message, $file, $line = 0)
 
   <div id=\"bottom\">&nbsp;</div>
  </div>
- <div id=\"footer\">Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"http://www.iguanadons.net\">Samson</a>]</div>
+ <div id=\"footer\">Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"https://www.iguanadons.net\">Samson</a>]</div>
 </body>
 </html>" );
 }
