@@ -506,7 +506,7 @@ class module
 		$url = $this->settings['site_address'] . $this->icon_dir . $icon;
 
 		if( $this->is_email($icon) ) {
-			$url = 'https://www.gravatar.com/avatar/';
+			$url = 'https://secure.gravatar.com/avatar/';
 			$url .= md5( strtolower( trim($icon) ) );
 			$url .= "?s={$this->settings['blog_icon_width']}&amp;r=pg";
 		}
