@@ -351,13 +351,13 @@ class bbcode
 		if( preg_match( '/v=([^&]+)/', $in, $newmatches ) > 0 ) {
 			$src = $newmatches[1];
 
-			return '<iframe class="youtube-player" width="640" height="400" src="http://www.youtube.com/embed/'.$src.'"></iframe>';
+			return '<iframe class="youtube-player" width="640" height="400" src="https://www.youtube.com/embed/'.$src.'"></iframe>';
 		}
 
 		if( preg_match( '/youtu.be\/([^&]+)/', $in, $newmatches ) > 0 ) {
 			$src = $newmatches[1];
 
-			return '<iframe class="youtube-player" width="640" height="400" src="http://www.youtube.com/embed/'.$src.'"></iframe>';
+			return '<iframe class="youtube-player" width="640" height="400" src="https://www.youtube.com/embed/'.$src.'"></iframe>';
 		}
 
 		return $in;
