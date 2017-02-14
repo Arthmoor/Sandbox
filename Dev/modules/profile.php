@@ -201,7 +201,7 @@ class profile extends module
 		}
 
 		$url = ( !stristr( $url, '://' ) ? 'http://' : null ) . $url;
-		if( $url == 'http://' )
+		if( $url == 'http://' || $url == 'https://' )
 			$url = '';
 		$stylesheet = '';
 		if( isset($this->post['user_stylesheet']) && $this->user['user_level'] > USER_MEMBER )
