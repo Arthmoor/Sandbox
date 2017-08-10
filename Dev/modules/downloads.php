@@ -71,22 +71,21 @@ class downloads extends module
 		$this->folder_array = &$folder_array;
 
 		if( $this->settings['friendly_urls'] ) {
-			$fld = null;
-			$this_folder = null;
-
-			if( isset($this->get['f']) ) {
-				$f = str_replace( '-', ' ', $this->get['f'] );
-				$fld = $f;
-			}
+			$folder_found = false; // Presume it doesn't exist until we know it does.
 
 			$z = 0;
 			if( isset($this->get['z']) ) {
 				$z = intval($this->get['z']);
 			}
 
-			if( $fld )
-				$this_folder = $this->db->quick_query( "SELECT * FROM %pfilefolders WHERE folder_name='%s' AND folder_id=%d", $fld, $z );
-			if( !$this_folder )
+			$this_folder = $this->db->quick_query( "SELECT * FROM %pfilefolders WHERE folder_id=%d", $z );
+
+			if( isset($this->get['f']) ) {
+				if( $this->clean_url( $this_folder['folder_name'] ) == $this->get['f'] )
+					$folder_found = true;
+			}
+
+			if( !$folder_found )
 				return $this->error( 'The folder you are looking for is not available. It may have been deleted, is restricted from viewing, or the URL is incorrect.', 404 );
 
 			$f = $this_folder['folder_id'];
