@@ -198,7 +198,7 @@ class gallery extends module
 				continue;
 
 			if( $folder['folder_hidden'] ) {
-				if( $this->user['user_level'] == USER_GUEST )
+				if( $this->user['user_level'] <= USER_VALIDATING )
 					continue;
 
 				if( $this->user['user_id'] != $folder['folder_user'] && $this->user['user_level'] < USER_ADMIN )
@@ -257,7 +257,7 @@ class gallery extends module
 				$photo = null;
 		}
 
-		if( !($photo['photo_flags'] & POST_PUBLISHED) || ( ($photo['photo_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] == USER_GUEST ) )
+		if( !($photo['photo_flags'] & POST_PUBLISHED) || ( ($photo['photo_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] <= USER_VALIDATING ) )
 			$photo = null;
 		if( !$photo || ($photo['folder_hidden'] && $this->user['user_id'] != $photo['folder_user'] && $this->user['user_level'] < USER_ADMIN) )
 			return $this->error( 'The image you are looking for is not available. It may have been deleted, is restricted from viewing, or the URL is incorrect.', 404 );
@@ -484,7 +484,7 @@ class gallery extends module
 			$sql .= ' ORDER BY photo_date DESC LIMIT 50';
 		else {
 			$where = null;
-			if( $this->user['user_level'] == USER_GUEST )
+			if( $this->user['user_level'] <= USER_VALIDATING )
 				$where .= ' AND (photo_flags & ' . POST_PUBLISHED . ') AND !(photo_flags & ' . POST_MEMBERSONLY . ')';
 			else
 				$where .= ' AND (photo_flags & ' . POST_PUBLISHED . ')';
@@ -496,7 +496,7 @@ class gallery extends module
 		while( $photo = $this->db->assoc( $result ) )
 		{
 			if( $photo['folder_hidden'] ) {
-				if( $this->user['user_level'] == USER_GUEST )
+				if( $this->user['user_level'] <= USER_VALIDATING )
 					continue;
 
 				if( $this->user['user_id'] != $photo['folder_user'] && $this->user['user_level'] < USER_ADMIN )

@@ -299,7 +299,7 @@ if ( !$open && $mod->user['user_level'] < USER_ADMIN ) {
 		}
 
 		// No need for guests to see this.
-		if( $mod->user['user_level'] > USER_GUEST ) {
+		if( $mod->user['user_level'] > USER_VALIDATING ) {
 			$time_now  = explode(' ', microtime());
 			$time_exec = round($time_now[1] + $time_now[0] - $time_start, 4);
 			$queries = $mod->db->queries;

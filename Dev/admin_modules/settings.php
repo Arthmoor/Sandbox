@@ -94,7 +94,7 @@ class settings extends module
 
 		$int_fields = array( 'site_open', 'blog_postsperpage', 'blog_autoclose', 'blog_icon_width', 'blog_icon_height', 'cookie_logintime',
 			'rss_items', 'rss_refresh', 'gallery_thumb_w', 'gallery_thumb_h', 'sidebar_images_count', 'sidebar_comments_count',
-			'html_email', 'friendly_urls', 'global_comments', 'anonymous_comments', 'blog_commentsperpage', 'download_size' );
+			'html_email', 'friendly_urls', 'validate_users', 'global_comments', 'anonymous_comments', 'blog_commentsperpage', 'download_size' );
 		foreach( $int_fields as $key )
 		{
 			if ( !isset($this->settings[$key]) )

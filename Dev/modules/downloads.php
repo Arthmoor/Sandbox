@@ -194,7 +194,7 @@ class downloads extends module
 				$file = null;
 		}
 
-		if( !($file['file_flags'] & POST_PUBLISHED) || ( ($file['file_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] == USER_GUEST) )
+		if( !($file['file_flags'] & POST_PUBLISHED) || ( ($file['file_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] <= USER_VALIDATING) )
 			$file = null;
 		if( !$file || ($file['folder_hidden'] && $this->user['user_id'] != $file['folder_user'] && $this->user['user_level'] < USER_ADMIN) )
 			return $this->error( 'The download you are looking for is not available. It may have been deleted, is restricted from viewing, or the URL is incorrect.', 404 );
@@ -249,7 +249,7 @@ class downloads extends module
 		$this->title( $file['file_name'] );
 		$this->meta_description( $file['file_summary'] );
 
-		if( $this->user['user_level'] == USER_GUEST && $this->settings['download_size'] > 0 && $file['file_size'] >= $this->settings['download_size'] )
+		if( $this->user['user_level'] <= USER_VALIDATING && $this->settings['download_size'] > 0 && $file['file_size'] >= $this->settings['download_size'] )
 			$file_url = 'Registration required to download';
 		else {
 			if( $this->settings['friendly_urls'] )
@@ -313,12 +313,12 @@ class downloads extends module
 			if( $this->clean_url( $file['file_name'] ) != $this->get['title'] )
 				$file = null;
 		}
-		if( !($file['file_flags'] & POST_PUBLISHED) || ( ($file['file_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] == USER_GUEST) )
+		if( !($file['file_flags'] & POST_PUBLISHED) || ( ($file['file_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] <= USER_VALIDATING) )
 			$file = null;
 		if( !$file || ($file['folder_hidden'] && $this->user['user_id'] != $file['folder_user'] && $this->user['user_level'] < USER_ADMIN) )
 			return $this->error( 'The file you are looking for is not available. It may have been deleted, is restricted from viewing, or the URL is incorrect.', 404 );
 
-		if( $this->user['user_level'] == USER_GUEST && $this->settings['download_size'] > 0 && $file['file_size'] >= $this->settings['download_size'] )
+		if( $this->user['user_level'] <= USER_VALIDATING && $this->settings['download_size'] > 0 && $file['file_size'] >= $this->settings['download_size'] )
 			return $this->error( 'The file you are trying to download requires a valid user account.', 403 );
 
 		$this->db->dbquery( 'UPDATE %pfilelist SET file_downcount=file_downcount+1, file_downloaded=%d WHERE file_id=%d', $this->time, $f );
@@ -392,7 +392,7 @@ class downloads extends module
 		$list[] = array();
 
 		$where = null;
-		if( $this->user['user_level'] == USER_GUEST )
+		if( $this->user['user_level'] <= USER_VALIDATING )
 			$where .= ' AND (file_flags & ' . POST_PUBLISHED . ') AND !(file_flags & ' . POST_MEMBERSONLY . ')';
 		else
 			$where .= ' AND (file_flags & ' . POST_PUBLISHED . ')';

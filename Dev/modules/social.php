@@ -54,6 +54,8 @@ class social extends module
 						else
 							$link = 'https://twitter.com/share?text='. $subject . '&url=' . $url;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {
@@ -70,10 +72,12 @@ class social extends module
 
 						$link = 'http://www.facebook.com/sharer.php?u=' . $url . '&t=' . $subject;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {
-						return $this->error( 'Twitter Submission Error: The URL you have attempted to submit is invalid.', 500 );
+						return $this->error( 'Facebook Submission Error: The URL you have attempted to submit is invalid.', 500 );
 					}
 				break;
 
@@ -86,6 +90,8 @@ class social extends module
 
 						$link = 'http://del.icio.us/post?url=' . $url . '&title=' . $subject;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {
@@ -102,6 +108,8 @@ class social extends module
 
 						$link = 'https://www.reddit.com/submit?url=' . $url . '&title=' . $subject;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {
@@ -118,6 +126,8 @@ class social extends module
 
 						$link = 'http://www.stumbleupon.com/submit?url=' . $url . '&title=' . $subject;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {
@@ -134,6 +144,8 @@ class social extends module
 
 						$link = 'https://plus.google.com/share?url=' . $url;
 
+						$link = trim($link);
+						$link = str_replace( "\n", "", $link );
 						header( 'Location: ' . $link );
 						exit();
 					} else {

@@ -63,7 +63,7 @@ class blog extends module
 			return $this->view_archive_page();
 
 		$where = null;
-		if( $this->user['user_level'] == USER_GUEST )
+		if( $this->user['user_level'] <= USER_VALIDATING )
 			$where .= ' WHERE (post_flags & ' . POST_PUBLISHED . ') AND !(post_flags & ' . POST_MEMBERSONLY . ')';
 		elseif( $this->user['user_level'] >= USER_MEMBER && $this->user['user_level'] < USER_ADMIN )
 			$where .= ' WHERE (post_flags & ' . POST_PUBLISHED . ')';
@@ -158,7 +158,7 @@ class blog extends module
 			$timestamp = $this->time;
 
 		$where = ' WHERE post_date >= ' . mktime(0,0,0,idate('m',$timestamp),1,idate('Y',$timestamp)) . ' AND post_date < ' . mktime(0,0,0,idate('m',$timestamp)+1,1,idate('Y',$timestamp));
-		if( $this->user['user_level'] == USER_GUEST )
+		if( $this->user['user_level'] <= USER_VALIDATING )
 			$where .= ' AND (post_flags & ' . POST_PUBLISHED . ') AND !(post_flags & ' . POST_MEMBERSONLY . ')';
 		else
 			$where .= ' AND (post_flags & ' . POST_PUBLISHED . ')';
@@ -227,7 +227,7 @@ class blog extends module
 				$post = null;
 		}
 
-		if ( !$post || (($post['post_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] == USER_GUEST) )
+		if ( !$post || (($post['post_flags'] & POST_MEMBERSONLY) && $this->user['user_level'] <= USER_VALIDATING) )
 			return $this->error( 'The blog entry you are looking for is not available. It may have been deleted, is restricted from viewing, or the URL is incorrect.', 404 );
 
 		if( !($post['post_flags'] & POST_PUBLISHED) ) {
@@ -297,7 +297,7 @@ class blog extends module
 			$next_post = $this->db->quick_query( 'SELECT post_id, post_subject FROM %pblogposts
 				WHERE post_date > %d
 				ORDER BY post_date ASC LIMIT 1', $post['post_date'] );
-		} elseif( $this->user['user_level'] > USER_GUEST ) {
+		} elseif( $this->user['user_level'] > USER_VALIDATING ) {
 			$next_post = $this->db->quick_query( 'SELECT post_id, post_subject FROM %pblogposts
 				WHERE post_date > %d AND (post_flags & %d)
 				ORDER BY post_date ASC LIMIT 1', $post['post_date'], POST_PUBLISHED );
@@ -320,7 +320,7 @@ class blog extends module
 			$prev_post = $this->db->quick_query( 'SELECT post_id, post_subject FROM %pblogposts
 				WHERE post_date < %d
 				ORDER BY post_date DESC LIMIT 1', $post['post_date'] );
-		} elseif( $this->user['user_level'] > USER_GUEST ) {
+		} elseif( $this->user['user_level'] > USER_VALIDATING ) {
 			$prev_post = $this->db->quick_query( 'SELECT post_id, post_subject FROM %pblogposts
 				WHERE post_date < %d AND (post_flags & %d)
 				ORDER BY post_date DESC LIMIT 1', $post['post_date'], POST_PUBLISHED );

@@ -106,7 +106,7 @@ class users extends module
 			$xtpl->parse( 'UserForm.Edit' );
 		}
 
-		$user_groups = array( USER_GUEST => 'Anonymous', USER_MEMBER => 'Member', USER_PRIVILEGED => 'Privileged', USER_CONTRIBUTOR => 'Contributor', USER_ADMIN => 'Administrator' );
+		$user_groups = array( USER_GUEST => 'Anonymous', USER_VALIDATING => 'Validating', USER_MEMBER => 'Member', USER_PRIVILEGED => 'Privileged', USER_CONTRIBUTOR => 'Contributor', USER_ADMIN => 'Administrator' );
 		$options = null;
 		for( $x = USER_GUEST; $x <= USER_ADMIN; $x++ )
 		{
@@ -156,7 +156,7 @@ class users extends module
 
 			$email = $this->post['user_email'];
 			$pass = $this->generate_pass(8);
-			$dbpass = hash( 'sha256', $pass );
+			$dbpass = $this->sandbox_password_hash( $pass );
 			$level = intval($this->post['user_level']);
 			if( $level < USER_MEMBER || $level > USER_ADMIN )
 				$level = USER_MEMBER;

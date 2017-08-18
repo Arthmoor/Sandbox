@@ -66,7 +66,7 @@ class rss extends module
 		$xtpl = new XTemplate( './skins/' . $this->skin . '/rss.xtpl' );
 
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST )
+		if( $this->user['user_level'] > USER_VALIDATING )
 			$where = "(i.photo_flags & " . POST_PUBLISHED . ")";
 		else
 			$where = "((i.photo_flags & " . POST_PUBLISHED . ") AND !(i.photo_flags & " . POST_MEMBERSONLY . "))";
@@ -80,7 +80,7 @@ class rss extends module
 		while ( $entry = $this->db->assoc($result) )
 		{
 			if( $entry['folder_hidden'] ) {
-				if( $this->user['user_level'] == USER_GUEST )
+				if( $this->user['user_level'] <= USER_VALIDATING )
 					continue;
 
 				if( $this->user['user_id'] != $entry['folder_user'] && $this->user['user_level'] < USER_ADMIN )
@@ -129,7 +129,7 @@ class rss extends module
 		$xtpl = new XTemplate( './skins/' . $this->skin . '/rss.xtpl' );
 
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST )
+		if( $this->user['user_level'] > USER_VALIDATING )
 			$where = "(f.file_flags & " . POST_PUBLISHED . ")";
 		else
 			$where = "((f.file_flags & " . POST_PUBLISHED . ") AND !(f.file_flags & " . POST_MEMBERSONLY . "))";
@@ -144,7 +144,7 @@ class rss extends module
 		while ( $entry = $this->db->assoc($result) )
 		{
 			if( $entry['folder_hidden'] ) {
-				if( $this->user['user_level'] == USER_GUEST )
+				if( $this->user['user_level'] <= USER_VALIDATING )
 					continue;
 
 				if( $this->user['user_id'] != $entry['folder_user'] && $this->user['user_level'] < USER_ADMIN )
@@ -193,7 +193,7 @@ class rss extends module
 
 		// Wow. Could this get any uglier, please?
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST )
+		if( $this->user['user_level'] > USER_VALIDATING )
 			$where = "(c.comment_type = " . COMMENT_BLOG . " AND (p.post_flags & " . POST_PUBLISHED . ")) OR (c.comment_type = " . COMMENT_GALLERY . " AND (i.photo_flags & " . POST_PUBLISHED . ")) OR (c.comment_type = " . COMMENT_FILE . " AND (f.file_flags & " . POST_PUBLISHED . "))";
 		else
 			$where = "(c.comment_type = " . COMMENT_BLOG . " AND (p.post_flags & " . POST_PUBLISHED . ") AND !(p.post_flags & " . POST_MEMBERSONLY . ")) OR (c.comment_type = " . COMMENT_GALLERY . " AND (i.photo_flags & " . POST_PUBLISHED . ") AND !(i.photo_flags & " . POST_MEMBERSONLY . ")) OR (c.comment_type = " . COMMENT_FILE . " AND (f.file_flags & " . POST_PUBLISHED . ") AND !(f.file_flags & " . POST_MEMBERSONLY . "))";
@@ -272,7 +272,7 @@ class rss extends module
 			$cat = intval($this->get['cat']);
 
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST ) {
+		if( $this->user['user_level'] > USER_VALIDATING ) {
 			$where = $cat ? ( "WHERE pc.pc_post=p.post_id AND pc.pc_id=$cat AND post_flags & " . POST_PUBLISHED )
 				: ( "WHERE post_flags & " . POST_PUBLISHED );
 		} else {

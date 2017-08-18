@@ -53,10 +53,11 @@ define( 'COMMENT_GALLERY', 1 );
 define( 'COMMENT_FILE', 2 );
 
 define( 'USER_GUEST', 1 );
-define( 'USER_MEMBER', 2 );
-define( 'USER_PRIVILEGED', 3 );
-define( 'USER_CONTRIBUTOR', 4 );
-define( 'USER_ADMIN', 5 );
+define( 'USER_VALIDATING', 2 );
+define( 'USER_MEMBER', 3 );
+define( 'USER_PRIVILEGED', 4 );
+define( 'USER_CONTRIBUTOR', 5 );
+define( 'USER_ADMIN', 6 );
 
 define( 'PERM_URL', 1 );
 define( 'PERM_SIG', 2 );
@@ -273,6 +274,13 @@ class module
 
 			if( !password_verify( $password, $user['user_password'] ) )
 				return false;
+
+			$hashcheck = $this->check_hash_update( $password, $user['user_password'] );
+			if( $hashcheck != $user['user_password'] ) {
+				$user['user_password'] = $hashcheck;
+
+				$this->db->dbquery( "UPDATE %pusers SET user_password='%s' WHERE user_id=%d", $user['user_password'], $user['user_id'] );
+			}
 
 			setcookie($this->settings['cookie_prefix'] . 'user', $user['user_id'], $this->time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
 			setcookie($this->settings['cookie_prefix'] . 'pass', $user['user_password'], $this->time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
@@ -527,6 +535,26 @@ class module
 		$newpass = password_hash( $pass, PASSWORD_DEFAULT, $options );
 
 		return $newpass;
+	}
+
+	/**
+	 * Check to see if a given password has needs to be updated to a new hash algorithm
+	 *
+	 * @param string $password The unencrypted password to rehash
+	 * @param string $hash The hashed password to check
+	 * @author Samson
+	 * @since 2.4.0
+	 */
+	function check_hash_update( $password, $hash )
+	{
+		$options = [ 'cost' => 12, ];
+
+		if( password_needs_rehash( $hash, PASSWORD_DEFAULT, $options ) ) {
+			$newhash = password_hash( $password, PASSWORD_DEFAULT, $options );
+
+			$hash = $newhash;
+		}
+		return $hash;
 	}
 
 	/**

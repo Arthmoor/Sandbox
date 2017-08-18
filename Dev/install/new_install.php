@@ -380,7 +380,7 @@ break;
 			$current_time = time();
 
 			$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_level, user_perms, user_joined, user_icon)
-				VALUES( '%s', '%s', '%s', 5, 7, %d, 'Anonymous.png' )",  $this->post['admin_name'], $pass, $this->post['contact_email'], $current_time );
+				VALUES( '%s', '%s', '%s', 6, 7, %d, 'Anonymous.png' )",  $this->post['admin_name'], $pass, $this->post['contact_email'], $current_time );
 			$id = $this->db->insert_id();
 
 			setcookie($this->settings['cookie_prefix'] . 'user', $id, $current_time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );

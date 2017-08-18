@@ -54,7 +54,7 @@ class search extends module
 			$result = $this->db->dbquery( 'SELECT p.post_id, p.post_subject, p.post_summary, p.post_date, p.post_user, u.user_name FROM %pblogposts p
 				LEFT JOIN %pusers u ON u.user_id=p.post_user
 				WHERE ' . $search_query . ' ORDER BY p.post_date DESC' );
-		} elseif( $this->user['user_level'] > USER_GUEST ) {
+		} elseif( $this->user['user_level'] > USER_VALIDATING ) {
 			$result = $this->db->dbquery( 'SELECT p.post_id, p.post_subject, p.post_summary, p.post_date, p.post_user, u.user_name FROM %pblogposts p
 				LEFT JOIN %pusers u ON u.user_id=p.post_user
 				WHERE ' . $search_query . ' AND (post_flags & %d) ORDER BY p.post_date DESC', POST_PUBLISHED );

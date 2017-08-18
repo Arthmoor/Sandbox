@@ -8,6 +8,14 @@
    <span class="form"><input type="text" name="user_name" size="30" maxlength="30" value="" /></span>
    <p class="line"></p>
 
+   <span class="field">Password:</span>
+   <span class="form"><input type="password" name="user_pass" size="30" maxlength="30" value="" /></span>
+   <p class="line"></p>
+
+   <span class="field">Confirm Password:</span>
+   <span class="form"><input type="password" name="user_passconfirm" size="30" maxlength="30" value="" /></span>
+   <p class="line"></p>
+
    <span class="field">Email:</span>
    <span class="form"><input type="text" name="user_email" size="50" maxlength="100" value="" /></span>
    <p class="line"></p>
@@ -26,9 +34,7 @@
 <!-- BEGIN: Akismet -->
    <span style="color:yellow">The information provided will be submitted to the Akismet spam filtering service. If this is not acceptable to you, your only recourse is to abort this registration. Akismet does not sell or otherwise distribute the data provided to them for any other purpose than to screen for spam.</span><br /><br />
 <!-- END: Akismet -->
-   <span style="color:yellow">A valid email address is required to register with this site. Your initial password will be sent there. If this is something else you find unacceptable, your only recourse is to abort this registration.<br /><br />
-    You must also accept cookies in order to process this registration. If cookies are refused, the registration will not be processed.
-   </span>
+   <span style="color:yellow">You must accept cookies in order to process this registration. If cookies are refused, the registration will not be processed.</span>
    <p></p>
 
    <input type="hidden" name="token" value="{token}" />

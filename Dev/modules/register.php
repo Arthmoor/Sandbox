@@ -48,6 +48,10 @@ class register extends module
 
 		switch( $this->get['s'] )
 		{
+			case 'validateaccount':
+				return $this->validate_user();
+				break;
+
 			case 'forgotpassword':
 				return $this->forgot_password();
 				break;
@@ -139,34 +143,70 @@ class register extends module
 			return $this->message( 'Registration Failure', 'Information provided during registration has been flagged by Akismet as a spam source. You will need to find another means of contacting the administration if you wish to register.' );
 		}
 
-		$pass = $this->generate_pass(8);
-		$dbpass = $this->sandbox_password_hash( $pass );
+		if( $this->post['user_pass'] != $this->post['user_passconfirm'] )
+			return $this->message( 'Registration Failure', 'Your password does not match the confirmation field. Please go back and try again.' );
+
+		$dbpass = $this->sandbox_password_hash( $this->post['user_pass'] );
 
 		$this->settings['user_count']++;
 		$this->save_settings();
 
-		$level = USER_MEMBER;
-		$perms = PERM_URL | PERM_SIG | PERM_ICON;
-		$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_url, user_level, user_perms, user_joined)
-				   VALUES( '%s', '%s', '%s', '%s', %d, %d, %d )", $name, $dbpass, $email, $url, $level, $perms, $this->time );
+		$jointime = $this->time;
 
+		if( isset( $this->settings['validate_users'] ) && $this->settings['validate_users'] == 1 ) {
+			$level = USER_VALIDATING;
+		} else {
+			$level = USER_MEMBER;
+		}
+
+		$perms = PERM_URL | PERM_SIG | PERM_ICON;
+
+		$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_url, user_level, user_perms, user_joined)
+				   VALUES( '%s', '%s', '%s', '%s', %d, %d, %d )", $name, $dbpass, $email, $url, $level, $perms, $jointime );
+		$id = $this->db->insert_id();
+
+		setcookie($this->settings['cookie_prefix'] . 'user', $id, $this->time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
+		setcookie($this->settings['cookie_prefix'] . 'pass', $dbpass, $this->time + $this->settings['cookie_logintime'], $this->settings['cookie_path'], $this->settings['cookie_domain'], $this->settings['cookie_secure'], true );
+
+		if( isset( $this->settings['validate_users'] ) && $this->settings['validate_users'] == 1 ) {
+			$this->send_user_validation_email( $email, $name, $dbpass, $jointime, true );
+
+			return $this->message( 'New User Registration', 'Your account has been created. Email validation is required. A link has been sent to your email address to validate your account.', 'Continue', '/' );
+		}
+		return $this->message( 'New User Registration', 'Your account has been created.', 'Continue', '/' );
+	}
+
+	function send_user_validation_email( $email, $name, $dbpass, $jointime, $newaccount )
+	{
 		$headers = "From: {$this->settings['site_name']} <{$this->settings['email_sys']}>\r\n" . "X-Mailer: PHP/" . phpversion();
-		$subject = 'New account creation';
-		$message = "A new account has been registered for you at {$this->settings['site_name']}: {$this->settings['site_address']}\n\n";
+		$subject = 'User Account Validation';
+		$message = "An email validation has been initiated for your user account at {$this->settings['site_name']}: {$this->settings['site_address']}\n\n";
 		$message .= "Your user name is: {$this->post['user_name']}\n";
-		$message .= "Your temporary password is: $pass\n\n";
-		$message .= 'Please write this information down as you will need it in order to log on to the site. You should change this password at your earliest convenience to something you will more easily remember.';
-		$message .= 'You will be able to make any changes to your user profile once you log on the first time.';
+		$message .= "Click on the following link to validate your account: {$this->settings['site_address']}index.php?a=register&s=validateaccount&e=" . md5($email . $name . $dbpass . $jointime) . "\n\n";
 
 		mail( $this->post['user_email'], '[' . $this->settings['site_name'] . '] ' . str_replace( '\n', '\\n', $subject ), $message, $headers );
 
-		$headers = "From: {$this->settings['site_name']} <{$this->settings['email_sys']}>\r\n" . "X-Mailer: PHP/" . phpversion();
-		$subject = 'New user signup';
-		$message = "A new user has signed up at {$this->settings['site_name']} named {$this->post['user_name']}\n";
+		if( $newaccount ) {
+			$headers = "From: {$this->settings['site_name']} <{$this->settings['email_sys']}>\r\n" . "X-Mailer: PHP/" . phpversion();
+			$subject = 'New user signup';
+			$message = "A new user has signed up at {$this->settings['site_name']} named {$this->post['user_name']}\n";
 
-		mail( $this->settings['email_adm'], '[' . $this->settings['site_name'] . '] ' . str_replace( '\n', '\\n', $subject ), $message, $headers );
+			mail( $this->settings['email_adm'], '[' . $this->settings['site_name'] . '] ' . str_replace( '\n', '\\n', $subject ), $message, $headers );
+		}
+	}
 
-		return $this->message( 'New User Registration', 'Your new account has been created. An email is being send to the address you provided with your temporary password.', 'Continue', '/' );
+	function validate_user()
+	{
+		if (isset($this->get['e'])) {
+			$user = $this->db->quick_query( "SELECT user_id, user_level FROM %pusers WHERE MD5(CONCAT(user_email, user_name, user_password, user_joined))='%s' LIMIT 1", $this->get['e'] );
+
+			if( $user && $user['user_id'] != USER_GUEST && $user['user_level'] == USER_VALIDATING ) {
+				$this->db->dbquery( 'UPDATE %pusers SET user_level=%d WHERE user_id=%d', USER_MEMBER, $user['user_id'] );
+				return $this->message( 'User Account Validation', 'Your account has been validated.', 'Continue', '/' );
+			}
+		}
+
+		return $this->message( 'User Account Validation', 'There was an error during validation. Please make sure you have used the correct validation link that was sent to you.', 'Continue', '/' );
 	}
 
 	function forgot_password()

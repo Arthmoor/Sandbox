@@ -140,7 +140,7 @@ class sidebar
 	private function build_recent_comments( $timestamp )
 	{
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST )
+		if( $this->user['user_level'] > USER_VALIDATING )
 			$where = "(c.comment_type = " . COMMENT_BLOG . " AND (p.post_flags & " . POST_PUBLISHED . ")) OR (c.comment_type = " . COMMENT_GALLERY . " AND (i.photo_flags & " . POST_PUBLISHED . ")) OR (c.comment_type = " . COMMENT_FILE . " AND (f.file_flags & " . POST_PUBLISHED . "))";
 		else
 			$where = "(c.comment_type = " . COMMENT_BLOG . " AND (p.post_flags & " . POST_PUBLISHED . ") AND !(p.post_flags & " . POST_MEMBERSONLY . ")) OR (c.comment_type = " . COMMENT_GALLERY . " AND (i.photo_flags & " . POST_PUBLISHED . ") AND !(i.photo_flags & " . POST_MEMBERSONLY . ")) OR (c.comment_type = " . COMMENT_FILE . " AND (f.file_flags & " . POST_PUBLISHED . ") AND !(f.file_flags & " . POST_MEMBERSONLY . "))";
@@ -326,7 +326,7 @@ class sidebar
 		$min_range = mktime( 0, 0, 0, $m, 1, $y );
 		$max_range = mktime( 23, 59, 59, $m+1, 0, $y );
 
-		if( $this->user['user_level'] == USER_GUEST )
+		if( $this->user['user_level'] <= USER_VALIDATING )
 			$where = '(post_flags & ' . POST_PUBLISHED . ') AND !(post_flags & ' . POST_MEMBERSONLY . ')';
 		else
 			$where = '(post_flags & ' . POST_PUBLISHED . ')';

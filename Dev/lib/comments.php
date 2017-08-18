@@ -169,7 +169,7 @@ class comments
 			$xtpl = new XTemplate( './skins/' . $this->module->skin . '/comment_preview.xtpl' );
 
 			$icon = $this->settings['site_address'] . $this->module->icon_dir . 'Anonymous.png';
-			if( $this->user['user_level'] > USER_GUEST && !empty($this->user['user_icon']) )
+			if( $this->user['user_level'] > USER_VALIDATING && !empty($this->user['user_icon']) )
 				$icon = $this->settings['site_address'] . $this->module->icon_dir . $this->user['user_icon'];
 			$xtpl->assign( 'icon', $icon );
 
@@ -186,7 +186,7 @@ class comments
 			$xtpl->assign( 'text', $text );
 			$xtpl->assign( 'message', $message );
 
-			if( $this->user['user_level'] == USER_GUEST || $this->user['user_level'] == USER_MEMBER )
+			if( $this->user['user_level'] <= USER_MEMBER )
 				$xtpl->parse( 'Comment.SpamControl' );
 
 			if( $this->user['user_level'] == USER_GUEST ) {

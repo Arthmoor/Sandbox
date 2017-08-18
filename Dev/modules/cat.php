@@ -73,7 +73,7 @@ class cat extends module
 		$Posts = null;
 
 		$where = null;
-		if( $this->user['user_level'] > USER_GUEST ) {
+		if( $this->user['user_level'] > USER_VALIDATING ) {
 			$where = "pc.pc_cat={$cat['cat_id']} AND post_flags & " . POST_PUBLISHED;
 		} else {
 			$where = "pc.pc_cat={$cat['cat_id']} AND post_flags & " . POST_PUBLISHED . " AND !(post_flags & " . POST_MEMBERSONLY . ")";

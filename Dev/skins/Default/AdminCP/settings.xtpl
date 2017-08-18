@@ -71,6 +71,14 @@
   </span>
   <p class="line"></p>
 
+  <span class="field">User Account Validation:</span>
+  <span class="form">
+   <input type="radio" name="validate_users" id="glob1" value="1"{glob1} /> <label for="glob1">Enabled</label>
+   <input type="radio" name="validate_users" id="glob0" value="0"{glob0} /> <label for="glob0">Disabled</label><br />
+   Enables email validation for new users. Sends a validation link when registering.
+  </span>
+  <p class="line"></p>
+
   <span class="field">Global Comments:</span>
   <span class="form">
    <input type="radio" name="global_comments" id="glob1" value="1"{glob1} /> <label for="glob1">Allowed</label>
