@@ -1,7 +1,6 @@
 <!-- BEGIN: RandomQuotes -->
 <form action="{action_link}" method="post" id="bbcode">
  <script type="text/javascript" src="{site_root}javascript/bbcode.js"></script>
- <script type="text/javascript">mbcodeInit("bbcode", "text");</script>
  <table style="width:100%">
   <tr>
    <td class="header" colspan="2">{heading}</td>
@@ -23,6 +22,7 @@
    <td><textarea name="text" rows="15">{text}</textarea></td>
   </tr>
  </table>
+ <script type="text/javascript">textarea = bbcodeInit("text");</script>
 </form>
 
 <!-- BEGIN: List -->

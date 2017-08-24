@@ -13,6 +13,8 @@ Bugs:
 * Active user agent list didn't have sufficient space for an IPv6 address to display clearly.
 * Bare URLs entered into posts were getting stray single quotes placed around them.
 * Facebook submission errors were incorrectly attributed to Twitter.
+* Crash if all permissions are unset on a user edit.
+* BBCode menu was not functional on the random quotes editor.
 
 Changes for Sandbox 2.3
 -----------------------
