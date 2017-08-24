@@ -162,8 +162,10 @@ class users extends module
 				$level = USER_MEMBER;
 
 			$perms = 0;
-			foreach( $this->post['user_perms'] as $flag )
-				$perms |= intval($flag);
+			if( isset( $this->post['user_perms'] ) ) {
+				foreach( $this->post['user_perms'] as $flag )
+					$perms |= intval($flag);
+			}
 
 			$this->db->dbquery( "INSERT INTO %pusers (user_name, user_password, user_email, user_level, user_perms, user_icon, user_joined)
 					   VALUES( '%s', '%s', '%s', %d, %d, 'Anonymous.png', %d )", $name, $dbpass, $email, $level, $perms, $this->time );
@@ -228,8 +230,10 @@ class users extends module
 					$level = USER_MEMBER;
 
 				$perms = 0;
-				foreach( $this->post['user_perms'] as $flag )
-					$perms |= intval($flag);
+				if( isset( $this->post['user_perms'] ) ) {
+					foreach( $this->post['user_perms'] as $flag )
+						$perms |= intval($flag);
+				}
 
 				$passgen = null;
 				if( isset($this->post['user_pass']) ) {
