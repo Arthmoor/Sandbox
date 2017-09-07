@@ -418,14 +418,17 @@ class module
 	 * @author Samson
 	 * @since 2.11
 	 **/
-	function generate_social_links($template, $data)
+	function generate_social_links($template, $subject, $url)
 	{
-		$template->assign( 'stumbleupon', "<a href=\"javascript:void(0);\" title=\"Share on Stumbleupon\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=stumbleupon&amp;data=$data','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/stumbleupon.png\" alt=\"\" /></a>" );
-		$template->assign( 'delicious', "<a href=\"javascript:void(0);\" title=\"Share on Delicious\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=delicious&amp;data=$data','sandbox_social',900,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/delicious.png\" alt=\"\" /></a>" );
-		$template->assign( 'reddit', "<a href=\"javascript:void(0);\" title=\"Share on Reddit\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=reddit&amp;data=$data','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/reddit.png\" alt=\"\" /></a>" );
-		$template->assign( 'gplus', "<a href=\"javascript:void(0);\" title=\"Share on Google+\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=gplus&amp;data=$data','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/gplus.png\" alt=\"\" /></a>" );
-		$template->assign( 'facebook', "<a href=\"javascript:void(0);\" title=\"Share on Facebook\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=facebook&amp;data=$data','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/facebook-logo.png\" alt=\"\" /></a>" );
-		$template->assign( 'twitter', "<a href=\"javascript:void(0);\" title=\"Share on Twitter\" target=\"sandbox_social\" onclick=\"CenterPopUp('{$this->settings['site_address']}index.php?a=social&amp;s=twitter&amp;data=$data','sandbox_social',550,420)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/twitter-logo.png\" alt=\"\" /></a>" );
+		$reddit_subject = str_replace( " ", "+", $subject );
+		$encoded_url = urlencode( $url );
+
+		$template->assign( 'stumbleupon', "<a href=\"javascript:void(0);\" title=\"Share on Stumbleupon\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://www.stumbleupon.com/submit?url={$encoded_url}','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/stumbleupon.png\" alt=\"\" /></a>" );
+		$template->assign( 'delicious', "<a href=\"javascript:void(0);\" title=\"Share on Delicious\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://del.icio.us/post?url={$url}&amp;title={$subject}','sandbox_social',900,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/delicious.png\" alt=\"\" /></a>" );
+		$template->assign( 'reddit', "<a href=\"javascript:void(0);\" title=\"Share on Reddit\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://www.reddit.com/submit?url={$url}&amp;title={$reddit_subject}','sandbox_social',865,950)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/reddit.png\" alt=\"\" /></a>" );
+		$template->assign( 'gplus', "<a href=\"javascript:void(0);\" title=\"Share on Google+\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://plus.google.com/share?url={$url}','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/gplus.png\" alt=\"\" /></a>" );
+		$template->assign( 'facebook', "<a href=\"javascript:void(0);\" title=\"Share on Facebook\" target=\"sandbox_social\" onclick=\"CenterPopUp('http://www.facebook.com/sharer.php?u={$url}','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/facebook-logo.png\" alt=\"\" /></a>" );
+		$template->assign( 'twitter', "<a href=\"javascript:void(0);\" title=\"Share on Twitter\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://twitter.com/share?text={$subject}&amp;url={$url}','sandbox_social',550,420)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/twitter-logo.png\" alt=\"\" /></a>" );
 	}
 
 	/**

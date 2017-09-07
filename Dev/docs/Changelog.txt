@@ -6,13 +6,13 @@ Changes:
 * Updated how mobile icons are handled.
 * User agent string has been raised to 255 since more browser agents are using long strings these days.
 * Password security has been updated to stronger hashing standards. As a result, PHP 5.5.0 or higher is now required.
+* Social media submissions are now being linked directly to their submission URLs instead of being processed by Sandbox first.
 * Added user email validation support.
 
 Bugs:
 
 * Active user agent list didn't have sufficient space for an IPv6 address to display clearly.
 * Bare URLs entered into posts were getting stray single quotes placed around them.
-* Facebook submission errors were incorrectly attributed to Twitter.
 * Crash if all permissions are unset on a user edit.
 * BBCode menu was not functional on the random quotes editor.
 

@@ -98,8 +98,7 @@ class blog extends module
 			$post_url = urlencode( $post_link );
 			$xtpl->assign( 'post_url', $post_url );
 
-			$data = base64_encode( $row['post_subject'] ) . ';' . base64_encode( $post_link );
-			$this->generate_social_links( $xtpl, $data );
+			$this->generate_social_links( $xtpl, $row['post_subject'], $post_link );
 
 			if( !empty($row['post_image']) ) {
 				$xtpl->assign( 'image', $this->postimages_dir . $row['post_image'] );
@@ -383,8 +382,7 @@ class blog extends module
 		$post_url = urlencode( $post_link );
 		$xtpl->assign( 'post_url', $post_url );
 
-		$data = base64_encode( $post['post_subject'] ) . ';' . base64_encode( $post_link );
-		$this->generate_social_links( $xtpl, $data );
+		$this->generate_social_links( $xtpl, $post['post_subject'], $post_link );
 
 		$cat_array = $this->get_cat_list( $post['post_id'] );
 		$xtpl->assign( 'cat_text', $this->generate_category_links( $cat_array ) );

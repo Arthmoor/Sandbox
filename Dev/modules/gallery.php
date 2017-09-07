@@ -392,8 +392,7 @@ class gallery extends module
 		$image_url = urlencode( $image_link );
 		$xtpl->assign( 'image_url', $image_url );
 
-		$data = base64_encode( $photo['photo_caption'] ) . ';' . base64_encode( $image_link );
-		$this->generate_social_links( $xtpl, $data );
+		$this->generate_social_links( $xtpl, $photo['photo_caption'], $image_link );
 
 		if( $photo['photo_comment_count'] > 0 ) {
 			$xtpl->assign( 'comments', $this->comments->list_comments( COMMENT_GALLERY, $p, $photo['photo_caption'], $photo['photo_user'], $photo['photo_comment_count'], $min, $num, $image_link ) );
