@@ -192,6 +192,14 @@ class settings extends module
 			$xtpl->assign( 'glob0', ' checked="checked"' );
 		}
 
+		if( $sets['validate_users'] ) {
+			$xtpl->assign( 'valu1', ' checked="checked"' );
+			$xtpl->assign( 'valu0', null );
+		} else {
+			$xtpl->assign( 'valu1', null );
+			$xtpl->assign( 'valu0', ' checked="checked"' );
+		}
+
 		if( $sets['anonymous_comments'] ) {
 			$xtpl->assign( 'anon1', ' checked="checked"' );
 			$xtpl->assign( 'anon0', null );
