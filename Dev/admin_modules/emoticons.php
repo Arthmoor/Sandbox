@@ -77,33 +77,36 @@ class emoticons extends module
 				$xtpl->assign( 'em_id', $data['emote_id'] );
 
 				$em_string = $data['emote_string'];
-				$xtpl->assign( 'em_string', $em_string );
-
 				$em_image = $data['emote_image'];
-				$xtpl->assign( 'em_image', $em_image );
 
-				$xtpl->assign( 'em_clickable', 'Yes' );
-				if( $data['emote_clickable'] == 0 )
-					$xtpl->assign( 'em_clickable', 'No' );
+				if( !$this->get['edit'] || ($edit_id != $data['emote_id']) ) {
+					$xtpl->assign( 'em_string', $em_string );
+					$xtpl->assign( 'em_image', $em_image );
+					$xtpl->assign( 'img_src', "<img src=\"{$this->settings['site_address']}files/emoticons/{$em_image}\" alt=\"{$em_string}\" />" );
 
-				$xtpl->assign( 'em_edit', '<a href="' . $this->settings['site_address'] . 'admin.php?a=emoticons&amp;s=edit&amp;edit=' . $data['emote_id'] . '">Edit</a>' );
-				$xtpl->assign( 'em_delete', '<a href="' . $this->settings['site_address'] . 'admin.php?a=emoticons&amp;s=edit&amp;delete=' . $data['emote_id'] . '">Delete</a>' );
+					if( $data['emote_clickable'] == 0 )
+						$xtpl->assign( 'em_clickable', 'No' );
+					else
+						$xtpl->assign( 'em_clickable', 'Yes' );
 
-				if ( !$this->get['edit'] || ($edit_id != $data['emote_id']) ) {
-					$xtpl->assign( 'img_src', '<img src="' . $this->settings['site_address'] . 'files/emoticons/' . $em_image . '" alt="' . $em_string . '" />' );
-
-					$xtpl->parse( 'Emoticons.SingleEntryDisplay' );
+					$xtpl->assign( 'em_edit', "<a href=\"{$this->settings['site_address']}admin.php?a=emoticons&amp;s=edit&amp;edit={$data['emote_id']}\">Edit</a>" );
 				} else {
+					$xtpl->assign( 'em_string', "<input name=\"new_string\" value=\"{$em_string}\" class=\"input\" />" );
+
+					$em_list = $this->list_emoticons( $em_image );
+					$xtpl->assign( 'em_image', "<select name=\"new_image\" onchange='document.emot_preview.src=\"../files/emoticons/\"+this.options[selectedIndex].value'>{$em_list}</select>" );
+					$xtpl->assign( 'img_src', "<img name=\"emot_preview\" src=\"{$this->settings['site_address']}files/emoticons/{$em_image}\" alt=\"{$em_string}\" />" );
+
 					$checked = '';
 					if( $data['emote_clickable'] == 1 )
 						$checked = 'checked';
-					$xtpl->assign( 'checked', $checked );
+					$xtpl->assign( 'em_clickable', "<input type=\"checkbox\" name=\"new_click\" {$checked} />" );
 
-					$xtpl->assign( 'img_src', '<img name="emot_preview" src="' . $this->settings['site_address'] . 'files/emoticons/' . $em_image . '" alt="' . $em_string . '" />' );
-					$xtpl->assign( 'em_list', $this->list_emoticons( $em_image ) );
-
-					$xtpl->parse( 'Emoticons.SingleEntryEdit' );
+					$xtpl->assign( 'em_edit', "<input type=\"submit\" name=\"submit\" value=\"Edit\">" );
 				}
+				$xtpl->assign( 'em_delete', "<a href=\"{$this->settings['site_address']}admin.php?a=emoticons&amp;s=edit&amp;delete={$data['emote_id']}\">Delete</a>" );
+
+				$xtpl->parse( 'Emoticons.SingleEntry' );
 			}
 
 			$xtpl->assign( 'form_action', $this->settings['site_address'] . 'admin.php?a=emoticons&amp;s=edit&amp;edit=' . $edit_id );
