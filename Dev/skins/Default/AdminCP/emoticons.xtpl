@@ -30,7 +30,7 @@
    <td class="subheader" colspan="2">&nbsp;</td>
   </tr>
 
-<!-- BEGIN: SingleEntryDisplay -->
+<!-- BEGIN: SingleEntry -->
   <tr>
    <td width="25%">{em_string}</td>
    <td width="25%">{em_image}</td>
@@ -39,22 +39,7 @@
    <td align="center" width="20%">{em_edit}</td>
    <td align="center" width="20%">{em_delete}</td>
   </tr>
-<!-- END: SingleEntryDisplay -->
-
-<!-- BEGIN: SingleEntryEdit -->
-  <tr>
-   <td width="25%"><input name="new_string" value="{em_string}" class="input" /></td>
-   <td width="25%">
-    <select name="new_image" onchange='document.emot_preview.src="../files/emoticons/"+this.options[selectedIndex].value'>
-     {em_list}
-    </select>
-   </td>
-   <td align="center" width="5%">{img_src}</td>
-   <td align="center" width="5%"><input type="checkbox" name="new_click" {checked} /></td>
-   <td align="center" width="20%"><input type="submit" name="submit" value="Edit"></td>
-   <td align="center" width="20%">{em_delete}</td>
-  </tr>
-<!-- END: SingleEntryEdit -->
+<!-- END: SingleEntry -->
 
   <tr>
    <td class="footer" colspan="6">&nbsp;</td>
