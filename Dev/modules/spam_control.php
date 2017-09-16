@@ -130,7 +130,7 @@ class spam_control extends module
 		$akismet->setCommentContent($spam['spam_message']);
 		$akismet->setUserIP($spam['spam_ip']);
 		$akismet->setReferrer($svars['HTTP_REFERER']);
-		$akismet->setUserAgent($svars['HTTP_USER_AGENT']);
+		$akismet->setCommentUserAgent($svars['HTTP_USER_AGENT']);
 		$akismet->setCommentType('comment');
 
 		$akismet->submitHam();
