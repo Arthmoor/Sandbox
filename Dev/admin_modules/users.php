@@ -38,6 +38,8 @@ if ( !defined('SANDBOX') || !defined('SANDBOX_ADM') ) {
 
 class users extends module
 {
+	var $user_groups = array( USER_GUEST => 'Anonymous', USER_VALIDATING => 'Validating', USER_MEMBER => 'Member', USER_PRIVILEGED => 'Privileged', USER_CONTRIBUTOR => 'Contributor', USER_ADMIN => 'Administrator' );
+
 	function execute()
 	{
 		if ( isset($this->get['s'] ) )
@@ -53,7 +55,21 @@ class users extends module
 
 	function list_users()
 	{
-		$users = $this->db->dbquery( 'SELECT user_id, user_name, user_icon, user_email, user_url, user_joined FROM %pusers' );
+		$num = $this->settings['acp_users_per_page'];
+
+		if( isset( $this->get['num'] ) )
+			$num = intval( $this->get['num'] );
+
+		$min = isset( $this->get['min'] ) ? intval( $this->get['min'] ) : 0;
+
+		$users = $this->db->dbquery( 'SELECT user_id, user_name, user_icon, user_email, user_level, user_url, user_joined
+		   FROM %pusers
+		   ORDER BY user_joined DESC
+		   LIMIT %d, %d', $min, $num );
+
+		$total = $this->db->quick_query( 'SELECT COUNT(user_id) count FROM %pusers' );
+		$list_total = $total['count'];
+
 		$comments = $this->db->quick_query( 'SELECT COUNT(comment_id) count FROM %pblogcomments' );
 
 		$xtpl = new XTemplate( './skins/' . $this->skin . '/AdminCP/users.xtpl' );
@@ -70,6 +86,7 @@ class users extends module
 			$xtpl->assign( 'user_id', $user['user_id'] );
 			$xtpl->assign( 'user_name', htmlspecialchars($user['user_name']) );
 			$xtpl->assign( 'user_email', htmlspecialchars($user['user_email']) );
+			$xtpl->assign( 'user_group', $this->user_groups[$user['user_level']] );
 			$xtpl->assign( 'user_url', htmlspecialchars($user['user_url']) );
 			$xtpl->assign( 'join_date', date( $this->settings['blog_dateformat'], $user['user_joined'] ) );
 
@@ -82,6 +99,11 @@ class users extends module
 
 			$xtpl->parse( 'Users.Member' );
 		}
+
+		$pagelinks = $this->make_links( $list_total, $min, $num );
+
+		$xtpl->assign( 'pagelinks', $pagelinks );
+		$xtpl->parse( 'Users.PageLinks' );
 
 		$xtpl->parse( 'Users' );
 		return $xtpl->text( 'Users' );
@@ -106,14 +128,13 @@ class users extends module
 			$xtpl->parse( 'UserForm.Edit' );
 		}
 
-		$user_groups = array( USER_GUEST => 'Anonymous', USER_VALIDATING => 'Validating', USER_MEMBER => 'Member', USER_PRIVILEGED => 'Privileged', USER_CONTRIBUTOR => 'Contributor', USER_ADMIN => 'Administrator' );
 		$options = null;
 		for( $x = USER_GUEST; $x <= USER_ADMIN; $x++ )
 		{
 			if( $x == $user['user_level'] )
-				$options .= "<option value=\"$x\" selected=\"selected\">{$user_groups[$x]}</option>";
+				$options .= "<option value=\"$x\" selected=\"selected\">{$this->user_groups[$x]}</option>";
 			else
-				$options .= "<option value=\"$x\">{$user_groups[$x]}</option>";
+				$options .= "<option value=\"$x\">{$this->user_groups[$x]}</option>";
 		}
 		$xtpl->assign( 'group_options', $options );
 
@@ -324,6 +345,115 @@ class users extends module
 			return $this->message( 'Delete User', 'User deleted.', 'Continue', 'admin.php?a=users' );
 		}
 		return $this->list_users();
+	}
+
+	private function make_links( $count, $min, $num )
+	{
+		if( $num < 1 ) $num = 1; // No more division by zero please.
+
+		$current = ceil( $min / $num );
+		$string  = null;
+		$pages   = ceil( $count / $num );
+		$end     = ($pages - 1) * $num;
+		$link = '';
+
+		$link = "{$this->settings['site_address']}admin.php?a=users";
+
+		// check if there's previous articles
+		if($min == 0) {
+			$startlink = '&lt;&lt;';
+			$previouslink = '';
+		} else {
+			$startlink = "<a href=\"$link&amp;min=0&amp;num=$num\">&lt;&lt;</a>";
+			$prev = $min - $num;
+			$previouslink = "<a href=\"$link&amp;min=$prev&amp;num=$num\">prev</a> ";
+		}
+
+		// check for next/end
+		if(($min + $num) < $count) {
+			$next = $min + $num;
+  			$nextlink = "<a href=\"$link&amp;min=$next&amp;num=$num\">next</a>";
+  			$endlink = "<a href=\"$link&amp;min=$end&amp;num=$num\">&gt;&gt;</a>";
+		} else {
+ 			$nextlink = '';
+  			$endlink = '&gt;&gt;';
+		}
+
+		// setup references
+		$b = $current - 2;
+		$e = $current + 2;
+
+		// set end and beginning of loop
+		if ($b < 0) {
+  			$e = $e - $b;
+  			$b = 0;
+		}
+
+		// check that end coheres to the issues
+		if ($e > $pages - 1) {
+  			$b = $b - ($e - $pages + 1);
+  			$e = ($pages - 1 < $current) ? $pages : $pages - 1;
+  			// b may need adjusting again
+  			if ($b < 0) {
+				$b = 0;
+			}
+		}
+
+ 		// ellipses
+		if ($b != 0) {
+			$badd = '...';
+		} else {
+			$badd = '';
+		}
+
+		if (($e != $pages - 1) && $count) {
+			$eadd = '...';
+		} else {
+			$eadd = '';
+		}
+
+		// run loop for numbers to the page
+		for ($i = $b; $i < $current; $i++)
+		{
+			$where = $num * $i;
+			$string .= ", <a href=\"$link&amp;min=$where&amp;num=$num\">" . ($i + 1) . '</a>';
+		}
+
+		// add in page
+		$string .= ', <strong>' . ($current + 1) . '</strong>';
+
+		// run to the end
+		for ($i = $current + 1; $i <= $e; $i++)
+		{
+			$where = $num * $i;
+			$string .= ", <a href=\"$link&amp;min=$where&amp;num=$num\">" . ($i + 1) . '</a>';
+		}
+
+		// get rid of preliminary comma.
+		if (substr($string, 0, 1) == ',') {
+			$string = substr($string, 1);
+		}
+
+		if( $pages == 1 ) {
+			$string = '';
+			$startlink = '';
+			$previouslink = '';
+			$nextlink = '';
+			$endlink = '';
+		}
+
+		$newmin = $min + 1;
+		$newnum = $min + $num;
+
+		if( $num > $count )
+			$newnum = $count;
+
+		if( $min + $num > $count )
+			$newnum = $count;
+
+		$showing = "Showing Users $newmin - $newnum of $count ";
+
+		return "$showing $startlink $previouslink $badd $string $eadd $nextlink $endlink";
 	}
 }
 ?>

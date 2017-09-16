@@ -258,6 +258,7 @@ break;
 			$this->settings['blog_notifycomments'] = true;
 			$this->settings['blog_icon_width'] = 40;
 			$this->settings['blog_icon_height'] = 40;
+			$this->settings['acp_users_per_page'] = 25;
 			$this->settings['site_owner'] = $this->post['admin_name'];
 			$this->settings['twitter_user'] = '';
 			$this->settings['blog_signature_on'] = true;

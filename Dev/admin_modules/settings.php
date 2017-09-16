@@ -94,7 +94,8 @@ class settings extends module
 
 		$int_fields = array( 'site_open', 'blog_postsperpage', 'blog_autoclose', 'blog_icon_width', 'blog_icon_height', 'cookie_logintime',
 			'rss_items', 'rss_refresh', 'gallery_thumb_w', 'gallery_thumb_h', 'sidebar_images_count', 'sidebar_comments_count',
-			'html_email', 'friendly_urls', 'validate_users', 'global_comments', 'anonymous_comments', 'blog_commentsperpage', 'download_size' );
+			'html_email', 'friendly_urls', 'validate_users', 'global_comments', 'anonymous_comments', 'blog_commentsperpage', 'download_size',
+			'acp_users_per_page' );
 		foreach( $int_fields as $key )
 		{
 			if ( !isset($this->settings[$key]) )
@@ -234,6 +235,7 @@ class settings extends module
 		$xtpl->assign( 'sidebar_comments_count', $sets['sidebar_comments_count'] );
 		$xtpl->assign( 'blog_commentsperpage', $sets['blog_commentsperpage'] );
 		$xtpl->assign( 'blog_notifycomments', $sets['blog_notifycomments'] ? ' checked="checked"' : null );
+		$xtpl->assign( 'acp_users_per_page', $sets['acp_users_per_page'] );
 
 		if( $sets['html_email'] ) {
 			$xtpl->assign( 'email1', ' checked="checked"' );

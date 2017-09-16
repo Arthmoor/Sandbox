@@ -8,6 +8,7 @@ Changes:
 * Password security has been updated to stronger hashing standards. As a result, PHP 5.5.0 or higher is now required.
 * Social media submissions are now being linked directly to their submission URLs instead of being processed by Sandbox first.
 * Added user email validation support.
+* User listing in the ACP will now paginate to avoid long queries.
 
 Bugs:
 

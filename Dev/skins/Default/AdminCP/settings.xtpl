@@ -40,7 +40,7 @@
 
   <span class="field">Mobile Icon Meta Tags:</span>
   <span class="form">
-   <textarea name="mobile_icons" rows="8">{mobile_icons}</textarea>
+   <textarea name="mobile_icons" rows="8">{mobile_icons}</textarea><br />
    Link tags for optional mobile icons (ie: Apple Touch, Android, etc). <a href="https://mathiasbynens.be/notes/touch-icons#sizes">See here for details.</a>
   </span>
   <p class="line"></p>
@@ -77,6 +77,10 @@
    <input type="radio" name="validate_users" id="valu0" value="0"{valu0} /> <label for="valu0">Disabled</label><br />
    Enables email validation for new users. Sends a validation link when registering.
   </span>
+  <p class="line"></p>
+
+  <span class="field"><label for="acp_users_per_page">Users per ACP Page:</label></span>
+  <span class="form"><input class="input" type="text" name="acp_users_per_page" id="acp_users_per_page" value="{acp_users_per_page}" /></span>
   <p class="line"></p>
 
   <span class="field">Global Comments:</span>

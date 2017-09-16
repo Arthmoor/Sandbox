@@ -1,13 +1,14 @@
 <!-- BEGIN: Users -->
 <table style="width:100%">
  <tr>
-  <td class="header" colspan="7">{header}</td>
+  <td class="header" colspan="8">{header}</td>
  </tr>
  <tr>
   <td class="subheader">&nbsp;</td>
   <td class="subheader">&nbsp;</td>
   <td class="subheader">Name</td>
   <td class="subheader">Email</td>
+  <td class="subheader">Group</td>
   <td class="subheader">Homepage</td>
   <td class="subheader">Joined On</td>
   <td class="subheader"># Comments</td>
@@ -18,10 +19,17 @@
   <td><a href="admin.php?a=users&amp;s=delete&amp;user={user_id}">Delete</a></td>
   <td><img src="{user_icon}" alt="" /> {user_name}</td>
   <td>{user_email}</td>
+  <td>{user_group}</td>
   <td>{user_url}</td>
   <td>{join_date}</td>
   <td>{post_count} [{percent}%]</td>
  </tr>
 <!-- END: Member -->
 </table>
+<!-- BEGIN: PageLinks -->
+  <div class="article">
+   {pagelinks}
+   <p></p>
+  </div>
+<!-- END: PageLinks -->
 <!-- END: Users -->
