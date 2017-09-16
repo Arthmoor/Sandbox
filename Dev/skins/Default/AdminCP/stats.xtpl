@@ -14,16 +14,16 @@
  <span class="form">{total_comments}</span>
  <p class="line"></p>
 
+ <span class="field">File Uploads:</span>
+ <span class="form">{file_count}</span>
+ <p class="line"></p>
+
+ <span class="field">Gallery Uploads:</span>
+ <span class="form">{pics_count}</span>
+ <p class="line"></p>
+
  <span class="field">Spam Comments:</span>
  <span class="form">{spam}{pct_spam}% of all comments were spam.</span>
- <p class="line"></p>
-
- <span class="field">False Positives:</span>
- <span class="form">{ham}</span>
- <p class="line"></p>
-
- <span class="field">False Negatives:</span>
- <span class="form">{false_neg}</span>
  <p class="line"></p>
 
  <span class="field">Spam Emails:</span>
@@ -34,12 +34,12 @@
  <span class="form">{uspam}</span>
  <p class="line"></p>
 
- <span class="field">File Uploads:</span>
- <span class="form">{file_count}</span>
+ <span class="field">False Positives:</span>
+ <span class="form">{ham}</span>
  <p class="line"></p>
 
- <span class="field">Gallery Uploads:</span>
- <span class="form">{pics_count}</span>
+ <span class="field">False Negatives:</span>
+ <span class="form">{false_neg}</span>
  <p></p>
 </div>
 

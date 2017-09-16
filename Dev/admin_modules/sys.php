@@ -97,6 +97,11 @@ class sys extends module
 			else
 				$this->db->dbquery( 'UPDATE %pfilelist SET file_comment_count=0 WHERE file_id=%d', $row['file_id'] );
 		}
+
+		$users = $this->db->quick_query( 'SELECT COUNT(user_id) count FROM %pusers' );
+		$this->settings['user_count'] = $users['count'];
+		$this->save_settings();
+
 		return $this->message( 'Recount Comments', 'All comment counts have been corrected.', 'Continue', 'admin.php' );
 	}
 
@@ -183,7 +188,6 @@ class sys extends module
 		$uspam = isset($this->settings['register_spam_count']) ? $this->settings['register_spam_count'] : 0;
 		$ham = isset($this->settings['ham_count']) ? $this->settings['ham_count'] : 0;
 		$false_neg = isset($this->settings['spam_uncaught']) ? $this->settings['spam_uncaught'] : 0;
-		$users = $this->db->quick_query( 'SELECT COUNT(user_id) count FROM %pusers' );
 
 		$total_comments = $comment['count'] + $spam;
 		$pct_spam = null;
@@ -197,7 +201,7 @@ class sys extends module
 
 		$xtpl = new XTemplate( './skins/' . $this->skin . '/AdminCP/stats.xtpl' );
 
-		$xtpl->assign( 'user_count', $users['count'] );
+		$xtpl->assign( 'user_count', $this->settings['user_count'] );
 		$xtpl->assign( 'post_count', $post['count'] );
 		$xtpl->assign( 'total_comments', $total_comments );
 		$xtpl->assign( 'pct_spam', $pct_spam );
