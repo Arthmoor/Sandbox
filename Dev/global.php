@@ -442,18 +442,22 @@ class module
 	 **/
 	function error( $message, $errorcode = 0 )
 	{
+		$errortext = 'Unknown Error';
+
 		switch( $errorcode )
 		{
 			case 403:
+				$error_text = '403 Forbidden';
 				header('HTTP/1.0 403 Forbidden');
 				break;
 			case 404:
+				$error_text = '404 Not Found';
 				header('HTTP/1.0 404 Not Found');
 				$message .= '<br />If you followed a link from an external resource, you should notify the webmaster there that the link may be broken.';
 				break;
 			default: break;
 		}
-		return $this->message( 'Error', $message );
+		return $this->message( 'Error: ' . $error_text, $message );
 	}
 
 	function createthumb( $name, $filename, $ext, $new_w, $new_h )
