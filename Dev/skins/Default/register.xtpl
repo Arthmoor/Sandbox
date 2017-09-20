@@ -31,6 +31,16 @@
    <span class="field">It's a Trap!</span>
    <span class="form"><textarea class="input" name="user_regcomment" rows="12" cols="60">Real entities should remove this text. Or leave it in. Your choice. Don't blame me if it doesn't work out for you.</textarea></span>
 
+<!-- BEGIN: Terms -->
+   <span class="field">Terms of Use:</span>
+   <span class="form">{registration_terms}</span>
+   <p class="line"></p>
+
+   <span class="field"><label for="terms_agreed">I agree to the Terms of Use as indicated: </label></span>
+   <span class="form"><input type="checkbox" name="terms_agreed" id="terms_agreed" /></span>
+   <p class="line"></p>
+<!-- END: Terms -->
+
 <!-- BEGIN: Akismet -->
    <span style="color:yellow">The information provided will be submitted to the Akismet spam filtering service. If this is not acceptable to you, your only recourse is to abort this registration. Akismet does not sell or otherwise distribute the data provided to them for any other purpose than to screen for spam.</span><br /><br />
 <!-- END: Akismet -->

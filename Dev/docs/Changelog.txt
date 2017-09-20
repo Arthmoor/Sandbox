@@ -9,6 +9,7 @@ Changes:
 * Social media submissions are now being linked directly to their submission URLs instead of being processed by Sandbox first.
 * Added user email validation support.
 * User listing in the ACP will now paginate to avoid long queries.
+* Terms of Use can now be specified in the ACP for new users.
 
 Bugs:
 

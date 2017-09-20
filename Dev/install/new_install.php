@@ -264,6 +264,7 @@ break;
 			$this->settings['blog_signature_on'] = true;
 			$this->settings['anonymous_comments'] = false;
 			$this->settings['global_comments'] = true;
+			$this->settings['registration_terms'] = '';
 
 			$this->settings['download_size'] = 0;
 

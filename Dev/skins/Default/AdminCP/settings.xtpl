@@ -118,6 +118,13 @@
   <span class="form"><input style="width:65%" class="input" type="text" name="site_closedmessage" id="site_closedmessage" value="{site_closedmessage}" /></span>
   <p class="line"></p>
 
+  <span class="field">Registration Terms:</span>
+  <span class="form">
+   Terms users are required to agree to in order to register an account.
+   <textarea name="registration_terms" rows="8">{registration_terms}</textarea>
+  </span>
+  <p class="line"></p>
+
   <span class="field">Footer Text:</span>
   <span class="form">
    <textarea name="footer_text" rows="8">{footer_text}</textarea>

@@ -143,7 +143,8 @@ class settings extends module
 			$valid_fields = array(
 				'email_adm', 'email_sys', 'site_name', 'site_tagline', 'site_owner', 'site_address', 'site_analytics', 'site_closedmessage',
 				'site_meta', 'site_keywords', 'mobile_icons', 'rss_name', 'rss_description', 'rss_image_url', 'blog_avatar', 'blog_dateformat',
-				'wordpress_api_key', 'twitter_user', 'cookie_prefix', 'cookie_path', 'cookie_domain', 'global_announce', 'copyright_terms', 'footer_text' );
+				'wordpress_api_key', 'twitter_user', 'cookie_prefix', 'cookie_path', 'cookie_domain', 'global_announce', 'copyright_terms',
+				'footer_text', 'registration_terms' );
 			foreach( $valid_fields as $key )
 				$this->settings[$key] = $this->post[$key];
 			if ( in_array( $this->post['site_defaultskin'], $this->get_skins() ) )
@@ -176,6 +177,7 @@ class settings extends module
 		$xtpl->assign( 'site_analytics', htmlspecialchars($sets['site_analytics']) );
 		$xtpl->assign( 'wordpress_api_key', htmlspecialchars($sets['wordpress_api_key']) );
 		$xtpl->assign( 'twitter_user', htmlspecialchars($sets['twitter_user']) );
+		$xtpl->assign( 'registration_terms', htmlspecialchars($sets['registration_terms']) );
 
 		if( $sets['friendly_urls'] ) {
 			$xtpl->assign( 'url1', ' checked="checked"' );

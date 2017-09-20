@@ -87,12 +87,25 @@ class register extends module
 
 			$xtpl->assign( 'prompt', "What is $num1 $op $num2 ?" );
 
+			if( isset( $this->settings['registration_terms'] ) && !empty( $this->settings['registration_terms'] ) ) {
+				$flags = POST_BBCODE | POST_BREAKS | POST_EMOTICONS;
+				$text = $this->format( $this->settings['registration_terms'], $flags );
+
+				$xtpl->assign( 'registration_terms', $text );
+				$xtpl->parse( 'Registration.Terms' );
+			}
+
 			$xtpl->parse( 'Registration' );
 			return $xtpl->text( 'Registration' );
 		}
 
 		if( !$this->is_valid_token() ) {
 			return $this->message( 'New User Registration', 'Cookies are not being accepted by your browser. Please adjust your privacy settings, then go back and try again.' );
+		}
+
+		if( isset( $this->settings['registration_terms'] ) && !empty( $this->settings['registration_terms'] ) ) {
+			if( !isset( $this->post['terms_agreed'] ) )
+				return $this->message( 'New User Registration', 'You have declined to agree to the terms of use.' );
 		}
 
 		if ( !isset( $this->post['user_name'] ) || !$this->valid_user( $this->post['user_name'] ) )

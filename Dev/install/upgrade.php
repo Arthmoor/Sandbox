@@ -317,6 +317,7 @@ class upgrade extends module
 						$this->settings['mobile_icons'] = '';
 						$this->settings['validate_users'] = 1;
 						$this->settings['acp_users_per_page'] = 25;
+						$this->settings['registration_terms'] = '';
 
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_user_agent active_user_agent varchar(255) NOT NULL';
 						$queries[] = 'ALTER TABLE %pusers CHANGE user_password user_password varchar(255) NOT NULL';
