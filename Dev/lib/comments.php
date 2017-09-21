@@ -298,8 +298,8 @@ class comments
 
 		$this->db->dbquery( "
 			INSERT INTO %pblogcomments (comment_user, comment_author, comment_post, comment_date, comment_ip, comment_message, comment_referrer, comment_agent, comment_type)
-			     VALUES ( %d, '%s', %d, %d, '$ip', '%s', '%s', '%s', %d)",
-				$uid, $author, $id, $com_time, $message, $this->module->referrer, $this->module->agent, $type );
+			     VALUES ( %d, '%s', %d, %d, '%s', '%s', '%s', '%s', %d)",
+				$uid, $author, $id, $com_time, $this->module->ip, $message, $this->module->referrer, $this->module->agent, $type );
 		$cid = $this->db->insert_id();
 
 		switch( $ctype )
