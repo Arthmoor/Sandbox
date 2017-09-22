@@ -1,10 +1,11 @@
 <?php
-/* Sandbox v0.5-1.0b http://sandbox.kiasyn.com
- * Copyright (c) 2006-2007 Sam O'Connor (Kiasyn)
+/* Sandbox v0.5-1.0b
+ * Copyright (c) 2006-2007
+ * Sam O'Connor (Kiasyn) http://www.kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2015
- * Roger Libiez [Samson] http://www.iguanadons.net
+ * Copyright (c) 2007-2018
+ * Roger Libiez [Samson] https://www.iguanadons.net
  *
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the authors be held liable for any damages arising from the
