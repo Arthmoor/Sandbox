@@ -20,6 +20,8 @@ Bugs:
 * Fixed an issue with the emoticon editor in the ACP.
 * Submitting a false positive on a comment was calling an invalid function name.
 * User count stats were referencing the wrong variable and giving inaccurate counts.
+* Comments were not correctly storing IP addresses.
+* Editing comments does not handle request_uri properly.
 
 Changes for Sandbox 2.3
 -----------------------

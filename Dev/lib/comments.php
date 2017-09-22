@@ -489,8 +489,8 @@ $error
 
 		$this->db->dbquery( "UPDATE %pblogcomments SET comment_editdate=%d, comment_editedby='%s', comment_message='%s' WHERE comment_id=%d", $this->module->time, $editedby, $text, $c );
 
-		if( isset($this->post['request_uri']) )
-			header( 'Location: ' . $this->post['request_uri'] );
+		if( isset( $this->module->post['request_uri'] ) )
+			header( 'Location: ' . $this->module->post['request_uri'] );
 
 		$link = "{$this->settings['site_address']}index.php?a=$page&p={$comment['comment_post']}&c=$c#comment-$c";
 		header( 'Location: ' . $link );
