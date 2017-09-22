@@ -76,6 +76,9 @@
     <p class="line"></p>
 <!-- END: Stylesheet -->
 
+   <input style="display:none" name="bogususername" type="text" value="" />
+   <input style="display:none" name="boguspassword" type="password" value="" />
+
    <span class="field">Change Password:</span>
    <span class="form"><input name="user_password" type="password" value="" /></span>
    <p class="line"></p>
