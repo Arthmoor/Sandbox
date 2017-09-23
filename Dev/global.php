@@ -442,7 +442,7 @@ class module
 	 **/
 	function error( $message, $errorcode = 0 )
 	{
-		$errortext = 'Unknown Error';
+		$error_text = 'Unknown Error';
 
 		switch( $errorcode )
 		{
