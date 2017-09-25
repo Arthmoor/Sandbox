@@ -168,10 +168,7 @@ class comments
 		if( isset($this->module->post['preview']) ) {
 			$xtpl = new XTemplate( './skins/' . $this->module->skin . '/comment_preview.xtpl' );
 
-			$icon = $this->settings['site_address'] . $this->module->icon_dir . 'Anonymous.png';
-			if( $this->user['user_level'] > USER_VALIDATING && !empty($this->user['user_icon']) )
-				$icon = $this->settings['site_address'] . $this->module->icon_dir . $this->user['user_icon'];
-			$xtpl->assign( 'icon', $icon );
+			$xtpl->assign( 'icon', $this->module->display_icon( $this->user['user_icon'] ) );
 
 			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $this->module->time ) );
 			$xtpl->assign( 'subject', $subject );
