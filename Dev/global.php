@@ -94,7 +94,7 @@ class module
 	var $thumb_dir		= null;
 	var $icon_dir		= null;
 
-	function module( $db = null )
+	public function __construct( $db = null )
 	{
 		$this->time	= time();
 		$this->server	= $_SERVER;
