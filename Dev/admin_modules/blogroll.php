@@ -104,8 +104,11 @@ class blogroll extends module
 		$url = $this->post['link_url'];
 		$title = $this->post['link_title'];
 
-		if( strpos( $url, 'http://' ) === false || strpos( $url, 'http://' ) != 0 )
-			$url = 'http://' . $url;
+		if( strpos( $url, 'http://' ) === false || strpos( $url, 'http://' ) != 0 ) {
+			if( strpos( $url, 'https://' ) === false || strpos( $url, 'https://' ) != 0 ) {
+				$url = 'http://' . $url;
+			}
+		}
 
 		$exists = $this->db->quick_query( "SELECT link_name, link_url FROM %pblogroll WHERE link_name='%s' OR link_url='%s'", $name, $url );
 		if( $exists )
@@ -164,8 +167,11 @@ class blogroll extends module
 		$url = $this->post['link_url'];
 		$title = $this->post['link_title'];
 
-		if( strpos( $url, 'http://' ) === false || strpos( $url, 'http://' ) != 0 )
-			$url = 'http://' . $url;
+		if( strpos( $url, 'http://' ) === false || strpos( $url, 'http://' ) != 0 ) {
+			if( strpos( $url, 'https://' ) === false || strpos( $url, 'https://' ) != 0 ) {
+				$url = 'http://' . $url;
+			}
+		}
 
 		$exists = $this->db->quick_query( "SELECT link_id, link_name, link_url FROM %pblogroll WHERE link_name='%s' OR link_url='%s'", $name, $url );
 		if( $exists && $exists['link_id'] != $id )
