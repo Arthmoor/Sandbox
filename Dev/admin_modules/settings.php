@@ -174,7 +174,7 @@ class settings extends module
 		$xtpl->assign( 'mobile_icons', htmlspecialchars($sets['mobile_icons']) );
 		$xtpl->assign( 'blog_dateformat', htmlspecialchars($sets['blog_dateformat']) );
 		$xtpl->assign( 'site_defaultskin', $this->select_input( 'site_defaultskin', $sets['site_defaultskin'], $this->get_skins() ) );
-		$xtpl->assign( 'site_analytics', htmlspecialchars($sets['site_analytics']) );
+		$xtpl->assign( 'site_analytics', htmlspecialchars($sets['site_analytics'], ENT_QUOTES) );
 		$xtpl->assign( 'wordpress_api_key', htmlspecialchars($sets['wordpress_api_key']) );
 		$xtpl->assign( 'twitter_user', htmlspecialchars($sets['twitter_user']) );
 		$xtpl->assign( 'registration_terms', htmlspecialchars($sets['registration_terms']) );
