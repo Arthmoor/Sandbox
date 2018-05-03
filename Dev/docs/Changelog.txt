@@ -10,6 +10,7 @@ Changes:
 * Added user email validation support.
 * User listing in the ACP will now paginate to avoid long queries.
 * Terms of Use can now be specified in the ACP for new users.
+* Updated Google Analytics support so that the codebase doesn't need to be updated every time they change the tracking code snippet.
 
 Bugs:
 
