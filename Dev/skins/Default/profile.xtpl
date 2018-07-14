@@ -45,6 +45,10 @@
   <div class="article">
    <div class="title">Update Profile Information</div>
 
+   <span class="field">My Timezone:</span>
+   <span class="form">{timezone}</span>
+   <p class="line"></p>
+
    <span class="field">Icon:</span>
    <span class="form"><input type="file" name="user_icon" /> Icon will be reduced to {width}px wide X {height}px high</span>
    <p class="line"></p>

@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://sandbox.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -319,7 +319,9 @@ class upgrade extends module
 						$this->settings['validate_users'] = 1;
 						$this->settings['acp_users_per_page'] = 25;
 						$this->settings['registration_terms'] = '';
+						$this->settings['blog_timezone'] = 'Europe/London';
 
+						$queries[] = "ALTER TABLE %pusers ADD user_timezone varchar(255) NOT NULL DEFAULT 'Europe/London' AFTER user_stylesheet";
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_user_agent active_user_agent varchar(255) NOT NULL';
 						$queries[] = 'ALTER TABLE %pusers CHANGE user_password user_password varchar(255) NOT NULL';
 						$queries[] = 'UPDATE sb_users SET user_level=user_level + 1 WHERE user_id > 1';

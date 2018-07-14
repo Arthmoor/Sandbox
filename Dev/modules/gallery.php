@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -375,7 +375,7 @@ class gallery extends module
 		$xtpl->assign( 'size', ceil( $photo['photo_size'] / 1024 ) );
 		$date = null;
 		if( $photo['photo_date'] > 0 )
-			$date = ' on ' . date( $this->settings['blog_dateformat'], $photo['photo_date'] );
+			$date = ' on ' . $this->t_date( $photo['photo_date'] );
 		$xtpl->assign( 'date', $date );
 
 		$xtpl->assign( 'name', htmlspecialchars( $photo['user_name']) );

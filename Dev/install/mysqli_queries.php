@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://sandbox.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -242,6 +242,7 @@ $queries[] = "CREATE TABLE %pusers (
   user_email varchar(100) NOT NULL DEFAULT '',
   user_url varchar(100) DEFAULT '',
   user_stylesheet varchar(100) DEFAULT '',
+  user_timezone varchar(255) NOT NULL DEFAULT 'Europe/London',
   user_signature text,
   PRIMARY KEY (user_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";

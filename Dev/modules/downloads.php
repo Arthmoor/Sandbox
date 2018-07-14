@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -269,12 +269,12 @@ class downloads extends module
 		$xtpl->assign( 'type', $this->pretty_filetype( $file['file_type'] ) );
 		$xtpl->assign( 'size', ceil( $file['file_size'] / 1024 ) );
 		$xtpl->assign( 'downloads', $file['file_downcount'] . ' time' . ($file['file_downcount'] != 1 ? 's' : '') );
-		$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $file['file_date'] ) );
+		$xtpl->assign( 'date', $this->t_date( $file['file_date'] ) );
 
 		if( $file['file_downloaded'] < 1 )
 			$down_time = 'Never';
 		else
-			$down_time = date( $this->settings['blog_dateformat'], $file['file_downloaded'] );
+			$down_time = $this->t_date( $file['file_downloaded'] );
 		$xtpl->assign( 'down_time', $down_time );
 
 		if( $this->user['user_level'] >= USER_MEMBER ) {
@@ -415,7 +415,7 @@ class downloads extends module
 				$image = '<img src="' . $thumb . '" alt="" />';
 			}
 
-			$date = date( $this->settings['blog_dateformat'], $file['file_date'] );
+			$date = $this->t_date( $file['file_date'] );
 
 			$downloads = ' downloads';
 			if( $file['file_downloaded'] == 1 )

@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -95,7 +95,7 @@ class posts extends module
 				$status = 'Closed';
 			$xtpl->assign( 'status', $status );
 
-			$xtpl->assign( 'date', date($this->settings['blog_dateformat'], $post['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 
 			$xtpl->parse( 'PostList.Entry' );
 		}
@@ -385,7 +385,7 @@ class posts extends module
 			$xtpl->assign( 'text', htmlspecialchars($text) );
 
 			$xtpl->assign( 'author', htmlspecialchars($post['user_name']) );
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $post['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 			$xtpl->assign( 'icon', $this->display_icon($post['user_icon']) );
 
 			$xtpl->assign( 'action_link', "admin.php?a=posts&amp;s=edit&amp;p={$post['post_id']}" );
@@ -511,7 +511,7 @@ class posts extends module
 			$xtpl->assign( 'subject', htmlspecialchars($post['post_subject']) );
 			$xtpl->assign( 'text', $this->format( $post['post_text'], $post['post_flags'] ) );
 			$xtpl->assign( 'icon', $this->display_icon($post['user_icon']) );
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $post['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 
 			if( !empty($post['post_image']) ) {
 				$xtpl->assign( 'image', $this->postimages_dir . $post['post_image'] );
@@ -621,7 +621,7 @@ class posts extends module
 
 			if( isset($this->post['preview']) ) {
 				$xtpl->assign( 'icon', $this->display_icon($comment['user_icon']) );
-				$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $comment['comment_date'] ) );
+				$xtpl->assign( 'date', $this->t_date( $comment['comment_date'] ) );
 				$xtpl->assign( 'message', $message );
 
 				$xtpl->parse( 'Comment.Preview' );
@@ -671,7 +671,7 @@ class posts extends module
 			$xtpl->assign( 'author', htmlspecialchars($comment['user_name']) );
 			$params = POST_BBCODE | POST_EMOTICONS;
 			$xtpl->assign( 'text', $this->format( $comment['comment_message'], $params ) );
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $comment['comment_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $comment['comment_date'] ) );
 
 			$link = 'admin.php?a=posts&s=del_comment&c=' . $c;
 			$sp = null;

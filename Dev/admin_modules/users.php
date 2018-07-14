@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -88,7 +88,7 @@ class users extends module
 			$xtpl->assign( 'user_email', htmlspecialchars($user['user_email']) );
 			$xtpl->assign( 'user_group', $this->user_groups[$user['user_level']] );
 			$xtpl->assign( 'user_url', htmlspecialchars($user['user_url']) );
-			$xtpl->assign( 'join_date', date( $this->settings['blog_dateformat'], $user['user_joined'] ) );
+			$xtpl->assign( 'join_date', $this->t_date( $user['user_joined'] ) );
 
 			$posts = $this->db->quick_query( 'SELECT COUNT(comment_id) count FROM %pblogcomments WHERE comment_user=%d', $user['user_id'] );
 			$xtpl->assign( 'post_count', $posts['count'] );

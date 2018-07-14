@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com/
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -88,7 +88,7 @@ class blog extends module
 				$post_link = "{$this->settings['site_address']}index.php?a=blog&amp;p={$row['post_id']}";
 			}
 
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $row['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $row['post_date'] ) );
 			$xtpl->assign( 'subject', htmlspecialchars( $row['post_subject'] ) );
 			$xtpl->assign( 'unpublished', !($row['post_flags'] & POST_PUBLISHED) ? ' <span style="color:yellow">[UNPUBLISHED ENTRY]</span>' : null );
 			$xtpl->assign( 'post_link', $post_link );
@@ -210,7 +210,7 @@ class blog extends module
 			$cat_array = $this->get_cat_list( $row['post_id'] );
 			$xtpl->assign( 'cat_text', $this->generate_category_links( $cat_array ) );
 
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $row['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $row['post_date'] ) );
 
 			$xtpl->parse( 'Archive.Post' );
 		}
@@ -348,7 +348,7 @@ class blog extends module
 		$SideBar = new sidebar($this);
 		$xtpl->assign( 'sidebar', $SideBar->build_sidebar( $post['post_date'] ) );
 
-		$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $post['post_date'] ) );
+		$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 
 		$subject = htmlspecialchars($post['post_subject']);
 		$xtpl->assign( 'subject', $subject );
@@ -568,7 +568,7 @@ class blog extends module
 			$xtpl->assign( 'text', htmlspecialchars($text) );
 
 			$xtpl->assign( 'author', htmlspecialchars($post['user_name']) );
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $post['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 			$xtpl->assign( 'icon', $this->display_icon( $post['user_icon'] ) );
 
 			$xtpl->assign( 'action_link', "{$this->settings['site_address']}index.php?a=blog&amp;s=edit&amp;p={$post['post_id']}" );
@@ -708,7 +708,7 @@ class blog extends module
 			$xtpl->assign( 'subject', htmlspecialchars($post['post_subject']) );
 			$xtpl->assign( 'text', $this->format( $post['post_text'], $post['post_flags'] ) );
 			$xtpl->assign( 'icon', $this->display_icon( $post['user_icon'] ) );
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $post['post_date'] ) );
+			$xtpl->assign( 'date', $this->t_date( $post['post_date'] ) );
 
 			if( !empty($post['post_image']) ) {
 				$xtpl->assign( 'image', $this->postimages_dir . $post['post_image'] );

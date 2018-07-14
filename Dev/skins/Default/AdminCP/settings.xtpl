@@ -49,6 +49,10 @@
   <span class="form"><input class="input" type="text" name="blog_dateformat" id="blog_dateformat" value="{blog_dateformat}" /></span>
   <p class="line"></p>
 
+  <span class="field">Server Timezone:</span>
+  <span class="form">{blog_timezone}</span>
+  <p class="line"></p>
+
   <span class="field">Default Skin:</span>
   <span class="form">{site_defaultskin}</span>
   <p class="line"></p>

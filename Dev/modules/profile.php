@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -61,6 +61,8 @@ class profile extends module
 		$url = $this->user['user_url'];
 		$stylesheet = $this->user['user_stylesheet'];
 		$gravatar = null;
+		$newtz = $this->user['user_timezone'];
+
 		if( $this->is_email($this->user['user_icon']) )
 			$gravatar = $this->user['user_icon'];
 
@@ -72,6 +74,8 @@ class profile extends module
 			$url = $this->post['user_url'];
 		if( isset($this->post['user_stylesheet']) )
 			$stylesheet = $this->post['user_stylesheet'];
+		if( isset($this->post['user_timezone']) )
+			$newtz = $this->post['user_timezone'];
 
 		if( isset($this->post['submit']) ) {
 			if( isset($this->post['user_email']) && !empty($this->post['user_email']) ) {
@@ -149,12 +153,13 @@ class profile extends module
 			$xtpl->assign( 'sig', htmlspecialchars($sig) );
 			$xtpl->assign( 'url', htmlspecialchars($url) );
 			$xtpl->assign( 'icon', $this->display_icon( $icon ) );
+			$xtpl->assign( 'timezone', $this->select_timezones( $this->user['user_timezone'], 'user_timezone' ) );
 			$xtpl->assign( 'gravatar', htmlspecialchars($gravatar) );
 			$xtpl->assign( 'skin', $this->select_input( 'user_skin', $this->skin, $this->get_skins() ) );
 			$params = POST_BBCODE | POST_EMOTICONS;
 			$xtpl->assign( 'sigdisplay', $this->format( $sig, $params ) );
 
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $this->user['user_joined'] ) );
+			$xtpl->assign( 'date', $this->t_date( $this->user['user_joined'] ) );
 			$level = $this->user['user_level'];
 
 			$comments = $this->db->quick_query( 'SELECT COUNT(comment_id) count FROM %pblogcomments' );
@@ -210,14 +215,14 @@ class profile extends module
 		if( !empty( $this->post['user_password'] ) && !empty( $this->post['user_pass_confirm'] ) ) {
 			$newpass = $this->sandbox_password_hash( $this->post['user_password'] );
 
-			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s', user_password='%s' WHERE user_id=%d",
-				$email, $url, $stylesheet, $icon, $sig, $newpass, $this->user['user_id'] );
+			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s', user_password='%s', user_timezone='%s' WHERE user_id=%d",
+				$email, $url, $stylesheet, $icon, $sig, $newpass, $newtz, $this->user['user_id'] );
 
 			$action_link = '/';
 		}
 		else {
-			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s' WHERE user_id=%d",
-				$email, $url, $stylesheet, $icon, $sig, $this->user['user_id'] );
+			$this->db->dbquery( "UPDATE %pusers SET user_email='%s', user_url='%s', user_stylesheet='%s', user_icon='%s', user_signature='%s', user_timezone='%s' WHERE user_id=%d",
+				$email, $url, $stylesheet, $icon, $sig, $newtz, $this->user['user_id'] );
 		}
 		return $this->message( 'Edit Your Profile', 'Your profile has been updated.', 'Continue', $action_link );
 	}

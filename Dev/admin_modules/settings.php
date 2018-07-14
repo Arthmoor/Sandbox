@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -144,7 +144,7 @@ class settings extends module
 				'email_adm', 'email_sys', 'site_name', 'site_tagline', 'site_owner', 'site_address', 'site_analytics', 'site_closedmessage',
 				'site_meta', 'site_keywords', 'mobile_icons', 'rss_name', 'rss_description', 'rss_image_url', 'blog_avatar', 'blog_dateformat',
 				'wordpress_api_key', 'twitter_user', 'cookie_prefix', 'cookie_path', 'cookie_domain', 'global_announce', 'copyright_terms',
-				'footer_text', 'registration_terms' );
+				'footer_text', 'registration_terms', 'blog_timezone' );
 			foreach( $valid_fields as $key )
 				$this->settings[$key] = $this->post[$key];
 			if ( in_array( $this->post['site_defaultskin'], $this->get_skins() ) )
@@ -173,6 +173,7 @@ class settings extends module
 		$xtpl->assign( 'site_keywords', htmlspecialchars($sets['site_keywords']) );
 		$xtpl->assign( 'mobile_icons', htmlspecialchars($sets['mobile_icons']) );
 		$xtpl->assign( 'blog_dateformat', htmlspecialchars($sets['blog_dateformat']) );
+		$xtpl->assign( 'blog_timezone', $this->select_timezones( $sets['blog_timezone'], 'blog_timezone' ) );
 		$xtpl->assign( 'site_defaultskin', $this->select_input( 'site_defaultskin', $sets['site_defaultskin'], $this->get_skins() ) );
 		$xtpl->assign( 'site_analytics', htmlspecialchars($sets['site_analytics'], ENT_QUOTES) );
 		$xtpl->assign( 'wordpress_api_key', htmlspecialchars($sets['wordpress_api_key']) );

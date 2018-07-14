@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -191,7 +191,7 @@ class sidebar
 
 			$this->xtpl->assign( 'comment_post_url', $post_url );
 			$this->xtpl->assign( 'comment_user_name', htmlspecialchars($comment['user_name']) );
-			$this->xtpl->assign( 'comment_date', date( $this->settings['blog_dateformat'], $comment['comment_date'] ) );
+			$this->xtpl->assign( 'comment_date', $this->module->t_date( $comment['comment_date'] ) );
 			$this->xtpl->assign( 'comment_subject', $subject );
 
 			$this->xtpl->parse( 'Sidebar.Comments.Link' );
@@ -220,7 +220,7 @@ class sidebar
 				$post_url = "{$this->settings['site_address']}index.php?a=gallery&amp;p={$image['photo_id']}";
 
 			$this->xtpl->assign( 'image_post_url', $post_url );
-			$this->xtpl->assign( 'image_date', date( $this->settings['blog_dateformat'], $image['photo_date'] ) );
+			$this->xtpl->assign( 'image_date', $this->module->t_date( $image['photo_date'] ) );
 			$this->xtpl->assign( 'image_subject', htmlspecialchars($image['photo_caption']) );
 
 			$this->xtpl->parse( 'Sidebar.Images.Link' );

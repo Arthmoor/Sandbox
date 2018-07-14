@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://sandbox.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -255,6 +255,7 @@ break;
 			$this->settings['blog_commentsperpage'] = 50;
 			$this->settings['blog_avatar'] = 'sandbox.jpg';
 			$this->settings['blog_dateformat'] = 'M j, Y g:i a';
+			$this->settings['blog_timezone'] = 'Europe/London';
 			$this->settings['blog_autoclose'] = 90;
 			$this->settings['blog_notifycomments'] = true;
 			$this->settings['blog_icon_width'] = 40;

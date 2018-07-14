@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -80,7 +80,7 @@ class search extends module
 				$item_link = "index.php?a=blog&amp;p={$item['post_id']}";
 			$xtpl->assign( 'item_link', $item_link );
 
-			$xtpl->assign( 'date', date($this->settings['blog_dateformat'], $item['post_date']) );
+			$xtpl->assign( 'date', $this->t_date( $item['post_date'] ) );
 			$count++;
 
 			$xtpl->assign( 'subject', htmlspecialchars($item['post_subject']) );

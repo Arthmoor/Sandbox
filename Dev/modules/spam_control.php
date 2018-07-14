@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -195,7 +195,7 @@ class spam_control extends module
 			$xtpl->assign( 'delete_link', $this->settings['site_address'] . 'index.php?a=spam_control&amp;s=delete_spam&amp;c=' . $spam['spam_id'] );
 
 			$xtpl->assign( 'spam_text', htmlspecialchars($spam['spam_message']) );
-			$xtpl->assign( 'spam_date', date( $this->settings['blog_dateformat'], $spam['spam_date'] ) );
+			$xtpl->assign( 'spam_date', $this->t_date( $spam['spam_date'] ) );
 
 			$type = 'Unknown';
 			$subject = null;

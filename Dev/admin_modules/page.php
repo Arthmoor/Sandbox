@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -64,8 +64,8 @@ class page extends module
 			$xtpl->assign( 'edit_link', '<a href="admin.php?a=page&amp;s=edit&amp;p='. $page['page_id'] . '">Edit</a>' );
 			$xtpl->assign( 'delete_link', '<a href="admin.php?a=page&amp;s=delete&amp;p='. $page['page_id'] . '">Delete</a>' );
 			$xtpl->assign( 'page_title', htmlspecialchars($page['page_title']) );
-			$xtpl->assign( 'created', date( $this->settings['blog_dateformat'], $page['page_createdate'] ) );
-			$xtpl->assign( 'edited', ($page['page_editdate'] > 0) ? date( $this->settings['blog_dateformat'], $page['page_editdate'] ) : 'Never' );
+			$xtpl->assign( 'created', $this->t_date( $page['page_createdate'] ) );
+			$xtpl->assign( 'edited', ($page['page_editdate'] > 0) ? $this->t_date( $page['page_editdate'] ) : 'Never' );
 
 			$xtpl->parse( 'Pages.Entry' );
 		}

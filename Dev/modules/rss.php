@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -99,7 +99,7 @@ class rss extends module
 			$xtpl->assign( 'item_desc',  htmlspecialchars($entry['photo_summary'] . " " . $entry['photo_width'] . " x " . $entry['photo_height'] . " " . $size . "KB" ));
 
 			// ISO822 format is standard for XML feeds
-			$xtpl->assign( 'item_date', date( 'D, j M Y H:i:s T', $entry['photo_date'] ) );
+			$xtpl->assign( 'item_date', $this->t_date( $entry['photo_date'], true ) );
 			$xtpl->assign( 'item_category', 'Image Gallery' );
 			$xtpl->assign( 'item_author', htmlspecialchars('nobody@example.com (' . $entry['user_name'] . ')') );
 
@@ -162,7 +162,7 @@ class rss extends module
 			$xtpl->assign( 'item_desc', htmlspecialchars(substr($entry['file_description'],0,200)) );
 
 			// ISO822 format is standard for XML feeds
-			$xtpl->assign( 'item_date', date( 'D, j M Y H:i:s T', $entry['file_date'] ) );
+			$xtpl->assign( 'item_date', $this->t_date( $entry['file_date'], true ) );
 			$xtpl->assign( 'item_category', 'Downloads' );
 			$xtpl->assign( 'item_author', htmlspecialchars('nobody@example.com (' . $entry['user_name'] . ')') );
 
@@ -238,7 +238,7 @@ class rss extends module
 			$xtpl->assign( 'item_desc', htmlspecialchars(substr($entry['comment_message'],0,200)) );
 
 			// ISO822 format is standard for XML feeds
-			$xtpl->assign( 'item_date', date( 'D, j M Y H:i:s T', $entry['comment_date'] ) );
+			$xtpl->assign( 'item_date', $this->t_date( $entry['comment_date'], true ) );
 			$xtpl->assign( 'item_category', 'Comments' );
 			$xtpl->assign( 'item_author', htmlspecialchars('nobody@example.com (' . $entry['user_name'] . ')') );
 
@@ -308,7 +308,7 @@ class rss extends module
 			$xtpl->assign( 'item_desc', htmlspecialchars($entry['post_summary']) );
 
 			// ISO822 format is standard for XML feeds
-			$xtpl->assign( 'item_date', date( 'D, j M Y H:i:s T', $entry['post_date'] ) );
+			$xtpl->assign( 'item_date', $this->t_date( $entry['post_date'], true ) );
 			$item_category = 'Uncategorized';
 			if( count($cats) > 0 && !empty($cats[0]) )
 				$item_category = implode($cats, ', ');

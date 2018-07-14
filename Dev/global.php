@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -303,6 +303,89 @@ class module
 		return true;
 	}
 
+	function t_date( $time = 0, $rssfeed = false )
+	{
+		if (!$time) {
+			$time = $this->time;
+		}
+
+		$timezone = $this->user['user_timezone'];
+
+		if( $this->user['user_level'] < USER_VALIDATING )
+			$timezone = $this->settings['blog_timezone'];
+
+		$dt = new DateTime();
+		$dt->setTimezone( new DateTimeZone( $timezone ) );
+		$dt->setTimestamp( $time );
+
+		if( $rssfeed == false )
+			return $dt->format( $this->settings['blog_dateformat'] );
+
+		// ISO822 format is standard for XML feeds
+		return $dt->format( 'D, j M Y H:i:s T' );
+	}
+
+	function select_timezones( $zone, $variable_name )
+	{
+		$out = null;
+
+		$zones = array(
+			'-12'			=> 'GMT-12    - Baker Island/International Dateline West',
+			'Pacific/Pago_Pago'	=> 'GMT-11    - Pacific: Midway Islands',
+			'America/Adak'		=> 'GMT-10    - USA: Alaska (Aleutian Islands)',
+			'Pacific/Honolulu'	=> 'GMT-10    - USA: Hawaii Time Zone',
+			'America/Anchorage'	=> 'GMT-9     - USA: Alaska Time Zone',
+			'America/Los_Angeles'	=> 'GMT-8     - US/Canada: Pacific Time Zone',
+			'America/Denver'	=> 'GMT-7     - US/Canada: Mountain Time Zone',
+			'America/Phoenix'	=> 'GMT-7     - USA: Mountain Time Zone (Arizona)',
+			'America/Chicago'	=> 'GMT-6     - US/Canada: Central Time Zone',
+			'America/New_York'	=> 'GMT-5     - US/Canada: Eastern Time Zone',
+			'America/Halifax'	=> 'GMT-4     - US/Canada: Atlantic Time Zone',
+			'America/St_Johns'	=> 'GMT-3.5   - Canada: Newfoundland',
+			'America/Argentina/Buenos Aires'	=> 'GMT-3     - Argentina',
+			'America/Sao_Paulo'	=> 'GMT-3     - Brazil: Sao Paulo',
+			'America/Noronha'	=> 'GMT-2     - Brazil: Atlantic islands/Noronha',
+			'Atlantic/Azores'	=> 'GMT-1     - Europe: Portugal/Azores',
+			'Europe/London'		=> 'GMT       - Europe: Greenwich Mean Time (UK/Ireland)',
+			'Atlantic/Reykjavik'	=> 'GMT       - Europe: Greenwich Mean Time (Iceland)',
+			'Europe/Berlin'		=> 'GMT+1     - Europe: France/Germany/Spain',
+			'Europe/Athens'		=> 'GMT+2     - Europe: Greece (Athens)',
+			'Europe/Moscow'		=> 'GMT+3     - Europe: Russia (Moscow)',
+			'Asia/Tehran'		=> 'GMT+3.5   - Asia: Iran',
+			'Asia/Dubai'		=> 'GMT+4     - Asia: Oman/United Arab Emerites',
+			'Asia/Kabul'		=> 'GMT+4.5   - Asia: Afghanistan',
+			'Asia/Karachi'		=> 'GMT+5     - Asia: Pakistan',
+			'Asia/Kolkata'		=> 'GMT+5.5   - Asia: India',
+			'Asia/Almaty'		=> 'GMT+6     - Asia: Kazakhstan',
+			'Asia/Yangon'		=> 'GMT+6.5   - Asia: Myanmar',
+			'Asia/Bangkok'  	=> 'GMT+7     - Asia: Thailand/Cambodia/Laos',
+			'Asia/Shanghai'		=> 'GMT+8     - Asia: China/Mongolia/Phillipines',
+			'Australia/Perth'	=> 'GMT+8     - Australia: Western (Perth)',
+			'Australia/Eucla'	=> 'GMT+8.75  - Australia: Western (Eucla)',
+			'Asia/Tokyo'		=> 'GMT+9     - Asia: Japan/Korea/New Guinea',
+			'Australia/Broken_Hill'	=> 'GMT+9.5   - Australia: New South Wales (Yancowinna)',
+			'Australia/Darwin'	=> 'GMT+9.5   - Australia: Northern Territory (Darwin)',
+			'Australia/Brisbane'    => 'GMT+10    - Australia: Queensland',
+			'Australia/Hobart'	=> 'GMT+10    - Australia: Tasmania',
+			'Australia/Melbourne'	=> 'GMT+10    - Australia: Victoria/New South Wales',
+			'Australia/Lord_Howe'	=> 'GMT+10.5  - Australia: Lord Howe Island',
+			'Pacific/Bougainville'	=> 'GMT+11    - Pacific: Solomon Islands/Vanuatu/New Caledonia',
+			'Asia/Kamchatka'	=> 'GMT+12    - Asia: Kamchatka',
+			'Pacific/Auckland'	=> 'GMT+12    - Pacific: New Zealand/Fiji',
+			'Pacific/Funafuti'	=> 'GMT+12    - Pacific: Tuvalu/Marshall Islands',
+			'Pacific/Chatham'	=> 'GMT+12.75 - Pacific: Chatham Islands',
+			'Pacific/Tongatapu'	=> 'GMT+13    - Pacific: Tonga/Phoenix Islands',
+			'Pacific/Kiritimati'	=> 'GMT+14    - Pacific: Line Islands'
+		);
+
+		foreach ($zones as $offset => $zone_name)
+		{
+			$out .= "<option value='$offset'" . (($offset == $zone) ? ' selected=\'selected\'' : null) . ">$zone_name</option>\n";
+		}
+
+		return "<select name=\"$variable_name\">$out</select>";
+	}
+
 	function format( $in, $options = POST_BBCODE )
 	{
 		return $this->bbcode->format( $in, $options );
@@ -423,7 +506,6 @@ class module
 		$reddit_subject = str_replace( " ", "+", $subject );
 		$encoded_url = urlencode( $url );
 
-		$template->assign( 'stumbleupon', "<a href=\"javascript:void(0);\" title=\"Share on Stumbleupon\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://www.stumbleupon.com/submit?url={$encoded_url}','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/stumbleupon.png\" alt=\"\" /></a>" );
 		$template->assign( 'delicious', "<a href=\"javascript:void(0);\" title=\"Share on Delicious\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://del.icio.us/post?url={$url}&amp;title={$subject}','sandbox_social',900,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/delicious.png\" alt=\"\" /></a>" );
 		$template->assign( 'reddit', "<a href=\"javascript:void(0);\" title=\"Share on Reddit\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://www.reddit.com/submit?url={$url}&amp;title={$reddit_subject}','sandbox_social',865,950)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/reddit.png\" alt=\"\" /></a>" );
 		$template->assign( 'gplus', "<a href=\"javascript:void(0);\" title=\"Share on Google+\" target=\"sandbox_social\" onclick=\"CenterPopUp('https://plus.google.com/share?url={$url}','sandbox_social',950,600)\"><img src=\"{$this->settings['site_address']}skins/{$this->skin}/images/gplus.png\" alt=\"\" /></a>" );

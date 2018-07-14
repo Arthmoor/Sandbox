@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -36,7 +36,7 @@ define( 'SANDBOX', true );
 $time_now   = explode(' ', microtime());
 $time_start = $time_now[1] + $time_now[0];
 
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('UTC');
 
 session_start();
 
@@ -113,6 +113,7 @@ if( !$mod->login('index.php') ) {
 	$mod->user['user_name'] = 'Anonymous';
 	$mod->user['user_level'] = USER_GUEST;
 	$mod->user['user_id'] = 1;
+	$mod->user['user_timezone'] = 'UTC';
 }
 
 $xtpl = new XTemplate( './skins/' . $mod->skin . '/index.xtpl' );
@@ -139,7 +140,7 @@ if( isset($mod->settings['site_meta']) && !empty($mod->settings['site_meta']) )
 
 $style_link = "{$mod->settings['site_address']}skins/{$mod->skin}/styles.css";
 
-$date = date( $mod->settings['blog_dateformat'], $mod->time );
+$date = $mod->t_date( $mod->time );
 $year = date( 'Y', $mod->time );
 
 $spam = 0;

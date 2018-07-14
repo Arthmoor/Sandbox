@@ -1,7 +1,7 @@
 <?php
 /* Sandbox v0.5-1.0b
  * Copyright (c) 2006-2007
- * Sam O'Connor (Kiasyn) http://www.kiasyn.com
+ * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
  * Copyright (c) 2007-2018
@@ -122,13 +122,13 @@ class comments
 			$params = POST_BBCODE | POST_EMOTICONS;
 			$xtpl->assign( 'message', $this->module->format( $comment['comment_message'], $params ) );
 
-			$date = date( $this->settings['blog_dateformat'], $comment['comment_date'] );
+			$date = $this->module->t_date( $comment['comment_date'] );
 			$date = 'Comment #' . $pos . ' ' . $date;
 			$xtpl->assign( 'date', $date );
 
 			$edited = null;
 			if( $comment['comment_editdate'] > 0 ) {
-				$xtpl->assign( 'editdate', date( $this->settings['blog_dateformat'], $comment['comment_editdate'] ) );
+				$xtpl->assign( 'editdate', $this->module->t_date( $comment['comment_editdate'] ) );
 				$xtpl->assign( 'editedby', htmlspecialchars($comment['comment_editedby']) );
 
 				$xtpl->parse( 'CList.Comment.EditedBy' );
@@ -170,7 +170,7 @@ class comments
 
 			$xtpl->assign( 'icon', $this->module->display_icon( $this->user['user_icon'] ) );
 
-			$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $this->module->time ) );
+			$xtpl->assign( 'date', $this->module->t_date( $this->module->time ) );
 			$xtpl->assign( 'subject', $subject );
 
 			$text = null;
@@ -348,7 +348,7 @@ class comments
 			$comment_author = htmlspecialchars($author);
 
 			if ( $this->settings['html_email'] ) {
-				$message_date = date( $this->settings['blog_dateformat'], $this->module->time );
+				$message_date = $this->module->t_date( $this->module->time );
 				$params = POST_BBCODE | POST_EMOTICONS;
 				$html_message = $this->module->format( $this->module->post['comment_message'], $params );
 				$email_link = "
@@ -468,7 +468,7 @@ $error
 
 			if( isset($this->module->post['preview']) ) {
 				$xtpl->assign( 'icon', $this->module->icon_dir . $comment['user_icon'] );
-				$xtpl->assign( 'date', date( $this->settings['blog_dateformat'], $comment['comment_date'] ) );
+				$xtpl->assign( 'date', $this->module->t_date( $comment['comment_date'] ) );
 				$xtpl->assign( 'message', $message );
 
 				$xtpl->parse( 'Comment.Preview' );
@@ -565,7 +565,7 @@ $error
 			$author = htmlspecialchars($comment['user_name']);
 			$params = POST_BBCODE | POST_EMOTICONS;
 			$text = $this->module->format( $comment['comment_message'], $params );
-			$date = date( $this->settings['blog_dateformat'], $comment['comment_date'] );
+			$date = $this->module->t_date( $comment['comment_date'] );
 
 			$msg = "<div class=\"title\">Comment by {$author} Posted on: {$date}</div><div class=\"article\">{$text}</div>";
 			$link = "index.php?a=$page&amp;s=del_comment&amp;c=$c&amp;confirm=1";
