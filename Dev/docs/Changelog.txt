@@ -26,6 +26,7 @@ Bugs:
 * Editing comments does not handle request_uri properly.
 * Profile page should no longer improperly autocomplete stylesheet and password fields.
 * Blogroll editing was not handling https:// links properly.
+* Email validation was outdated and rejecting more than it should have. Replaced with standardized PHP library call.
 
 Changes for Sandbox 2.3
 -----------------------
