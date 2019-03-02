@@ -4,8 +4,8 @@
  * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2018
- * Roger Libiez [Samson] https://www.iguanadons.net
+ * Copyright (c) 2007-2019
+ * Roger Libiez [Samson] https://www.afkmods.com/
  *
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the authors be held liable for any damages arising from the
@@ -948,7 +948,7 @@ function error($type, $message, $file, $line = 0)
 
   <div id=\"bottom\">&nbsp;</div>
  </div>
- <div id=\"footer\">Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"https://www.iguanadons.net\">Samson</a>]</div>
+ <div id=\"footer\">Powered by Sandbox &copy; 2006-2015 Sam O'Connor [<a href=\"http://www.kiasyn.com\">Kiasyn</a>] and Roger Libiez [<a href=\"https://www.afkmods.com/\">Samson</a>]</div>
 </body>
 </html>" );
 }

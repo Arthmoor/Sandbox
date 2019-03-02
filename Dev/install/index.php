@@ -4,8 +4,8 @@
  * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2018
- * Roger Libiez [Samson] https://www.iguanadons.net
+ * Copyright (c) 2007-2019
+ * Roger Libiez [Samson] https://www.afkmods.com/
  *
  * Sandbox installer module. Based on QSF Portal installer module.
  * QSF Portal Copyright (c)2006-2015 The QSF Portal Team
@@ -226,7 +226,7 @@ if ($mode) {
 	echo "   <div id='bottom'>&nbsp;</div>
   </div>
   <div id='footer'>
-   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2016 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='https://www.iguanadons.net'>Samson</a>]
+   <a href='http://www.iguanadons.net/'>Sandbox</a> {$sandbox->version} &copy; 2006-2016 Sam O'Connor [<a href='http://www.kiasyn.com'>Kiasyn</a>] and Roger Libiez [<a href='https://www.afkmods.com/'>Samson</a>]
   </div>
  </body>
 </html>";

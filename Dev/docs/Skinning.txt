@@ -96,7 +96,7 @@ So on to the good stuff. How do you make a skin for Sandbox? Basically speaking,
   <div id="footer">
    {footer_text}<br /><br />
    {copyright_terms}<br />
-   Powered by Sandbox &copy; 2006-2010 Sam O'Connor [<a href="http://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="http://www.iguanadons.net">Samson</a>]
+   Powered by Sandbox &copy; 2006-2010 Sam O'Connor [<a href="https://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.afkmods.com">Samson</a>]
 <!-- BEGIN: PageStats -->
    <br />{page_generated}
 <!-- END: PageStats -->

@@ -4,8 +4,8 @@
  * Sam O'Connor (Kiasyn) https://kiasyn.com
  *
  * Additions to Sandbox after 1.0:
- * Copyright (c) 2007-2018
- * Roger Libiez [Samson] https://www.iguanadons.net
+ * Copyright (c) 2007-2019
+ * Roger Libiez [Samson] https://www.afkmods.com/
  *
  * Sandbox installer module. Based on QSF Portal installer module.
  * QSF Portal Copyright (c)2006-2015 The QSF Portal Team

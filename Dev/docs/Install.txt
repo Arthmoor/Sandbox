@@ -23,6 +23,6 @@ If you just want to dive right in and play around, follow these steps:
    files/gallery
    files/gallery/thumbnails
    files/posticons
-* Point your browser to http://yoururl/wheresandboxis/install
+* Point your browser to https://yoururl/wheresandboxis/install
 
 Follow the instructions in the installer.
