@@ -1,9 +1,9 @@
 Skinning for Sandbox
 --------------------
 
-Prior to version 2.0, Sandbox skinning was done through crude template fragments stored in the database itself. This made changing things around somewhat cumbersome and prone to error. This was something I wanted to change, so I spent some time searching for a suitable template engine built in PHP. I ran across the usuals, Smarty, Twig, Savant, etc. None of them really did what I wanted, or were far to complex for what Sandbox needs to do. Then I found XTemplate.
+Prior to version 2.0, Sandbox skinning was done through crude template fragments stored in the database itself. This made changing things around somewhat cumbersome and prone to error. This was something I wanted to change, so I spent some time searching for a suitable template engine built in PHP. I ran across the usuals, Smarty, Twig, Savant, etc. None of them really did what I wanted, or were far to complex for what Sandbox needs to do. Then I found zTemplate.
 
-XTemplate is a single PHP class that handles basic parsing of delimited tags, which take the form of {tag}. It also handles block parsing, so you can have portions of a template parsed in loops, marked as such: <!-- BEGIN: blockname --><!-- END: blockname -->. Relatively straightforward, and surprisingly fast for what it does. It has a few minor limitations, namely that it's not really possible to just add on a sub-template from a module to the global index template, but it doesn't appear as though the library consumes enough memory to matter.
+zTemplate is a single PHP class that handles basic parsing of delimited tags, which take the form of {tag}. It also handles block parsing, so you can have portions of a template parsed in loops, marked as such: <!-- BEGIN: blockname --><!-- END: blockname -->. Relatively straightforward, and surprisingly fast for what it does. It has a few minor limitations, namely that it's not really possible to just add on a sub-template from a module to the global index template, but it doesn't appear as though the library consumes enough memory to matter.
 
 So on to the good stuff. How do you make a skin for Sandbox? Basically speaking, if you know HTML and CSS, you're 99% of the way there already. Here's an example of one of the files, the index.xtpl template:
 
@@ -96,7 +96,7 @@ So on to the good stuff. How do you make a skin for Sandbox? Basically speaking,
   <div id="footer">
    {footer_text}<br /><br />
    {copyright_terms}<br />
-   Powered by Sandbox &copy; 2006-2010 Sam O'Connor [<a href="https://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.afkmods.com">Samson</a>]
+   Powered by Sandbox &copy; 2007-2019 Sam O'Connor [<a href="https://www.kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.afkmods.com">Arthmoor</a>]
 <!-- BEGIN: PageStats -->
    <br />{page_generated}
 <!-- END: PageStats -->

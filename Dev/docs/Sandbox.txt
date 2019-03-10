@@ -11,7 +11,7 @@ General Features
 ----------------
 
 * Custom pages created on the fly, provided you know HTML.
-* Skinning built around the XTemplate PHP class. Change the entire look of your site without ever touching the PHP!
+* Skinning built around the zTemplate PHP class. Change the entire look of your site without ever touching the PHP!
 * HTML 5/CSS standards compliant in the default skin.
 * Graduated user levels, from totally anonymous, up to full fledged administrators.
 * Google Analytics support - Just input your Analytics ID.
