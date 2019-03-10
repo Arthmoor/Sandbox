@@ -2,13 +2,13 @@
 /**
  * Akismet anti-comment spam service
  *
- * The class in this package allows use of the {@link http://akismet.com Akismet} anti-comment spam service in any PHP5 application.
+ * The class in this package allows use of the {@link https://akismet.com Akismet} anti-comment spam service in any PHP5 application.
  *
  * This service performs a number of checks on submitted data and returns whether or not the data is likely to be spam.
  *
- * Please note that in order to use this class, you must have a vaild {@link http://wordpress.com/api-keys/ WordPress API key}.  They are free for non/small-profit types and getting one will only take a couple of minutes.
+ * Please note that in order to use this class, you must have a vaild {@link https://akismet.com/ WordPress API key}.  They are free for non/small-profit types and getting one will only take a couple of minutes.
  *
- * For commercial use, please {@link http://akismet.com/commercial/ visit the Akismet commercial licensing page}.
+ * For commercial use, please {@link https://akismet.com/commercial/ visit the Akismet commercial licensing page}.
  *
  * Please be aware that this class is PHP5 only.  Attempts to run it under PHP4 will most likely fail.
  *
@@ -18,15 +18,15 @@
  * @author		Alex Potsides, {@link http://www.achingbrain.net http://www.achingbrain.net}
  * @version		0.5
  * @copyright		Alex Potsides, {@link http://www.achingbrain.net http://www.achingbrain.net}
- * @license		http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @license		https://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
 /**
  * The Akismet PHP5 Class
  *
- * This class takes the functionality from the Akismet WordPress plugin written by {@link http://photomatt.net/ Matt Mullenweg} and allows it to be integrated into any PHP5 application or website.
+ * This class takes the functionality from the Akismet WordPress plugin written by {@link https://ma.tt/ Matt Mullenweg} and allows it to be integrated into any PHP5 application or website.
  *
- * The original plugin is {@link http://akismet.com/download/ available on the Akismet website}.
+ * The original plugin is {@link https://akismet.com/download/ available on the Akismet website}.
  *
  * <code>
  * $akismet = new Akismet('http://www.example.com/blog/', 'aoeu1aoue');
@@ -102,7 +102,7 @@ class Akismet
 		$this->version = $blogVersion; // The Sandbox version number.
 
 		// Set some default values
-		$this->apiPort = 80;
+		$this->apiPort = 443;
 		$this->akismetServer = 'rest.akismet.com';
 		$this->akismetVersion = '1.1';
 		$this->requestFactory = new SocketWriteReadFactory();
@@ -192,7 +192,7 @@ class Akismet
 		$response = $this->sendRequest($this->getQueryString(), $this->wordPressAPIKey . '.rest.akismet.com', '/' . $this->akismetVersion . '/comment-check');
 
 		if($response[1] == 'invalid' && !$this->isKeyValid()) {
-			throw new exception('The Wordpress API key passed to the Akismet constructor is invalid.  Please obtain a valid one from http://wordpress.com/api-keys/');
+			throw new exception('The Wordpress API key passed to the Akismet constructor is invalid.  Please obtain a valid one from https://akismet.com/');
 		}
 
 		return ($response[1] == 'true');
@@ -329,7 +329,7 @@ class Akismet
  *
  * This class is used by Akismet to do the actual sending and receiving of data.  It opens a connection to a remote host, sends some data and the reads the response and makes it available to the calling program.
  *
- * The code that makes up this class originates in the Akismet WordPress plugin, which is {@link http://akismet.com/download/ available on the Akismet website}.
+ * The code that makes up this class originates in the Akismet WordPress plugin, which is {@link https://akismet.com/download/ available on the Akismet website}.
  *
  * N.B. It is not necessary to call this class directly to use the Akismet class.
  *
@@ -362,7 +362,7 @@ class SocketWriteRead implements AkismetRequestSender {
 	public function send($host, $port, $request, $responseLength = 1160) {
 		$response = '';
 
-		$fs = fsockopen($host, $port, $this->errorNumber, $this->errorString, 3);
+		$fs = fsockopen( 'ssl://' $host, $port, $this->errorNumber, $this->errorString, 3 );
 
 		if($this->errorNumber != 0) {
 			throw new Exception('Error connecting to host: ' . $host . ' Error number: ' . $this->errorNumber . ' Error message: ' . $this->errorString);
