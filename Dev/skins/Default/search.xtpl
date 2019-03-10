@@ -2,7 +2,7 @@
 <div id="main">
  <div class="article">
   <div class="title">Search Results: {count} {posts} containing '{search_word}'</div>
-<!-- Begin: Result -->
+<!-- BEGIN: Result -->
   <span class="category">
    <a href="{item_link}">{subject}</a>
    <p></p>
