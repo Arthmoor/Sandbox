@@ -100,11 +100,11 @@ class contact extends module
 
 		if( $this->user['user_level'] < USER_PRIVILEGED ) {
 			try {
-				$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
-				$akismet->setCommentAuthor($this->post['name']);
-				$akismet->setCommentAuthorEmail($this->post['email']);
-				$akismet->setCommentContent($this->post['comments']);
-				$akismet->setCommentType('contact-form');
+				$akismet = new Akismet( $this );
+				$akismet->set_comment_author( $this->post['name'] );
+				$akismet->set_comment_author_email( $this->post['email'] );
+				$akismet->set_comment_content( $this->post['comments'] );
+				$akismet->set_comment_type( 'contact-form' );
 
 				$spam_checked = true;
 			}
@@ -116,7 +116,7 @@ class contact extends module
 			$spam_checked = true;
 		}
 
-		if( $spam_checked && $akismet != null && $akismet->isCommentSpam() )
+		if( $spam_checked && $akismet != null && $akismet->is_this_spam() )
 		{
 			if( isset($this->settings['email_spam_count']) )
 				$this->settings['email_spam_count']++;

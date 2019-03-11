@@ -137,20 +137,20 @@ class register extends module
 		$spam_checked = false;
 
 		try {
-			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
+			$akismet = new Akismet( $this );
 
-			$akismet->setCommentAuthor($this->post['user_name']);
-			$akismet->setCommentAuthorEmail($this->post['user_email']);
-			$akismet->setCommentAuthorURL($this->post['user_url']);
-			$akismet->setCommentContent($this->post['user_regcomment']);
-			$akismet->setCommentType('signup');
+			$akismet->set_comment_author( $this->post['user_name'] );
+			$akismet->set_comment_author_email( $this->post['user_email'] );
+			$akismet->set_comment_author_url( $this->post['user_url'] );
+			$akismet->set_comment_content( $this->post['user_regcomment'] );
+			$akismet->set_comment_type( 'signup' );
 
 			$spam_checked = true;
 		}
 		// Try and deal with it rather than say something.
 		catch(Exception $e) {}
 
-		if( $spam_checked && $akismet->isCommentSpam() ) {
+		if( $spam_checked && $akismet->is_this_spam() ) {
 			$this->settings['register_spam_count']++;
 			$this->save_settings();
 			return $this->message( 'Registration Failure', 'Information provided during registration has been flagged by Akismet as a spam source. You will need to find another means of contacting the administration if you wish to register.' );

@@ -250,22 +250,21 @@ class comments
 
 		if( $this->user['user_level'] < USER_PRIVILEGED ) {
 			try {
-				$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->module->version);
+				$akismet = new Akismet( $this->module );
 
-				$akismet->setCommentAuthor($author);
-				// $akismet->setCommentAuthorEmail($email);
-				if( $this->user['user_level'] == USER_MEMBER && isset($this->user['user_url']) )
-					$akismet->setCommentAuthorURL($this->user['user_url']);
-				elseif( isset($this->module->post['url']) )
-					$akismet->setCommentAuthorURL($this->module->post['url']);
-				else
-					$akismet->setCommentAuthorURL( '' );
-				$akismet->setCommentContent($this->module->post['comment_message']);
-				$akismet->setCommentType('comment');
+				$akismet->set_comment_author( $author );
+				if( $this->user['user_level'] > USER_GUEST )
+					$akismet->set_comment_author_email( $this->user['user_email'] );
+				if( $this->user['user_level'] == USER_MEMBER && isset( $this->user['user_url'] ) )
+					$akismet->set_comment_author_url( $this->user['user_url'] );
+				else( isset( $this->module->post['url'] ) )
+					$akismet->set_comment_author_url( $this->module->post['url'] );
+				$akismet->set_comment_content( $this->module->post['comment_message'] );
+				$akismet->set_comment_type( 'comment' );
 
 				$link = $this->module->clean_url( $subject );
 				$plink = $this->settings['site_address'] . "$link-$id.html";
-				$akismet->setPermalink($plink);
+				$akismet->set_permalink( $plink );
 
 				$spam_checked = true;
 			}
@@ -275,7 +274,7 @@ class comments
 			$spam_checked = true;
 		}
 
-		if( $spam_checked && $akismet != null && $akismet->isCommentSpam() )
+		if( $spam_checked && $akismet != null && $akismet->is_this_spam() )
 		{
 			// Store the contents of the entire $_SERVER array.
 			$svars = json_encode($_SERVER);
@@ -584,16 +583,17 @@ $error
 		if( isset($this->module->get['t']) && $this->module->get['t'] == 'spam' ) {
 			// Time to report the spammer before we delete the comment. Hopefully this is enough info to strike back with.
 			require_once( 'lib/akismet.php' );
-			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->module->version);
-			$akismet->setCommentAuthor($comment['user_name']);
-			$akismet->setCommentAuthorURL($comment['user_url']);
-			$akismet->setCommentContent($comment['comment_message']);
-			$akismet->setUserIP($comment['comment_ip']);
-			$akismet->setReferrer($comment['comment_referrer']);
-			$akismet->setCommentUserAgent($comment['comment_agent']);
-			$akismet->setCommentType('comment');
+			$akismet = new Akismet( $this->module );
+			$akismet->set_comment_author( $comment['user_name'] );
+			$akismet->set_comment_author_url( $comment['user_url'] );
+			$akismet->set_comment_content( $comment['comment_message'] );
+			$akismet->set_comment_ip( $comment['comment_ip'] );
+			$akismet->set_comment_referrer( $comment['comment_referrer'] );
+			$akismet->set_comment_useragent( $comment['comment_agent'] );
+			$akismet->set_comment_time( $comment['comment_date'] );
+			$akismet->set_comment_type( 'comment' );
 
-			$akismet->submitSpam();
+			$akismet->submit_spam();
 
 			$this->settings['spam_count']++;
 			$this->settings['spam_uncaught']++;

@@ -695,16 +695,16 @@ class posts extends module
 		if( isset($this->get['t']) && $this->get['t'] == 'spam' ) {
 			// Time to report the spammer before we delete the comment. Hopefully this is enough info to strike back with.
 			require_once( 'lib/akismet.php' );
-			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key']);
-			$akismet->setCommentAuthor($comment['user_name']);
-			$akismet->setCommentAuthorURL($comment['user_url']);
-			$akismet->setCommentContent($comment['comment_message']);
-			$akismet->setUserIP($comment['comment_ip']);
-			$akismet->setReferrer($comment['comment_referrer']);
-			$akismet->setCommentUserAgent($comment['comment_agent']);
-			$akismet->setCommentType('comment');
+			$akismet = new Akismet( $this );
+			$akismet->set_comment_author( $comment['user_name'] );
+			$akismet->set_comment_author_url( $comment['user_url'] );
+			$akismet->set_comment_content( $comment['comment_message'] );
+			$akismet->set_comment_ip( $comment['comment_ip'] );
+			$akismet->set_comment_referrer( $comment['comment_referrer'] );
+			$akismet->set_comment_useragent( $comment['comment_agent'] );
+			$akismet->set_comment_type( 'comment' );
 
-			$akismet->submitSpam();
+			$akismet->submit_spam();
 
 			$this->settings['spam_count']++;
 			$this->settings['spam_uncaught']++;

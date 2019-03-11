@@ -124,16 +124,17 @@ class spam_control extends module
 
 		// Setup and deliver the information to flag this comment as legit with Akismet.
 		require_once( 'lib/akismet.php' );
-		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
-		$akismet->setCommentAuthor($spam['spam_author']);
-		$akismet->setCommentAuthorURL($spam['spam_url']);
-		$akismet->setCommentContent($spam['spam_message']);
-		$akismet->setUserIP($spam['spam_ip']);
-		$akismet->setReferrer($svars['HTTP_REFERER']);
-		$akismet->setCommentUserAgent($svars['HTTP_USER_AGENT']);
-		$akismet->setCommentType('comment');
+		$akismet = new Akismet( $this );
+		$akismet->set_comment_author( $spam['spam_author'] );
+		$akismet->set_comment_author_url( $spam['spam_url'] );
+		$akismet->set_comment_content( $spam['spam_message'] );
+		$akismet->set_comment_ip( $spam['spam_ip'] );
+		$akismet->set_comment_referrer( $svars['HTTP_REFERER'] );
+		$akismet->set_comment_useragent( $svars['HTTP_USER_AGENT'] );
+		$akismet->set_comment_time( $spam['spam_date'] );
+		$akismet->set_comment_type( 'comment' );
 
-		$akismet->submitHam();
+		$akismet->submit_ham();
 
 		$q = $spam['spam_post'];
 		$author = $spam['spam_user'];

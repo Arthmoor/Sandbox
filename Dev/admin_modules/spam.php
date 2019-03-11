@@ -71,20 +71,21 @@ class spam extends module
 
 		$out = '';
 		if( !isset($this->get['s']) || $this->get['s'] != 'delete_spam' ) {
-			$svars = json_decode($spam['spam_server'], true);
+			$svars = json_decode( $spam['spam_server'], true );
 
 			// Setup and deliver the information to flag this comment as legit with Akismet.
 			require_once( 'lib/akismet.php' );
-			$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
-			$akismet->setCommentAuthor($spam['spam_author']);
-			$akismet->setCommentAuthorURL($spam['user_url']);
-			$akismet->setCommentContent($spam['spam_message']);
-			$akismet->setUserIP($spam['spam_ip']);
-			$akismet->setReferrer($svars['HTTP_REFERER']);
-			$akismet->setCommentUserAgent($svars['HTTP_USER_AGENT']);
-			$akismet->setCommentType('Sandbox');
+			$akismet = new Akismet( $this );
+			$akismet->set_comment_author( $spam['spam_author'] );
+			$akismet->set_comment_author_url( $spam['user_url'] );
+			$akismet->set_comment_content( $spam['spam_message'] );
+			$akismet->set_comment_ip( $spam['spam_ip'] );
+			$akismet->set_comment_referrer( $svars['HTTP_REFERER'] );
+			$akismet->set_comment_useragent( $svars['HTTP_USER_AGENT'] );
+			$akismet->set_comment_time( $spam['spam_date'] );
+			$akismet->set_comment_type( 'comment' );
 
-			$akismet->submitHam();
+			$akismet->submit_ham();
 
 			$q = $spam['spam_post'];
 			$author = $spam['user_id'];
@@ -121,9 +122,9 @@ class spam extends module
 	function test_akismet_key()
 	{
 		require_once( 'lib/akismet.php' );
-		$akismet = new Akismet($this->settings['site_address'], $this->settings['wordpress_api_key'], $this->version);
+		$akismet = new Akismet( $this );
 
-		$response = $akismet->isKeyValid() ? 'Key is Valid!' : 'Key is Invalid!';
+		$response = $akismet->is_key_valid() ? 'Key is Valid!' : 'Key is Invalid!';
 		return $this->message( 'Test Akismet Key', $response, 'Continue', 'admin.php', 0 );
 	}
 
