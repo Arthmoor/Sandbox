@@ -90,7 +90,7 @@
   <div id="footer">
    {footer_text}<br /><br />
    {copyright_terms}<br />
-   Powered by Sandbox &copy; 2006-2019 Sam O'Connor [<a href="https://kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.afkmods.com">Arthmoor</a>]
+   Powered by <a href="https://github.com/Arthmoor/Sandbox">Sandbox</a> &copy; 2006-2019 Sam O'Connor [<a href="https://kiasyn.com">Kiasyn</a>] and Roger Libiez [<a href="https://www.afkmods.com">Arthmoor</a>]
 <!-- BEGIN: PageStats -->
    <br />{page_generated}
 <!-- END: PageStats -->
