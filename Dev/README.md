@@ -1,6 +1,0 @@
-Sandbox
-=======
-
-Sandbox is a personal website package that provides you with a blog, image gallery, file downloads area, and the ability to create miscellaneous custom webpages. It was originally designed by Sam O'Connor as a simple package to handle some random postings and other small things. When I took over the project around version 1.0, I decided I needed more. Other blog/website packages like Wordpress only did one thing. Many of them still only do one thing. Most blog packages do not also provide a good image gallery and I have not seen one yet that provides a good downloads module. You can get these things in separate packages, but integrating them into one site is a nightmare of code bridges and incompatible skinning systems. Sandbox evolved after 1.0 from my desire to have all of these things integrated into one package, with an easy to use interface. Though it may seem simplistic at first glance, the software holds a great deal of potential in the right hands and could function as the front end for a small business, school group, family site, or project headquarters. It's my hope that it will one day take its place among the giants. Well, I can dream anyway, right? :) 
-
-Please consider making a donation: https://www.patreon.com/arthmoor
