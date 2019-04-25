@@ -247,15 +247,6 @@ if ( !$open && $mod->user['user_level'] < USER_ADMIN ) {
 			$google = $mod->settings['site_analytics'];
 		}
 
-		// Google +1 button
-		$google .= "<script type=\"text/javascript\">
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>";
-
 		$xtpl->assign( 'google', $google );
 
 		if( !$open ) {
