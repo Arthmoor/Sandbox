@@ -82,6 +82,10 @@ class upgrade extends module
 			} else {
 				echo "	<div class='title' style='text-align:center'>Upgrade from what version?</div>
 
+					<span class='field'><input type='radio' name='from' value='2.4' id='240' /></span>
+					<span class='form'><label for='240'>Sandbox 2.4</label></span>
+					<p class='line'></p>
+
 					<span class='field'><input type='radio' name='from' value='2.3' id='230' /></span>
 					<span class='form'><label for='230'>Sandbox 2.3</label></span>
 					<p class='line'></p>
@@ -325,6 +329,8 @@ class upgrade extends module
 						$queries[] = 'ALTER TABLE %pactive CHANGE active_user_agent active_user_agent varchar(255) NOT NULL';
 						$queries[] = 'ALTER TABLE %pusers CHANGE user_password user_password varchar(255) NOT NULL';
 						$queries[] = 'UPDATE sb_users SET user_level=user_level + 1 WHERE user_id > 1';
+
+					case '2.4': // 2.4.0 to 2.4.1
 
 					default:
 						break;

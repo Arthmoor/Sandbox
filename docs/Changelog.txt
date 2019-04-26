@@ -1,3 +1,14 @@
+Changes for Sandbox 2.4.1
+-------------------------
+
+Changes:
+
+* Google +1 support dropped since it's shut down now.
+
+Bugs:
+
+* Fixed an issue when selecting the Buenos Aires timezone.
+
 Changes for Sandbox 2.4
 -----------------------
 

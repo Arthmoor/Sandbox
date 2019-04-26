@@ -277,7 +277,7 @@ class comments
 		if( $spam_checked && $akismet != null && $akismet->is_this_spam() )
 		{
 			// Store the contents of the entire $_SERVER array.
-			$svars = json_encode($_SERVER);
+			$svars = json_encode( $_SERVER );
 
 			$this->db->dbquery( "
 			   INSERT INTO %pspam (spam_post, spam_user, spam_author, spam_message, spam_date, spam_type, spam_ip, spam_server)
@@ -286,6 +286,7 @@ class comments
 			$this->settings['spam_count']++;
 			$this->module->save_settings();
 			$this->purge_old_spam();
+
 			return $this->module->message( 'Akismet Warning', 'Your comment has been flagged as potential spam and must be evaluated by the site owner.' );
 		}
 
@@ -724,6 +725,7 @@ $error
 	{
 		$diff = 2592000; // 30 days * 86400 secs
 		$cut_off = $this->module->time - $diff;
+
 		$this->db->dbquery( 'DELETE FROM %pspam WHERE spam_date <= %d', $cut_off );
 	}
 }
