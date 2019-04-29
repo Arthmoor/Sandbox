@@ -31,7 +31,31 @@
  * Notifying Roger Libiez is not required but would still be appreciated :)
  */
 
+if( version_compare( PHP_VERSION, "7.0.0", "<" ) ) {
+	die( 'PHP version does not meet minimum requirements. Contact your system administrator.' );
+}
+
 define( 'SANDBOX', true );
+
+function log_hostile_action( $settings, $qstring )
+{
+	if( isset( $settings['error_email'] ) ) {
+		$https = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+
+		$headers = "From: Your Sandbox Site <{$settings['error_email']}>\r\n" . "X-Mailer: PHP/" . phpversion();
+
+		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'N/A';
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+
+		$error_report = "Sandbox has intercepted a possible attack!\n";
+		$error_report .= "The details are as follows:\n\nURL: $https" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "?" . $qstring . "\n";
+		$error_report .= "Querying user agent: " . $agent . "\n";
+		$error_report .= "Querying IP: " . $ip . "\n\n";
+		$error_report = str_replace( "&nbsp;", " ", html_entity_decode( $error_report ) );
+
+		@mail( $settings['error_email'], "[Sandbox] Potential Attack Intercepted", $error_report, $headers );
+	}
+}
 
 $time_now   = explode(' ', microtime());
 $time_start = $time_now[1] + $time_now[0];
@@ -71,20 +95,62 @@ if (!$db->db) {
  * Otherwise $missing remains false and no error is generated later.
  */
 $missing = false;
-if (!isset($_GET['a']) ) {
+if( !isset( $_GET['a'] ) ) {
 	$module = 'blog';
-	if( isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']) )
+
+	if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+		$qstring = $_SERVER['QUERY_STRING'];
+
 		$missing = true;
-} elseif ( !file_exists( 'modules/' . $_GET['a'] . '.php' ) ) {
-	$module = 'blog';
-	$missing = true;
+	}
+
+	if( isset( $_GET['s'] ) && $_GET['s'] == 'logout' ) {
+		$missing = false;
+	}
+} elseif( !empty( $_GET['a'] ) ) {
+	if( strstr( $_GET['a'], '/' ) || strstr( $_GET['a'], '\\' ) || strstr( $_GET['a'], '.' ) ) {
+		if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+			$qstring = $_SERVER['QUERY_STRING'];
+		}
+
+		$missing = true;
+
+		$_SESSION = array();
+
+		session_destroy();
+
+		log_hostile_action( $settings, $qstring );
+
+		header( 'Clear-Site-Data: "*"' );
+	} elseif( !file_exists( 'modules/' . $_GET['a'] . '.php' ) ) {
+		$module = 'issues';
+		$missing = true;
+		$qstring = $_SERVER['REQUEST_URI'];
+	} else {
+		$module = $_GET['a'];
+	}
 } else {
-	$module = $_GET['a'];
+	if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+		$qstring = $_SERVER['QUERY_STRING'];
+
+		$missing = true;
+	}
 }
 
-if ( strstr($module, '/') || strstr($module, '\\') ) {
-	header('HTTP/1.0 403 Forbidden');
-	exit( 'You have been banned from this site.' );
+// I know this looks corny and all but it mimics the output from a real 404 page.
+if( $missing ) {
+	header( 'HTTP/1.0 404 Not Found' );
+
+	echo( "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">
+	<html><head>
+	<title>404 Not Found</title>
+	</head><body>
+	<h1>Not Found</h1>
+	<p>The requested URL $qstring was not found on this server.</p>
+	<hr>
+	{$_SERVER['SERVER_SIGNATURE']}	</body></html>" );
+
+	exit( );
 }
 
 require 'modules/'  . $module . '.php';
@@ -164,17 +230,16 @@ if ( !$open && $mod->user['user_level'] < USER_ADMIN ) {
 	$xtpl->parse( 'Index' );
 	$xtpl->out( 'Index' );
 } else {
-	if( $missing ) {
-		$module_output = $mod->error( 'The page you requested does not exist.', 404 );
-	} else {
-		$module_output = $mod->execute();
-	}
+	$module_output = $mod->execute( );
 
-	if ( $mod->nohtml ) {
+	if( $mod->nohtml ) {
+		ob_start( 'ob_gzhandler' );
+
 		echo $module_output;
-	} else {
-		ob_start('ob_gzhandler');
 
+		@ob_end_flush();
+		@flush();
+	} else {
 		$xtpl->assign( 'meta_desc', $mod->meta_description );
 		$xtpl->assign( 'page_title', $mod->title );
 
@@ -290,6 +355,9 @@ if ( !$open && $mod->user['user_level'] < USER_ADMIN ) {
 		}
 
 		$xtpl->parse( 'Index' );
+
+		ob_start( 'ob_gzhandler' );
+
 		$xtpl->out( 'Index' );
 
 		@ob_end_flush();

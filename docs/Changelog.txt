@@ -4,6 +4,7 @@ Changes for Sandbox 2.4.1
 Changes:
 
 * Google +1 support dropped since it's shut down now.
+* Tweaked the initial module selection code to block out potential attacks and notify administrators when this happens.
 
 Bugs:
 
