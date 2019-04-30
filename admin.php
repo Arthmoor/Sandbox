@@ -31,8 +31,32 @@
  * Notifying Roger Libiez is not required but would still be appreciated :)
  */
 
+if( version_compare( PHP_VERSION, "7.0.0", "<" ) ) {
+	die( 'PHP version does not meet minimum requirements. Contact your system administrator.' );
+}
+
 define( 'SANDBOX', true );
 define( 'SANDBOX_ADM', true );
+
+function log_hostile_action( $settings, $qstring )
+{
+	if( isset( $settings['error_email'] ) ) {
+		$https = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+
+		$headers = "From: Your Sandbox Site <{$settings['error_email']}>\r\n" . "X-Mailer: PHP/" . phpversion();
+
+		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'N/A';
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+
+		$error_report = "Sandbox has intercepted a possible attack!\n";
+		$error_report .= "The details are as follows:\n\nURL: $https" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "?" . $qstring . "\n";
+		$error_report .= "Querying user agent: " . $agent . "\n";
+		$error_report .= "Querying IP: " . $ip . "\n\n";
+		$error_report = str_replace( "&nbsp;", " ", html_entity_decode( $error_report ) );
+
+		@mail( $settings['error_email'], "[Sandbox] Potential Attack Intercepted", $error_report, $headers );
+	}
+}
 
 $time_now   = explode(' ', microtime());
 $time_start = $time_now[1] + $time_now[0];
@@ -40,9 +64,6 @@ $time_start = $time_now[1] + $time_now[0];
 date_default_timezone_set('UTC');
 
 session_start();
-
-// Privacy policy header which is understood by IE
-header( 'P3P: CP="CAO PSA OUR"' );
 
 $_REQUEST = array();
 
@@ -69,20 +90,44 @@ if (!$db->db) {
  * Otherwise $missing remains false and no error is generated later.
  */
 $missing = false;
-if (!isset($_GET['a']) ) {
-	$module = 'home';
-	if( isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']) )
-		$missing = true;
-} elseif ( !file_exists( 'admin_modules/' . $_GET['a'] . '.php' ) ) {
-	$module = 'home';
-	$missing = true;
-} else {
-	$module = $_GET['a'];
-}
+$qstring = null;
+$module = null;
 
-if ( strstr($module, '/') || strstr($module, '\\') ) {
-	header('HTTP/1.0 403 Forbidden');
-	exit( 'You have been banned from this site.' );
+if( !isset( $_GET['a'] ) ) {
+	$module = 'home';
+
+	if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+		$qstring = $_SERVER['QUERY_STRING'];
+
+		$missing = true;
+	}
+} elseif( !empty( $_GET['a'] ) ) {
+	if( strstr( $_GET['a'], '/' ) || strstr( $_GET['a'], '\\' ) || strstr( $_GET['a'], '.' ) ) {
+		if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+			$qstring = $_SERVER['QUERY_STRING'];
+		}
+
+		$missing = true;
+
+		$_SESSION = array();
+
+		session_destroy();
+
+		log_hostile_action( $settings, $qstring );
+
+		header( 'Clear-Site-Data: "*"' );
+	} elseif( !file_exists( 'admin_modules/' . $_GET['a'] . '.php' ) ) {
+		$missing = true;
+		$qstring = $_SERVER['REQUEST_URI'];
+	} else {
+		$module = $_GET['a'];
+	}
+} else {
+	if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+		$qstring = $_SERVER['QUERY_STRING'];
+
+		$missing = true;
+	}
 }
 
 require 'admin_modules/' . $module . '.php';

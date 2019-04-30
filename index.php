@@ -95,6 +95,9 @@ if (!$db->db) {
  * Otherwise $missing remains false and no error is generated later.
  */
 $missing = false;
+$qstring = null;
+$module = null;
+
 if( !isset( $_GET['a'] ) ) {
 	$module = 'blog';
 
@@ -123,7 +126,6 @@ if( !isset( $_GET['a'] ) ) {
 
 		header( 'Clear-Site-Data: "*"' );
 	} elseif( !file_exists( 'modules/' . $_GET['a'] . '.php' ) ) {
-		$module = 'issues';
 		$missing = true;
 		$qstring = $_SERVER['REQUEST_URI'];
 	} else {
