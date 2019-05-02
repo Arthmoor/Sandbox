@@ -96,8 +96,6 @@ if( !isset( $_GET['a'] ) ) {
 
 		session_destroy();
 
-		log_hostile_action( $settings, $qstring );
-
 		header( 'Clear-Site-Data: "*"' );
 	} elseif( !file_exists( 'admin_modules/' . $a . '.php' ) ) {
 		$missing = true;
