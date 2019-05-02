@@ -38,26 +38,6 @@ if( version_compare( PHP_VERSION, "7.0.0", "<" ) ) {
 define( 'SANDBOX', true );
 define( 'SANDBOX_ADM', true );
 
-function log_hostile_action( $settings, $qstring )
-{
-	if( isset( $settings['error_email'] ) ) {
-		$https = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
-
-		$headers = "From: Your Sandbox Site <{$settings['error_email']}>\r\n" . "X-Mailer: PHP/" . phpversion();
-
-		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'N/A';
-		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-
-		$error_report = "Sandbox has intercepted a possible attack!\n";
-		$error_report .= "The details are as follows:\n\nURL: $https" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . "?" . $qstring . "\n";
-		$error_report .= "Querying user agent: " . $agent . "\n";
-		$error_report .= "Querying IP: " . $ip . "\n\n";
-		$error_report = str_replace( "&nbsp;", " ", html_entity_decode( $error_report ) );
-
-		@mail( $settings['error_email'], "[Sandbox] Potential Attack Intercepted", $error_report, $headers );
-	}
-}
-
 $time_now   = explode(' ', microtime());
 $time_start = $time_now[1] + $time_now[0];
 
@@ -102,7 +82,10 @@ if( !isset( $_GET['a'] ) ) {
 		$missing = true;
 	}
 } elseif( !empty( $_GET['a'] ) ) {
-	if( strstr( $_GET['a'], '/' ) || strstr( $_GET['a'], '\\' ) || strstr( $_GET['a'], '.' ) ) {
+	$a = trim( $_GET['a'] );
+
+	// Should restrict us to only valid alphabetic characters, which are all that's valid for this software.
+	if( !preg_match( '/^[a-zA-Z]*$/', $a ) ) {
 		if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
 			$qstring = $_SERVER['QUERY_STRING'];
 		}
@@ -116,11 +99,11 @@ if( !isset( $_GET['a'] ) ) {
 		log_hostile_action( $settings, $qstring );
 
 		header( 'Clear-Site-Data: "*"' );
-	} elseif( !file_exists( 'admin_modules/' . $_GET['a'] . '.php' ) ) {
+	} elseif( !file_exists( 'admin_modules/' . $a . '.php' ) ) {
 		$missing = true;
 		$qstring = $_SERVER['REQUEST_URI'];
 	} else {
-		$module = $_GET['a'];
+		$module = $a;
 	}
 } else {
 	if( isset( $_SERVER['QUERY_STRING'] ) && !empty( $_SERVER['QUERY_STRING'] ) ) {
