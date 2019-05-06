@@ -119,15 +119,6 @@ class module
 		$this->thumb_dir = 'files/gallery/thumbnails/';
 		$this->icon_dir = 'files/posticons/';
 		$this->emote_dir = 'files/emoticons/';
-
-		if( version_compare( PHP_VERSION, "5.3.0", "<" ) ) {
-			// Undo any magic quote slashes!
-			if (get_magic_quotes_gpc()) {
-				$this->unset_magic_quotes_gpc($this->get);
-				$this->unset_magic_quotes_gpc($this->post);
-				$this->unset_magic_quotes_gpc($this->cookie);
-			}
-		}
 	}
 
  	/**
