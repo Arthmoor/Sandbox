@@ -165,6 +165,9 @@ if ( !$mod->login('admin.php') ) {
 
 	if ( $mod->nohtml ) {
 		echo $module_output;
+
+		@ob_end_flush();
+		@flush();
 	} else {
 		ob_start('ob_gzhandler');
 
